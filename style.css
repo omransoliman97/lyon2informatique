@@ -220,6 +220,21 @@ body::before {
     background-color: #3a8a3d;
 }
 
+.links-section-github-lyon2 {
+    background-color: #2B3137;
+    border-bottom: 6px solid #24292F;
+    border-right: 6px solid #24292F;
+    
+  }
+
+.links-section-github-lyon2 button {
+    background-color: #24292F;
+ }
+
+.links-section-github-lyon2 button:hover {
+    background-color: #2f353c;
+ }
+
 .links-section-others {
     background-color: #9E9E9E; 
     border-bottom: 6px solid #616161;
