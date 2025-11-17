@@ -1,21 +1,22 @@
 <!DOCTYPE html>
-<html lang="FR">
-
-
-
+<html lang="fr">
 <head>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-27SCS6BBW2"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-27SCS6BBW2');
-</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Informatique Lyon 2</title>
+    <link rel="stylesheet" href="style.css">
+
+
+     <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-27SCS6BBW2"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-27SCS6BBW2');
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta property="og:title" content="Informatique Lyon 2">
     <meta property="og:description" content="Le site du groupe sur WhatsApp où vous trouverez tous les liens et documents dont vous avez besoin">
     <meta property="og:image" content="images/background.jpg">
@@ -23,244 +24,89 @@
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
 
-    <link rel="stylesheet" href="googledrive.css">
-    <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-
-
-
-
-
-
-    <style>
-        
-        .myblockly-btn {
-            position: relative;
-            display: inline-block;
-            padding: 16px 32px;
-            font-size: 18px;
-            font-weight: 600;
-            text-decoration: none;
-            color: white;
-            background: linear-gradient(45deg, #4776E6, #8E54E9);
-            border-radius: 50px;
-            overflow: hidden;
-            transition: all 0.4s ease;
-            box-shadow: 0 4px 15px rgba(71, 118, 230, 0.3);
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            z-index: 1;
-            border: none;
-            cursor: pointer;
-            margin-left: 30%;
-            margin-right: 30%;
-        }
-        
-        .myblockly-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, #ff6b6b, #ff8e53);
-            z-index: -1;
-            transition: opacity 0.4s ease;
-            opacity: 0;
-            border-radius: 50px;
-        }
-        
-        .myblockly-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(71, 118, 230, 0.4);
-            letter-spacing: 1px;
-        }
-        
-        .myblockly-btn:hover::before {
-            opacity: 1;
-        }
-        
-        .myblockly-btn:active {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 10px rgba(71, 118, 230, 0.4);
-        }
-        
-        .myblockly-btn span {
-            position: relative;
-            z-index: 1;
-        }
-        
-        /* Ripple effect */
-        .myblockly-btn::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 5px;
-            height: 5px;
-            background: rgba(255, 255, 255, 0.5);
-            opacity: 0;
-            border-radius: 50%;
-            transform: scale(1, 1) translate(-50%);
-            transform-origin: 50% 50%;
-        }
-        
-        .myblockly-btn:focus:not(:active)::after {
-            animation: ripple 1s ease-out;
-        }
-        
-        @keyframes ripple {
-            0% {
-                transform: scale(0, 0);
-                opacity: 0.5;
-            }
-            100% {
-                transform: scale(20, 20);
-                opacity: 0;
-            }
-        }
-
-
-    </style>
 </head>
+<body>
 
-<body >
 
-
-        <div class="background-image fade-in">
-        <img src="images/background.jpg" alt="Background"  />
-        </div>
-        <div class="top-section">
-          <div class="login-button">
-              <a href="login.html">  Se Connecter</a>
-          </div>
+        <div class="navbar">
+            <ul>
+                <li><a href="#links-section">Liens</a></li>
+                <li><a href="#ai-section">AI</a></li>
+            </ul>
         </div>
 
+    <section class="hero-section fade-in">
+        <img src="images/background.jpg" alt="background de l'Université Lyon 2" class="hero-section-cover"/>
+        <img src="images/logo.png" alt="logo de l'Université Lyon 2" class="hero-section-logo" />
+    </section>
+    <section class="hero-section-title fade-in">
+        Informatique  L1
+    </section>
+    <section class="des-section fade-in">
+        <h2>le site de l'informatique à l'Université Lyon 2</h2>
+    </section>
 
-        <!-- Porfile Section -->
-        <div class="profile-section fade-in">
-            <div >
-              <div class="profile-photo-container">
-                <p >Informatique L1</p>
-                <img src="images/logo.png" alt="Profile"/>
-            </div>
-
-
-            <!-- Social Media is -->
-            <div class="social-media-links fade-in">
-
-            <a href="https://chat.whatsapp.com/IuDtlAR3McrKtIHPlL9rjN" ><img src="images/icons/whatsapp_icon.png" alt="whatsapp"  /></a>
-            <a href="blog.html" ><img src="images/icons/blog_icon.png" alt="blog"  /></a>
-
-            </div>
-          </div>
+    <section class="links-section fade-in" id="links-section">
+        <h1>Liens</h1>
+        <div class="links-section-items">
+        <div class="links-section-groupe-whatsapp">
+            <img src="images/icons/whatsapp_logo.png" alt="Groupe WhatsApp"/>
+            <p>Groupe WhatsApp</p>
+            <button onclick="window.location.href='https://osdev.short.gy/informatiauelyon2groupewhatsapp'">open</button>
         </div>
+        <div class="links-section-google-drive">
+            <img src="images/icons/google_drive_logo.png" alt="Google drive"/>
+            <p>Google Drive</p>
+            <button onclick="window.location.href='https://osdev.short.gy/lyon2informatiquedrive'">open</button>
+        </div>
+        <div class="links-section-myblockly">
+            <img src="images/icons/myblockly_logo.png" alt="MyBlockly"/>
+            <p>MyBlockly</p>
+            <button onclick="window.location.href='https://osdev.short.gy/myblocklyos'">open</button>
+        </div>
+        <div class="links-section-notepadapp">
+            <img src="images/icons/notepad_logo.png" alt="Notepadplus"/>
+            <p>Notepad++ Pour MacOS & Windows</p>
+            <button onclick="window.location.href='https://osdev.short.gy/notepad_macos_windows'">open</button>
+        </div>
+        <div class="links-section-w3school">
+            <img src="images/icons/w3schools_logo.webp" alt="w3school"/>
+            <p>W2school</p>
+            <button onclick="window.location.href='https://osdev.short.gy/lyon2informatiquew3school'">open</button>
+        </div>
+        <div class="links-section-others">
+            <img src="images/icons/coming_soon_logo.webp" alt="others"/>
+            <p>coming soon..</p>
+            <button onclick="window.location.href='/'">coming soon..</button>
+        </div>
+        </div>
+    </section>
 
 
+    <section class="ai-section fade-in" id="ai-section">
+        <h1>L'IA</h1>
+        <div class="ai-section-items">
+        <div class="ai-card">
+            <h2>🌐 CM - Conception de sites web Public V1</h2>
+            <p>Optimisez vos séances d'étude grâce à un cycle d'apprentissage complet : utilisez des flashcards pour mémoriser les éléments essentiels, testez votre rétention avec des QCM personnalisés et obtenez des réponses instantanées et fiables à vos questions. L'IA vous fournira la réponse et vous indiquera également son emplacement exact dans le PDF.</p>
+            <button onclick="window.location.href='https://osdev.short.gy/lyon2informatique_cm_conception_de_sites-web'">open</button>
+        </div>
+        <div class="ai-card">
+            <h2>🤖 CM - Algorithmique et programmation visuelle V1</h2>
+                <p> Optimisez vos séances d'étude grâce à un cycle d'apprentissage complet : utilisez des flashcards pour mémoriser les éléments essentiels, testez votre rétention avec des QCM personnalisés et obtenez des réponses instantanées et fiables à vos questions. L'IA vous fournira la réponse et vous indiquera également son emplacement exact dans le PDF.</p>
+              <button onclick="window.location.href='https://osdev.short.gy/lyon2informatique_cm_algorithmique'">open</button>
+        </div>
+        <div class="ai-card">
+            <h2>🐧 TD - CM Environnement informatique et Internet Public V2</h2>
+             <p>Optimisez vos séances d'étude grâce à un cycle d'apprentissage complet : utilisez des flashcards pour mémoriser les éléments essentiels, testez votre rétention avec des QCM personnalisés et obtenez des réponses instantanées et fiables à vos questions. L'IA vous fournira la réponse et vous indiquera également son emplacement exact dans le PDF.</p>
+            <button onclick="window.location.href='https://osdev.short.gy/lyon2informatique_td_cm_environnement'">open</button>
+        </div>
+        </div>
+    </section>
 
-    <!-- Google Drive -->
-    <!-- Google Drive -->
-<div class="shadow-dance-container">
-    <h1 class="shadow-dance-text" >
-      <a href="https://bit.ly/lyon2informatiquedrive2">GOOGLE DRIVE</a>
-    </h1>
-</div>
-    <button class="myblockly-btn" onclick="window.open('https://bit.ly/myblocklyos', '_blank')">
-        <span>MyBlockly</span>
-    </button>
-    <button class="myblockly-btn" onclick="window.open('https://bit.ly/notepad_macos_windows', '_blank')" style="margin-top: 5px">
-        <span>Notepad pour MacOS, Windows</span>
-    </button>
-        
-         <!-- Content Box -->
-            <div class="content-box fade-in">
-                <h2 >🌐 CM - Conception de sites web Public V1</h2>
-                <p >
-                  Optimisez vos séances d'étude grâce à un cycle d'apprentissage complet : utilisez des flashcards pour mémoriser les éléments essentiels, testez votre rétention avec des QCM personnalisés et obtenez des réponses instantanées et fiables à vos questions. L'IA vous fournira la réponse et vous indiquera également son emplacement exact dans le PDF.</p>
-              <div class="open-button">
-                 <a href="https://bit.ly/lyon2informatique_cm_conception_de_sites-web">Ouvrir</a>
-              </div>
-            </div>
-
-    <!-- Content Box -->
-            <div class="content-box fade-in">
-                <h2 >🤖 CM - Algorithmique et programmation visuelle V1</h2>
-                <p >
-                  Optimisez vos séances d'étude grâce à un cycle d'apprentissage complet : utilisez des flashcards pour mémoriser les éléments essentiels, testez votre rétention avec des QCM personnalisés et obtenez des réponses instantanées et fiables à vos questions. L'IA vous fournira la réponse et vous indiquera également son emplacement exact dans le PDF.</p>
-                  </p>
-              <div class="open-button" >
-                 <a href="https://bit.ly/lyon2informatique_cm_algorithmique1" >Ouvrir</a>
-              </div>
-            </div>
-
-
-
- <!-- Content Box -->
-            <div class="content-box fade-in">
-                <h2 >🐧 TD - CM Environnement informatique et Internet Public V2</h2>
-                <p >
-                  Optimisez vos séances d'étude grâce à un cycle d'apprentissage complet : utilisez des flashcards pour mémoriser les éléments essentiels, testez votre rétention avec des QCM personnalisés et obtenez des réponses instantanées et fiables à vos questions. L'IA vous fournira la réponse et vous indiquera également son emplacement exact dans le PDF.</p>
-              <div class="open-button">
-                 <a href="https://bit.ly/lyon2informatique_td_cm_environnement">Ouvrir</a>
-              </div>
-            </div>
-
-  <!-- Content Box -->
-            <div class="content-box fade-in">
-                <h2 >🤖 TD - Algorithmique et programmation visuelle V1</h2>
-                <p >
-                  à venir...
-                  </p>
-              <div class="open-button">
-                 <a href="#" > à venir... </a>
-              </div>
-            </div>
-
-
-
-
-
-
-            <footer class="footer">
-                <p>© 2025 
-                  <a href="https://www.instagram.com/omran.soliman97/">Omran SOLIMAN. </a>
-                  All rights reserved.</p>
-            </footer>
-
-
-<script>
-        // Add click animation
-        document.querySelector('.myblockly-btn').addEventListener('click', function(e) {
-            // Create ripple effect
-            let ripple = document.createElement('span');
-            ripple.style.position = 'absolute';
-            ripple.style.borderRadius = '50%';
-            ripple.style.backgroundColor = 'rgba(255, 255, 255, 0.6)';
-            ripple.style.width = '100px';
-            ripple.style.height = '100px';
-            ripple.style.marginTop = '-50px';
-            ripple.style.marginLeft = '-50px';
-            ripple.style.left = '50%';
-            ripple.style.top = '50%';
-            ripple.style.opacity = '0';
-            ripple.style.transform = 'scale(0)';
-            ripple.style.transition = 'transform 0.6s, opacity 0.6s';
-            
-            this.appendChild(ripple);
-            
-            // Trigger animation
-            setTimeout(() => {
-                ripple.style.transform = 'scale(2)';
-                ripple.style.opacity = '1';
-            }, 10);
-            
-            // Remove ripple after animation
-            setTimeout(() => {
-                ripple.remove();
-            }, 600);
-        });
-    </script>
-
-
+    <footer class="fade-in">
+        <p>Website designed by <a href="http://instagram.com/omran.soliman97">Omran SOLIMAN </a></p>
+    </footer>
 </body>
 </html>
