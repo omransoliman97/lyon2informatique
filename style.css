@@ -40,7 +40,7 @@ body::before {
   padding: 0;
   background-color: var(--primary);
   display: flex;
-  align-items: centerx;
+  align-items: center;
   justify-content: center;
   
 }
