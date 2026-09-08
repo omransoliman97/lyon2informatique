@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informatique Lyon 2 - L1</title>
+    
+    <link rel="icon" href="images/logo.png" type="image/png">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-27SCS6BBW2"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-27SCS6BBW2');
+    </script>
+    
+    <meta property="og:title" content="Informatique Lyon 2 - L1">
+    <meta property="og:description" content="Le site de l'informatique pour L1 à l'Université Lyon 2">
+    <meta property="og:image" content="images/background.jpg">
+    <meta property="og:type" content="website">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="images/logo.png" alt="Logo">
+                <span>Informatique Lyon 2</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#links-section" class="nav-link">Liens</a></li>
+                <li class="dropdown">
+                    <a href="l1.html" class="dropbtn">L1 <span class="arrow">&#9662;</span></a>
+                    <div class="dropdown-content">
+                        <a href="l1.html#learning-section">Ressources d'apprentissage</a>
+                        <a href="l1.html#ai-section">L'IA</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="index.html" class="dropbtn">L2 <span class="arrow">&#9662;</span></a>
+                    <div class="dropdown-content">
+                        <a href="index.html#learning-section">Ressources d'apprentissage</a>
+                        <a href="index.html#ai-section">L'IA</a>
+                    </div>
+                </li>
+                <li>
+                    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Theme">
+                        ☀️
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <section class="hero-section fade-in">
+        <div class="hero-overlay"></div>
+        <img src="images/background.jpg" alt="background de l'Université Lyon 2" class="hero-section-cover"/>
+        <img src="images/logo.png" alt="logo de l'Université Lyon 2" class="hero-section-logo" />
+    </section>
+    <section class="hero-section-title fade-in">
+        <p>Informatique L1</p>
+    </section>
+    <section class="des-section fade-in">
+        <h2>Le site de l'informatique à l'Université Lyon 2 (Année 1)</h2>
+    </section>
+
+    <!-- SHARED LIENS SECTION (Matches index.html exactly) -->
+    <section class="links-section fade-in" id="links-section">
+        <h1>Liens</h1>
+        <div class="links-section-items">
+            <!-- COPY THIS BLOCK TO ADD A NEW LINK -->
+            <div class="glass-card">
+                <img src="images/icons/whatsapp_logo.svg" alt="Groupe WhatsApp"/>
+                <p>Groupe WhatsApp</p>
+                <p class="description"></p>
+                <button onclick="window.location.href='https://osdev.short.gy/informatiauelyon2groupewhatsapp'">Ouvrir</button>
+            </div>
+
+            <!-- COPY THIS BLOCK TO ADD A NEW LINK -->
+            <div class="glass-card">
+                <img src="images/icons/google_drive_logo.svg" alt="Google drive"/>
+                <p>Google Drive</p>
+                <p class="description"></p>
+                <button onclick="window.location.href='https://osdev.short.gy/lyon2informatiquedrive'">Ouvrir</button>
+            </div>
+
+            <!-- COPY THIS BLOCK TO ADD A NEW LINK -->
+            <div class="glass-card">
+                <img src="images/icons/myblockly_logo.svg" alt="MyBlockly"/>
+                <p>MyBlockly</p>
+                <p class="description"></p>
+                <button onclick="window.location.href='https://osdev.short.gy/myblocklyos'">Ouvrir</button>
+            </div>
+
+            <!-- COPY THIS BLOCK TO ADD A NEW LINK -->
+            <div class="glass-card">
+                <img src="images/icons/notepad_logo.svg" alt="Notepadplus"/>
+                <p>Notepad++ Pour MacOS & Windows</p>
+                <p class="description"></p>
+                <button onclick="window.location.href='https://osdev.short.gy/notepad_macos_windows'">Ouvrir</button>
+            </div>
+
+            <!-- COPY THIS BLOCK TO ADD A NEW LINK -->
+            <div class="glass-card">
+                <img src="images/icons/w3schools_logo.svg" alt="w3school"/>
+                <p>W2school</p>
+                <p class="description"></p>
+                <button onclick="window.location.href='https://osdev.short.gy/lyon2informatiquew3school'">Ouvrir</button>
+            </div>
+
+            <!-- COPY THIS BLOCK TO ADD A NEW LINK -->
+            <div class="glass-card">
+                <img src="images/icons/github_logo.svg" alt="Github"/>
+                <p>Github Lyon2Informatique</p>
+                <p class="description"></p>
+                <button onclick="window.location.href='https://osdev.short.gy/GitHub_Lyon2Informatique'">Ouvrir</button>
+            </div>
+
+            <!-- COPY THIS BLOCK TO ADD A NEW LINK -->
+            <div class="glass-card">
+                <img src="images/icons/vscode_logo.svg" alt="VSCode"/>
+                <p>VSCode</p>
+                <p class="description"></p>
+                <button onclick="window.location.href='https://osdev.short.gy/lyon2_vscode'">Ouvrir</button>
+            </div>
+
+            <!-- COPY THIS BLOCK TO ADD A NEW LINK -->
+            <div class="glass-card">
+                <img src="images/icons/spyder-original.svg" alt="Spyder"/>
+                <p>Spyder</p>
+                <p class="description"></p>
+                <button onclick="window.location.href='https://osdev.short.gy/lyon2informatique_spyder'">Ouvrir</button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- L1 LEARNING SECTION -->
+    <section class="learning-section fade-in" id="learning-section">
+        <h1>Ressources d'apprentissage</h1>
+        <div class="learning-section-items">
+            <!-- COPY THIS BLOCK TO ADD A NEW RESOURCE -->
+            <div class="learning-card glass-card">
+                <img class="boot-dev" src="images/icons/bootdev_logo.webp" alt="boot.dev"/>
+                <h2>Boot.dev 🎮</h2>
+                <p>C'est une plateforme ludique pour apprendre le développement backend. Elle enseigne Python, Go, SQL et bien plus encore à travers des défis pratiques qui donnent l'impression de progresser dans un jeu vidéo 🎮, en vous gardant motivé tout en développant de vraies compétences.</p>
+                <button onclick="window.location.href='https://osdev.short.gy/bootDevOS'">Ouvrir</button>
+            </div>
+
+            <!-- COPY THIS BLOCK TO ADD A NEW RESOURCE -->
+            <div class="learning-card glass-card">
+                <img src="images/icons/coddytech_logo.svg" alt="coddy.tech"/>
+                <h2>Coddy.tech 🐸</h2>
+                <p>Est souvent décrit comme le "Duolingo du code" — il enseigne des langages de programmation comme Python, JavaScript, C++ et bien plus encore à travers des leçons courtes, fun et ludiques qui ressemblent davantage à un jeu qu'à un cours 🎮.</p>
+                <button onclick="window.location.href='https://osdev.short.gy/CoddyTechOS'">Ouvrir</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- L1 AI SECTION -->
+    <section class="ai-section fade-in" id="ai-section">
+        <h1>L'IA</h1>
+        <div class="ai-section-items">
+            
+            <!-- COPY THIS BLOCK TO ADD A NEW AI RESOURCE -->
+            <div class="ai-card glass-card">
+                <h2>🖼️ CM - Traitement d'image L1S2</h2>
+                <p>Optimisez vos séances d'étude grâce à un cycle d'apprentissage complet : utilisez des flashcards pour mémoriser les éléments essentiels, testez votre rétention avec des QCM personnalisés et obtenez des réponses instantanées et fiables à vos questions. L'IA vous fournira la réponse et vous indiquera également son emplacement exact dans le PDF.</p>
+                <button onclick="window.location.href='https://osdev.short.gy/lyon2informatique_cm_traitement_d_image_l1s2'">Ouvrir</button>
+            </div>
+
+            <!-- COPY THIS BLOCK TO ADD A NEW AI RESOURCE -->
+            <div class="ai-card glass-card">
+                <h2>📻 CM - Approche communicationnelle du numérique L1S2</h2>
+                <p>Optimisez vos séances d'étude grâce à un cycle d'apprentissage complet : utilisez des flashcards pour mémoriser les éléments essentiels, testez votre rétention avec des QCM personnalisés et obtenez des réponses instantanées et fiables à vos questions.</p>
+                <button onclick="window.location.href='https://osdev.short.gy/lyon2informatique_cm_approche_communicationnelle_l1s2'">Ouvrir</button>
+            </div>
+
+            <!-- COPY THIS BLOCK TO ADD A NEW AI RESOURCE -->
+            <div class="ai-card glass-card">
+                <h2>📧 CM - Systèmes et réseaux Public L1S2</h2>
+                <p>Optimisez vos séances d'étude grâce à un cycle d'apprentissage complet : utilisez des flashcards pour mémoriser les éléments essentiels, testez votre rétention avec des QCM personnalisés et obtenez des réponses instantanées et fiables à vos questions.</p>
+                <button onclick="window.location.href='https://osdev.short.gy/lyon2informatique_systemes_et-reseaux_cm'">Ouvrir</button>
+            </div>
+
+            <!-- COPY THIS BLOCK TO ADD A NEW AI RESOURCE -->
+            <div class="ai-card glass-card">
+                <h2>🛜 TD - Objets connectés Public L1S2</h2>
+                <p>Optimisez vos séances d'étude grâce à un cycle d'apprentissage complet : utilisez des flashcards pour mémoriser les éléments essentiels, testez votre rétention avec des QCM personnalisés et obtenez des réponses instantanées et fiables à vos questions.</p>
+                <button onclick="window.location.href='https://osdev.short.gy/lyon2informatique_objets_connectes_td'">Ouvrir</button>
+            </div>
+
+            <!-- COPY THIS BLOCK TO ADD A NEW AI RESOURCE -->
+            <div class="ai-card glass-card">
+                <h2>🌐 CM - Conception de sites web Public V1 L1S1</h2>
+                <p>Optimisez vos séances d'étude grâce à un cycle d'apprentissage complet : utilisez des flashcards pour mémoriser les éléments essentiels, testez votre rétention avec des QCM personnalisés et obtenez des réponses instantanées et fiables à vos questions.</p>
+                <button onclick="window.location.href='https://osdev.short.gy/lyon2informatique_cm_conception_de_sites-web'">Ouvrir</button>
+            </div>
+
+            <!-- COPY THIS BLOCK TO ADD A NEW AI RESOURCE -->
+            <div class="ai-card glass-card">
+                <h2>🤖 CM - Algorithmique et programmation visuelle V1 L1S1</h2>
+                <p>Optimisez vos séances d'étude grâce à un cycle d'apprentissage complet : utilisez des flashcards pour mémoriser les éléments essentiels, testez votre rétention avec des QCM personnalisés et obtenez des réponses instantanées et fiables à vos questions.</p>
+                <button onclick="window.location.href='https://osdev.short.gy/lyon2informatique_cm_algorithmique'">Ouvrir</button>
+            </div>
+
+            <!-- COPY THIS BLOCK TO ADD A NEW AI RESOURCE -->
+            <div class="ai-card glass-card">
+                <h2>🐧 TD - CM Environnement informatique et Internet Public V2 L1S1</h2>
+                <p>Optimisez vos séances d'étude grâce à un cycle d'apprentissage complet : utilisez des flashcards pour mémoriser les éléments essentiels, testez votre rétention avec des QCM personnalisés et obtenez des réponses instantanées et fiables à vos questions.</p>
+                <button onclick="window.location.href='https://osdev.short.gy/lyon2informatique_td_cm_environnement'">Ouvrir</button>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="fade-in">
+        <p>Site web réalisé par <a href="http://instagram.com/omran.soliman97" target="_blank">Omran SOLIMAN</a></p>
+    </footer>
+
+    <!-- Theme Toggle Logic -->
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+        
+        const sunIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>`;
+        const moonIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`;
+        
+        // Load preference
+        const currentTheme = localStorage.getItem('theme') || 'dark';
+        if (currentTheme === 'light') {
+            body.setAttribute('data-theme', 'light');
+            themeToggle.innerHTML = moonIcon;
+        } else {
+            themeToggle.innerHTML = sunIcon;
+        }
+
+        themeToggle.addEventListener('click', () => {
+            if (body.hasAttribute('data-theme')) {
+                body.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'dark');
+                themeToggle.innerHTML = sunIcon;
+            } else {
+                body.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
+                themeToggle.innerHTML = moonIcon;
+            }
+        });
+    </script>
+</body>
+</html>
