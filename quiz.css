@@ -1,0 +1,136 @@
+/* Quiz Styles */
+.quiz-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+.quiz-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--text-color, #fff);
+}
+
+.quiz-progress {
+    font-weight: 600;
+}
+
+.quiz-stats {
+    display: flex;
+    gap: 15px;
+    font-weight: 600;
+}
+
+.stat-correct { color: #4CAF50; }
+.stat-incorrect { color: #F44336; }
+
+.quiz-question {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.quiz-option {
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid transparent;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 1rem;
+    color: var(--text-color, #fff);
+    text-align: left;
+}
+
+.quiz-option:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.quiz-option:disabled {
+    cursor: default;
+}
+
+.quiz-option:disabled:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.quiz-option.selected {
+    border-color: #2196F3;
+}
+
+.quiz-option.correct {
+    background: rgba(76, 175, 80, 0.2);
+    border-color: #4CAF50;
+}
+
+.quiz-option.incorrect {
+    background: rgba(244, 67, 54, 0.2);
+    border-color: #F44336;
+}
+
+.quiz-explanation {
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba(33, 150, 243, 0.1);
+    border-left: 4px solid #2196F3;
+    border-radius: 4px;
+    display: none;
+}
+
+.quiz-controls {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.quiz-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background: #2196F3;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+.quiz-btn:hover {
+    background: #1976D2;
+}
+
+.quiz-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+.quiz-btn-danger {
+    background: #F44336;
+}
+.quiz-btn-danger:hover {
+    background: #D32F2F;
+}
+
+.quiz-results {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.quiz-results h2 {
+    margin-bottom: 20px;
+}
+
+.quiz-results .score {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #4CAF50;
+    margin-bottom: 20px;
+}
