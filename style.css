@@ -88,6 +88,21 @@ p {
   min-height: 20px; /* Placeholder space */
 }
 
+/* Back link (used on sub-pages to return to their parent resource page) */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.back-link:hover {
+  color: var(--primary);
+}
+
 /* Navbar */
 .navbar {
   position: sticky;
@@ -112,6 +127,12 @@ p {
   display: flex;
   align-items: center;
   gap: 15px;
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+}
+
+.nav-logo:hover {
+  opacity: 0.85;
 }
 
 .nav-logo img {
@@ -328,7 +349,7 @@ section[id] h1::after {
 }
 
 #links-section h1::after { background-color: var(--links-section-color); }
-#learning-section h1::after { background-color: var(--learning-section-color); }
+.learning-section h1::after { background-color: var(--learning-section-color); }
 #ai-section h1::after { background-color: var(--ai-section-color); }
 
 /* Glassmorphism Cards */
@@ -436,7 +457,7 @@ section[id] h1::after {
 }
 
 #links-section button { background-color: var(--links-section-color); }
-#learning-section button { background-color: var(--learning-section-color); }
+.learning-section button { background-color: var(--learning-section-color); }
 #ai-section button { background-color: var(--ai-section-color); }
 
 .glass-card button:hover {

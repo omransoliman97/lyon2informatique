@@ -108,6 +108,9 @@ class Quiz {
                 <div class="quiz-stats">
                     <span class="stat-correct">Vrai : ${this.state.correctCount}</span>
                     <span class="stat-incorrect">Faux : ${this.state.incorrectCount}</span>
+                    <button class="quiz-restart-btn" onclick="quizInstance.restart()" title="Recommencer" aria-label="Recommencer le quiz">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+                    </button>
                 </div>
             </div>
             <div class="quiz-question">${q.question}</div>
@@ -118,11 +121,8 @@ class Quiz {
                 <strong>Explication:</strong> ${q.explanation}
             </div>
             <div class="quiz-controls">
-                <div>
-                    <button class="quiz-btn" onclick="quizInstance.prevQuestion()" ${this.state.currentIndex === 0 ? 'disabled' : ''}>Précédent</button>
-                    <button class="quiz-btn quiz-btn-danger" onclick="quizInstance.restart()">Recommencer</button>
-                </div>
-                <button class="quiz-btn" onclick="quizInstance.nextQuestion()" ${!hasAnswered ? 'disabled' : ''}>${this.state.currentIndex === this.questions.length - 1 ? 'Terminer' : 'Suivant'}</button>
+                <button class="quiz-btn quiz-btn-secondary" onclick="quizInstance.prevQuestion()" ${this.state.currentIndex === 0 ? 'disabled' : ''}>Précédent</button>
+                <button class="quiz-btn quiz-btn-primary" onclick="quizInstance.nextQuestion()" ${!hasAnswered ? 'disabled' : ''}>${this.state.currentIndex === this.questions.length - 1 ? 'Terminer' : 'Suivant'}</button>
             </div>
         `;
     }

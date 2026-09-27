@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Algorithmique - Lyon 2</title>
+    <title>QCM CM1 - Outils de la recherche - Lyon 2</title>
     
     <link rel="icon" href="images/logo.png" type="image/png">
     <link rel="stylesheet" href="style.css?v=2">
@@ -59,24 +59,15 @@
         <img src="images/logo.png" alt="logo de l'Université Lyon 2" class="hero-section-logo" />
     </section>
     <section class="hero-section-title fade-in">
-        <p>Algorithmique, structures de données et programmation</p>
+        <p>QCM CM1 — 149 Questions</p>
+    </section>
+    <section class="des-section fade-in">
+        <a class="back-link" href="outils_recherche.html">&larr; Retour à Outils de la recherche</a>
     </section>
 
-    <section class="learning-section fade-in" id="cm-section">
-        <h1>CM - Cours Magistraux</h1>
+    <section class="fade-in" id="qcm-cm1-section">
         <div class="quiz-container glass-card" id="quiz-app">
             <!-- Quiz will be rendered here -->
-        </div>
-    </section>
-
-    <section class="learning-section fade-in" id="td-section">
-        <h1>TD - Travaux Dirigés</h1>
-        <div class="learning-section-items" style="justify-content: center;">
-            <div class="learning-card glass-card">
-                <h2>En préparation</h2>
-                <p>Les ressources pour les TD seront ajoutées prochainement.</p>
-                <p style="text-align: right; color: #888;">Bientôt</p>
-            </div>
         </div>
     </section>
 
@@ -111,12 +102,12 @@
             }
         });
     </script>
-    <script src="quiz_algo.js?v=2"></script>
+    <script src="quiz_outils.js?v=2"></script>
     <script src="quiz.js?v=3"></script>
     <script>
         let quizInstance;
         window.addEventListener('DOMContentLoaded', () => {
-            quizInstance = new Quiz('quiz-app', algoQuestions, 'quizProgress_algo');
+            quizInstance = new Quiz('quiz-app', outilsQuestions, 'quizProgress_outils_v2');
         });
     </script>
 </body>

@@ -6,8 +6,16 @@
     <title>Outils de la recherche - Lyon 2</title>
     
     <link rel="icon" href="images/logo.png" type="image/png">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="quiz.css">
+    <link rel="stylesheet" href="style.css?v=2">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-27SCS6BBW2"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-27SCS6BBW2');
+    </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,10 +25,10 @@
 
     <nav class="navbar">
         <div class="nav-container">
-            <div class="nav-logo">
+            <a class="nav-logo" href="index.html">
                 <img src="images/logo.png" alt="Logo">
                 <span>Informatique Lyon 2</span>
-            </div>
+            </a>
             <ul class="nav-menu">
                 <li><a href="index.html#links-section" class="nav-link">Liens</a></li>
                 <li class="dropdown">
@@ -55,8 +63,13 @@
 
     <section class="learning-section fade-in" id="cm-section">
         <h1>CM - Cours Magistraux</h1>
-        <div class="quiz-container glass-card" id="quiz-app">
-            <!-- Quiz will be rendered here -->
+        <div class="learning-section-items" style="justify-content: center;">
+            <!-- COPY THIS BLOCK TO ADD A NEW QCM -->
+            <div class="learning-card glass-card">
+                <h2>QCM CM1 — 149 Questions</h2>
+                <p>Testez vos connaissances sur l'ensemble du CM1 : LaTeX, histoire et épistémologie de l'informatique, recherche en France, intelligence artificielle et méthodologie de la recherche.</p>
+                <button onclick="window.location.href='qcm_outils_cm1.html'">Ouvrir</button>
+            </div>
         </div>
     </section>
 
@@ -100,14 +113,6 @@
                 localStorage.setItem('theme', 'light');
                 themeToggle.innerHTML = moonIcon;
             }
-        });
-    </script>
-    <script src="quiz_outils.js"></script>
-    <script src="quiz.js"></script>
-    <script>
-        let quizInstance;
-        window.addEventListener('DOMContentLoaded', () => {
-            quizInstance = new Quiz('quiz-app', outilsQuestions, 'quizProgress_outils_v2');
         });
     </script>
 </body>

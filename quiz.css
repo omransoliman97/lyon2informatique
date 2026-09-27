@@ -7,11 +7,13 @@
 
 .quiz-header {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
+    gap: 10px;
     margin-bottom: 20px;
     padding-bottom: 10px;
-    border-bottom: 1px solid var(--text-color, #fff);
+    border-bottom: 1px solid var(--glass-border);
 }
 
 .quiz-progress {
@@ -20,12 +22,14 @@
 
 .quiz-stats {
     display: flex;
-    gap: 15px;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
     font-weight: 600;
 }
 
-.stat-correct { color: #4CAF50; }
-.stat-incorrect { color: #F44336; }
+.stat-correct { color: #4CAF50; white-space: nowrap; }
+.stat-incorrect { color: #F44336; white-space: nowrap; }
 
 .quiz-question {
     font-size: 1.2rem;
@@ -39,40 +43,60 @@
     gap: 10px;
 }
 
-.quiz-option {
+/* IMPORTANT: every selector below that targets a <button> is prefixed with
+   .quiz-container. style.css has a rule ".glass-card button" (uppercase,
+   big padding, forced white text) meant for the site's "Ouvrir"-style
+   buttons -- and because our buttons live inside a .glass-card container,
+   that rule is MORE specific than a bare ".quiz-option" or ".quiz-btn"
+   and silently overrides it. Prefixing with .quiz-container gives our
+   rules enough specificity to always win, and every property that
+   ".glass-card button" sets is re-declared explicitly below so nothing
+   leaks through again -- not just the two properties that were noticed. */
+
+.quiz-container .quiz-option {
     padding: 15px;
     background: rgba(255, 255, 255, 0.05);
     border: 2px solid transparent;
     border-radius: 10px;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: background 0.2s ease, border-color 0.2s ease;
+    font-family: inherit;
     font-size: 1rem;
-    color: var(--text-color, #fff);
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: normal;
+    color: var(--foreground);
     text-align: left;
 }
 
-.quiz-option:hover {
+.quiz-container .quiz-option:hover,
+.quiz-container .quiz-option:active {
+    opacity: 1;
+    box-shadow: none;
+}
+
+.quiz-container .quiz-option:not(:disabled):hover {
     background: rgba(255, 255, 255, 0.1);
 }
 
-.quiz-option:disabled {
+.quiz-container .quiz-option:disabled {
     cursor: default;
 }
 
-.quiz-option:disabled:hover {
-    background: rgba(255, 255, 255, 0.05);
+[data-theme="light"] .quiz-container .quiz-option {
+    background: rgba(0, 0, 0, 0.04);
 }
 
-.quiz-option.selected {
-    border-color: #2196F3;
+[data-theme="light"] .quiz-container .quiz-option:not(:disabled):hover {
+    background: rgba(0, 0, 0, 0.06);
 }
 
-.quiz-option.correct {
+.quiz-container .quiz-option.correct {
     background: rgba(76, 175, 80, 0.2);
     border-color: #4CAF50;
 }
 
-.quiz-option.incorrect {
+.quiz-container .quiz-option.incorrect {
     background: rgba(244, 67, 54, 0.2);
     border-color: #F44336;
 }
@@ -87,36 +111,104 @@
 }
 
 .quiz-controls {
-    margin-top: 20px;
+    margin-top: 25px;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
+    align-items: center;
+    gap: 10px;
 }
 
-.quiz-btn {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    background: #2196F3;
-    color: white;
+.quiz-container .quiz-btn {
+    padding: 11px 20px;
+    border-radius: 10px;
     cursor: pointer;
-    font-weight: bold;
-    transition: background 0.2s;
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-transform: none;
+    letter-spacing: normal;
+    border: 1.5px solid transparent;
+    transition: background 0.2s ease, border-color 0.2s ease, opacity 0.2s ease, transform 0.1s ease;
 }
 
-.quiz-btn:hover {
-    background: #1976D2;
+.quiz-container .quiz-btn:hover,
+.quiz-container .quiz-btn:active {
+    box-shadow: none;
 }
 
-.quiz-btn:disabled {
-    background: #ccc;
-    cursor: not-allowed;
+.quiz-container .quiz-btn:active:not(:disabled) {
+    transform: scale(0.97);
 }
 
-.quiz-btn-danger {
+/* Primary: the main forward action (Suivant / Terminer) */
+.quiz-container .quiz-btn-primary {
+    background: var(--primary);
+    color: #fff;
+}
+
+.quiz-container .quiz-btn-primary:hover:not(:disabled) {
+    opacity: 0.9;
+}
+
+/* Secondary: a lower-emphasis action (Précédent) */
+.quiz-container .quiz-btn-secondary {
+    background: transparent;
+    border-color: var(--glass-border);
+    color: var(--foreground);
+}
+
+.quiz-container .quiz-btn-secondary:hover:not(:disabled) {
+    background: var(--glass-hover);
+    opacity: 1;
+}
+
+/* Danger: only used on the results screen, where it's the sole action */
+.quiz-container .quiz-btn-danger {
     background: #F44336;
+    color: #fff;
 }
-.quiz-btn-danger:hover {
-    background: #D32F2F;
+
+.quiz-container .quiz-btn-danger:hover:not(:disabled) {
+    opacity: 0.9;
+}
+
+.quiz-container .quiz-btn:disabled {
+    background: rgba(148, 163, 184, 0.15);
+    border-color: transparent;
+    color: var(--text-muted);
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* Small, quiet icon button for the "restart" action, kept out of the
+   Précédent/Suivant stepper. Mirrors the navbar theme-toggle button. */
+.quiz-container .quiz-restart-btn {
+    background: transparent;
+    border: none;
+    padding: 6px;
+    border-radius: 50%;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: normal;
+    color: var(--text-muted);
+    cursor: pointer;
+    line-height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.quiz-container .quiz-restart-btn:hover,
+.quiz-container .quiz-restart-btn:active {
+    opacity: 1;
+    box-shadow: none;
+}
+
+.quiz-container .quiz-restart-btn:hover {
+    background: rgba(244, 67, 54, 0.12);
+    color: #F44336;
 }
 
 .quiz-results {
@@ -133,4 +225,16 @@
     font-weight: bold;
     color: #4CAF50;
     margin-bottom: 20px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .quiz-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .quiz-container .quiz-btn {
+        width: 100%;
+        text-align: center;
+    }
 }
