@@ -1,0 +1,1364 @@
+{
+  "type": "presentaforge-revision",
+  "v": 1,
+  "exportedAt": "2026-09-30T15:45:24.994Z",
+  "course": {
+    "title": "TD 3 - Programmation Web front-end (JavaScript)",
+    "author": "ICOM Lyon 2 - L1 Informatique",
+    "slideCount": 46
+  },
+  "deck": {
+    "schemaVersion": 2,
+    "metadata": {
+      "title": "TD 3 - Programmation Web front-end (JavaScript)",
+      "author": "ICOM Lyon 2 - L1 Informatique",
+      "created": "2026-09-16",
+      "modified": "2026-09-25"
+    },
+    "theme": "icom",
+    "showSlideNumber": true,
+    "footerText": "TD3 - Programmation Web front-end",
+    "autoNumberChapters": true,
+    "slides": [
+      {
+        "type": "title",
+        "eyebrow": "Programmation Web front-end - ICOM Lyon 2",
+        "title": "TD 3 - Le DOM et les événements",
+        "subtitle": "style, onload, onMouseOver/Out, onclick, formulaires et champs dynamiques",
+        "author": "L2 Informatique",
+        "date": "2026"
+      },
+      {
+        "type": "bullets",
+        "title": "Avant de commencer : le DOM",
+        "items": [
+          "Le <b>DOM</b> (Document Object Model) représente la page comme un arbre d'objets JavaScript manipulables",
+          {
+            "text": "Récupérer un ou plusieurs éléments :",
+            "sub": [
+              "<code>document.getElementById(\"id\")</code> - un seul élément",
+              "<code>document.getElementsByTagName(\"p\")</code> - tous les éléments d'un type (liste)",
+              "<code>document.images</code> - raccourci pour toutes les <code>&lt;img&gt;</code>"
+            ]
+          },
+          "Modifier le style : <code>element.style.color = \"red\"</code>, <code>element.style.fontWeight = \"900\"</code>...",
+          "Ce TD utilise beaucoup d'<b>événements</b> HTML : <code>onclick</code>, <code>onload</code>, <code>onMouseOver</code>, <code>onMouseOut</code>, <code>onchange</code>"
+        ],
+        "note": "Beaucoup d'exercices de ce TD ne peuvent être testés que dans une vraie page HTML (pas dans un bac à sable) : les slides de correction l'indiquent clairement."
+      },
+      {
+        "type": "chapter",
+        "title": "Exercice 1",
+        "subtitle": "Changer la couleur du texte"
+      },
+      {
+        "type": "bullets",
+        "title": "Exercice 1 - Énoncé",
+        "items": [
+          "Créez une page avec un paragraphe de texte et deux boutons : « Noir » et « Rouge »",
+          "Écrivez un script qui change la couleur du texte selon le bouton appuyé"
+        ],
+        "note": "Utilisez l'objet <code>style</code> de l'élément (voir w3schools.com/jsref/dom_obj_style.asp)"
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_h002xxx",
+            "type": "heading",
+            "x": 60,
+            "y": 32,
+            "w": 1160,
+            "h": 60,
+            "z": 3,
+            "data": {
+              "text": "Exercice 1 - Ce qu'il faut savoir"
+            },
+            "style": {
+              "fontSize": 34,
+              "fontWeight": 800,
+              "color": "var(--sl-heading)",
+              "fontFamily": "var(--sl-font-heading)"
+            }
+          },
+          {
+            "id": "el_7pats89",
+            "type": "shape",
+            "x": 60,
+            "y": 110,
+            "w": 190,
+            "h": 4,
+            "z": 3,
+            "data": {
+              "shape": "rect",
+              "text": ""
+            },
+            "style": {
+              "fill": "var(--sl-primary)",
+              "opacity": 1,
+              "stroke": "none"
+            }
+          },
+          {
+            "id": "el_t001xxx",
+            "type": "text",
+            "x": 60,
+            "y": 132,
+            "w": 1080,
+            "h": 470,
+            "z": 2,
+            "data": {
+              "html": "<p>Chaque élément du DOM possède un objet <code>.style</code> qui correspond à son style <b>inline</b> (comme si on écrivait <code>style=\"...\"</code> dans le HTML) :</p><ul><li><code>document.getElementById(\"par\").style.color = \"red\"</code></li></ul><p style=\"margin-top:10px\">Le bouton passe la couleur en <b>paramètre</b> à la fonction (<code>onclick=\"changeCouleur('red')\"</code>) : une seule fonction gère les deux boutons, au lieu d'en écrire une par couleur.</p>"
+            },
+            "style": {
+              "fontSize": 18,
+              "color": "var(--sl-text)",
+              "fontFamily": "var(--sl-font-body)",
+              "lineHeight": 1.5
+            }
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_h004xxx",
+            "type": "heading",
+            "x": 60,
+            "y": 30,
+            "w": 1160,
+            "h": 60,
+            "z": 3,
+            "data": {
+              "text": "Exercice 1 - Élément de correction",
+              "html": ""
+            },
+            "style": {
+              "fontSize": 34,
+              "fontWeight": 800,
+              "color": "var(--sl-heading)",
+              "fontFamily": "var(--sl-font-heading)"
+            }
+          },
+          {
+            "id": "el_tvtxvgt",
+            "type": "shape",
+            "x": 60,
+            "y": 110,
+            "w": 190,
+            "h": 4,
+            "z": 3,
+            "data": {
+              "shape": "rect",
+              "text": ""
+            },
+            "style": {
+              "fill": "var(--sl-primary)",
+              "opacity": 1,
+              "stroke": "none"
+            }
+          },
+          {
+            "id": "el_uv0w3dd",
+            "type": "highlight",
+            "x": 60,
+            "y": 132,
+            "w": 700,
+            "h": 470,
+            "z": 2,
+            "data": {
+              "language": "javascript",
+              "code": "function changeCouleur(couleur) {\n  document.getElementById(\"par\").style.color = couleur;\n}\n\n// <button onclick=\"changeCouleur('#F00')\">Rouge</button>\n// <button onclick=\"changeCouleur('black')\">Noir</button>",
+              "label": "Non exécutable ici (accès DOM réel requis)"
+            },
+            "style": {}
+          },
+          {
+            "id": "el_t007xxx",
+            "type": "text",
+            "x": 792,
+            "y": 134,
+            "w": 430,
+            "h": 468,
+            "z": 2,
+            "data": {
+              "html": "<p style=\"font-weight:700;color:var(--sl-heading);font-size:17px;margin:0 0 8px\">À tester en vrai</p><p>Une seule fonction <code>changeCouleur(couleur)</code>, appelée avec une couleur différente par chaque bouton.</p>"
+            },
+            "style": {
+              "fontSize": 15,
+              "color": "var(--sl-text)",
+              "fontFamily": "var(--sl-font-body)",
+              "lineHeight": 1.5
+            }
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "code",
+        "title": "Exercice 1 - Corrigé",
+        "language": "html",
+        "code": "<h1>Exercice 1</h1>\n<p id=\"par\"> Texte qui change de couleur </p>\n<button id=\"rouge\" onclick=\"changeCouleur('#F00')\">Rouge</button>\n<button id=\"noir\" onclick=\"changeCouleur('black')\">Noir</button>\n\n<script>\n  function changeCouleur(couleur) {\n    document.getElementById(\"par\").style.color = couleur;\n  }\n</script>"
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_j8yj24n",
+            "type": "quiz-live",
+            "x": 150,
+            "y": 55,
+            "w": 980,
+            "h": 610,
+            "z": 1,
+            "data": {
+              "question": "Pour changer la couleur du texte d'un élément en JavaScript, on écrit :",
+              "options": [
+                "element.color = \"red\"",
+                "element.style.color = \"red\"",
+                "element.setColor(\"red\")",
+                "element.css.color = \"red\""
+              ],
+              "answer": 1,
+              "duration": 20,
+              "explanation": "La propriété de style se trouve toujours dans <code>element.style.xxx</code>, jamais directement sur l'élément."
+            },
+            "style": {}
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "chapter",
+        "title": "Exercice 2",
+        "subtitle": "Mettre en gras au chargement de la page"
+      },
+      {
+        "type": "bullets",
+        "title": "Exercice 2 - Énoncé",
+        "items": [
+          "Créez une page avec un titre et plusieurs paragraphes de texte",
+          "Au chargement de la page, faites apparaître le texte de toutes les balises <code>&lt;p&gt;</code> en gras"
+        ],
+        "note": "Utilisez l'événement <code>onload</code>"
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_h010xxx",
+            "type": "heading",
+            "x": 60,
+            "y": 32,
+            "w": 1160,
+            "h": 60,
+            "z": 3,
+            "data": {
+              "text": "Exercice 2 - Ce qu'il faut savoir"
+            },
+            "style": {
+              "fontSize": 34,
+              "fontWeight": 800,
+              "color": "var(--sl-heading)",
+              "fontFamily": "var(--sl-font-heading)"
+            }
+          },
+          {
+            "id": "el_1b5m7uz",
+            "type": "shape",
+            "x": 60,
+            "y": 110,
+            "w": 190,
+            "h": 4,
+            "z": 3,
+            "data": {
+              "shape": "rect",
+              "text": ""
+            },
+            "style": {
+              "fill": "var(--sl-primary)",
+              "opacity": 1,
+              "stroke": "none"
+            }
+          },
+          {
+            "id": "el_t009xxx",
+            "type": "text",
+            "x": 60,
+            "y": 132,
+            "w": 1080,
+            "h": 470,
+            "z": 2,
+            "data": {
+              "html": "<p><code>&lt;body onload=\"maFonction()\"&gt;</code> exécute <code>maFonction()</code> une fois que <b>toute la page</b> (HTML, images...) est chargée - contrairement à un <code>&lt;script&gt;</code> classique, exécuté immédiatement pendant le chargement.</p><ul><li><code>document.getElementsByTagName(\"p\")</code> renvoie <b>tous</b> les paragraphes (une collection, pas juste un élément)</li><li>On la parcourt avec une boucle <code>for</code>, comme un tableau : <code>tabPar.length</code>, <code>tabPar[i]</code></li></ul>"
+            },
+            "style": {
+              "fontSize": 18,
+              "color": "var(--sl-text)",
+              "fontFamily": "var(--sl-font-body)",
+              "lineHeight": 1.5
+            }
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_h012xxx",
+            "type": "heading",
+            "x": 62,
+            "y": 34,
+            "w": 1160,
+            "h": 60,
+            "z": 3,
+            "data": {
+              "text": "Exercice 2 - Élément de correction",
+              "html": ""
+            },
+            "style": {
+              "fontSize": 34,
+              "fontWeight": 800,
+              "color": "var(--sl-heading)",
+              "fontFamily": "var(--sl-font-heading)"
+            }
+          },
+          {
+            "id": "el_7tqb6mv",
+            "type": "shape",
+            "x": 60,
+            "y": 110,
+            "w": 190,
+            "h": 4,
+            "z": 3,
+            "data": {
+              "shape": "rect",
+              "text": ""
+            },
+            "style": {
+              "fill": "var(--sl-primary)",
+              "opacity": 1,
+              "stroke": "none"
+            }
+          },
+          {
+            "id": "el_o7mdq7x",
+            "type": "highlight",
+            "x": 60,
+            "y": 132,
+            "w": 700,
+            "h": 470,
+            "z": 2,
+            "data": {
+              "language": "javascript",
+              "code": "function changeGras() {\n  var tabPar = document.getElementsByTagName(\"p\");\n  for (var i = 0; i < tabPar.length; i++) {\n    tabPar[i].style.fontWeight = \"900\";\n  }\n}\n\n// <body onload=\"changeGras()\">",
+              "label": "Non exécutable ici (accès DOM réel requis)"
+            },
+            "style": {}
+          },
+          {
+            "id": "el_t015xxx",
+            "type": "text",
+            "x": 792,
+            "y": 134,
+            "w": 430,
+            "h": 468,
+            "z": 2,
+            "data": {
+              "html": "<p style=\"font-weight:700;color:var(--sl-heading);font-size:17px;margin:0 0 8px\">À tester en vrai</p><p>Mettre plusieurs <code>&lt;p&gt;</code> dans la page : tous doivent passer en gras dès l'affichage, sans clic.</p>"
+            },
+            "style": {
+              "fontSize": 15,
+              "color": "var(--sl-text)",
+              "fontFamily": "var(--sl-font-body)",
+              "lineHeight": 1.5
+            }
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "code",
+        "title": "Exercice 2 - Corrigé",
+        "language": "html",
+        "code": "<body onload=\"changeGras()\">\n  <h1>Exercice 2</h1>\n  <p>Le Petit Prince</p>\n  <p>Antoine de Saint-Exupéry</p>\n  <p>Les grandes personnes aiment les chiffres.</p>\n\n  <script>\n    function changeGras() {\n      tabPar = document.getElementsByTagName(\"p\");\n      for (var i = 0; i < tabPar.length; i++) {\n        tabPar[i].style.fontWeight = \"900\";\n      }\n    }\n  </script>\n</body>"
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_bep7ni2",
+            "type": "quiz-live",
+            "x": 150,
+            "y": 55,
+            "w": 980,
+            "h": 610,
+            "z": 1,
+            "data": {
+              "question": "Quand se déclenche l'événement onload placé sur <body> ?",
+              "options": [
+                "Avant le chargement du HTML",
+                "Dès la première ligne du <body>",
+                "Une fois toute la page chargée",
+                "À chaque clic sur la page"
+              ],
+              "answer": 2,
+              "duration": 20,
+              "explanation": "onload attend que toute la page (DOM + ressources comme les images) soit chargée avant de s'exécuter."
+            },
+            "style": {}
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "chapter",
+        "title": "Exercice 3",
+        "subtitle": "Bordure au survol de la souris"
+      },
+      {
+        "type": "bullets",
+        "title": "Exercice 3 - Énoncé",
+        "items": [
+          "Quand l'utilisateur passe la souris sur une image, faites apparaître <b>toutes</b> les images de la page avec une bordure verte de 3 pixels"
+        ],
+        "note": "Utilisez <code>onMouseOver</code> et <code>onMouseOut</code> sur la balise <code>&lt;img&gt;</code>"
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_h018xxx",
+            "type": "heading",
+            "x": 60,
+            "y": 32,
+            "w": 1160,
+            "h": 60,
+            "z": 3,
+            "data": {
+              "text": "Exercice 3 - Ce qu'il faut savoir"
+            },
+            "style": {
+              "fontSize": 34,
+              "fontWeight": 800,
+              "color": "var(--sl-heading)",
+              "fontFamily": "var(--sl-font-heading)"
+            }
+          },
+          {
+            "id": "el_uxapjlz",
+            "type": "shape",
+            "x": 60,
+            "y": 110,
+            "w": 190,
+            "h": 4,
+            "z": 3,
+            "data": {
+              "shape": "rect",
+              "text": ""
+            },
+            "style": {
+              "fill": "var(--sl-primary)",
+              "opacity": 1,
+              "stroke": "none"
+            }
+          },
+          {
+            "id": "el_t017xxx",
+            "type": "text",
+            "x": 60,
+            "y": 132,
+            "w": 1080,
+            "h": 470,
+            "z": 2,
+            "data": {
+              "html": "<p>Deux événements complémentaires, sur chaque <code>&lt;img&gt;</code> :</p><ul><li><code>onMouseOver</code> - la souris <b>entre</b> sur l'élément → ajoute la bordure</li><li><code>onMouseOut</code> - la souris <b>quitte</b> l'élément → retire la bordure</li></ul><p style=\"margin-top:10px\"><code>document.images</code> = raccourci pour <code>getElementsByTagName(\"img\")</code>. On boucle dessus pour appliquer la bordure à <b>toutes</b> les images, même si une seule a été survolée.</p>"
+            },
+            "style": {
+              "fontSize": 18,
+              "color": "var(--sl-text)",
+              "fontFamily": "var(--sl-font-body)",
+              "lineHeight": 1.5
+            }
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_h020xxx",
+            "type": "heading",
+            "x": 62,
+            "y": 32,
+            "w": 1160,
+            "h": 60,
+            "z": 3,
+            "data": {
+              "text": "Exercice 3 - Élément de correction",
+              "html": ""
+            },
+            "style": {
+              "fontSize": 34,
+              "fontWeight": 800,
+              "color": "var(--sl-heading)",
+              "fontFamily": "var(--sl-font-heading)"
+            }
+          },
+          {
+            "id": "el_82w5hr8",
+            "type": "shape",
+            "x": 60,
+            "y": 110,
+            "w": 190,
+            "h": 4,
+            "z": 3,
+            "data": {
+              "shape": "rect",
+              "text": ""
+            },
+            "style": {
+              "fill": "var(--sl-primary)",
+              "opacity": 1,
+              "stroke": "none"
+            }
+          },
+          {
+            "id": "el_efgqngj",
+            "type": "highlight",
+            "x": 60,
+            "y": 132,
+            "w": 700,
+            "h": 470,
+            "z": 2,
+            "data": {
+              "language": "javascript",
+              "code": "function ajoutBordure() {\n  var tabImg = document.images;\n  for (var i = 0; i < tabImg.length; i++) {\n    tabImg[i].style.borderWidth = \"3px\";\n    tabImg[i].style.borderColor = \"green\";\n    tabImg[i].style.borderStyle = \"solid\";\n  }\n}\nfunction effaceBordure() {\n  var tabImg = document.images;\n  for (var i = 0; i < tabImg.length; i++) {\n    tabImg[i].style.borderWidth = \"0\";\n  }\n}",
+              "label": "Non exécutable ici (accès DOM réel requis)"
+            },
+            "style": {}
+          },
+          {
+            "id": "el_t023xxx",
+            "type": "text",
+            "x": 792,
+            "y": 134,
+            "w": 430,
+            "h": 468,
+            "z": 2,
+            "data": {
+              "html": "<p style=\"font-weight:700;color:var(--sl-heading);font-size:17px;margin:0 0 8px\">À tester en vrai</p><p>Mettre 2 images, survoler l'une : les <b>deux</b> doivent afficher une bordure verte.</p>"
+            },
+            "style": {
+              "fontSize": 15,
+              "color": "var(--sl-text)",
+              "fontFamily": "var(--sl-font-body)",
+              "lineHeight": 1.5
+            }
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "code",
+        "title": "Exercice 3 - Corrigé",
+        "language": "html",
+        "code": "<img id=\"image1\" src=\"img11.gif\"\n     onMouseOver=\"ajoutBordure()\"\n     onMouseOut=\"effaceBordure()\">\n<img id=\"image2\" src=\"img12.gif\"\n     onMouseOver=\"ajoutBordure()\"\n     onMouseOut=\"effaceBordure()\">"
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_h83l7ru",
+            "type": "quiz-live",
+            "x": 150,
+            "y": 55,
+            "w": 980,
+            "h": 610,
+            "z": 1,
+            "data": {
+              "question": "Quel événement se déclenche quand la souris QUITTE une image ?",
+              "options": [
+                "onMouseOver",
+                "onMouseOut",
+                "onMouseLeave uniquement",
+                "onclick"
+              ],
+              "answer": 1,
+              "duration": 20,
+              "explanation": "onMouseOut se déclenche quand le pointeur quitte l'élément (symétrique d'onMouseOver, qui se déclenche à l'entrée)."
+            },
+            "style": {}
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "chapter",
+        "title": "Exercice 4",
+        "subtitle": "Permuter deux images au clic"
+      },
+      {
+        "type": "bullets",
+        "title": "Exercice 4 - Énoncé",
+        "items": [
+          "Créez une page avec deux images",
+          "Écrivez un script qui permute les images quand l'utilisateur clique sur l'une d'entre elles"
+        ]
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_h026xxx",
+            "type": "heading",
+            "x": 60,
+            "y": 32,
+            "w": 1160,
+            "h": 60,
+            "z": 3,
+            "data": {
+              "text": "Exercice 4 - Ce qu'il faut savoir"
+            },
+            "style": {
+              "fontSize": 34,
+              "fontWeight": 800,
+              "color": "var(--sl-heading)",
+              "fontFamily": "var(--sl-font-heading)"
+            }
+          },
+          {
+            "id": "el_j9sqr6h",
+            "type": "shape",
+            "x": 60,
+            "y": 110,
+            "w": 190,
+            "h": 4,
+            "z": 3,
+            "data": {
+              "shape": "rect",
+              "text": ""
+            },
+            "style": {
+              "fill": "var(--sl-primary)",
+              "opacity": 1,
+              "stroke": "none"
+            }
+          },
+          {
+            "id": "el_t025xxx",
+            "type": "text",
+            "x": 60,
+            "y": 132,
+            "w": 1080,
+            "h": 470,
+            "z": 2,
+            "data": {
+              "html": "<p>Permuter deux valeurs nécessite toujours une <b>variable temporaire</b> - sinon on écrase la première valeur avant de l'avoir copiée :</p><pre style=\"font-family:var(--sl-font-mono,monospace);font-size:15px;background:var(--sl-tag);border:1px solid var(--sl-border);border-radius:8px;padding:10px 12px;margin:8px 0\">var txt = img1.src;   // sauvegarder\nimg1.src = img2.src;  // écraser img1\nimg2.src = txt;        // récupérer l'original</pre><p>Chaque image porte <code>onclick=\"changeImages()\"</code> - cliquer sur l'une OU l'autre déclenche le même échange.</p>"
+            },
+            "style": {
+              "fontSize": 18,
+              "color": "var(--sl-text)",
+              "fontFamily": "var(--sl-font-body)",
+              "lineHeight": 1.5
+            }
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_h028xxx",
+            "type": "heading",
+            "x": 60,
+            "y": 32,
+            "w": 1160,
+            "h": 60,
+            "z": 3,
+            "data": {
+              "text": "Exercice 4 - Élément de correction",
+              "html": ""
+            },
+            "style": {
+              "fontSize": 34,
+              "fontWeight": 800,
+              "color": "var(--sl-heading)",
+              "fontFamily": "var(--sl-font-heading)"
+            }
+          },
+          {
+            "id": "el_21dl86z",
+            "type": "shape",
+            "x": 60,
+            "y": 110,
+            "w": 190,
+            "h": 4,
+            "z": 3,
+            "data": {
+              "shape": "rect",
+              "text": ""
+            },
+            "style": {
+              "fill": "var(--sl-primary)",
+              "opacity": 1,
+              "stroke": "none"
+            }
+          },
+          {
+            "id": "el_cl9x7l2",
+            "type": "highlight",
+            "x": 60,
+            "y": 132,
+            "w": 700,
+            "h": 470,
+            "z": 2,
+            "data": {
+              "language": "javascript",
+              "code": "function changeImages() {\n  var txt = document.getElementById(\"img1\").src;\n  document.getElementById(\"img1\").src =\n    document.getElementById(\"img2\").src;\n  document.getElementById(\"img2\").src = txt;\n}",
+              "label": "Non exécutable ici (accès DOM réel requis)"
+            },
+            "style": {}
+          },
+          {
+            "id": "el_t031xxx",
+            "type": "text",
+            "x": 792,
+            "y": 134,
+            "w": 430,
+            "h": 468,
+            "z": 2,
+            "data": {
+              "html": "<p style=\"font-weight:700;color:var(--sl-heading);font-size:17px;margin:0 0 8px\">À tester en vrai</p><p>Cliquer sur l'une ou l'autre image doit permuter les deux.</p>"
+            },
+            "style": {
+              "fontSize": 15,
+              "color": "var(--sl-text)",
+              "fontFamily": "var(--sl-font-body)",
+              "lineHeight": 1.5
+            }
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "code",
+        "title": "Exercice 4 - Corrigé",
+        "language": "html",
+        "code": "<img src=\"img11.gif\" id=\"img1\" onclick=\"changeImages()\"/>\n<img src=\"img22.gif\" id=\"img2\" onclick=\"changeImages()\"/>\n\n<script>\n  function changeImages() {\n    var txt = document.getElementById(\"img1\").src;\n    document.getElementById(\"img1\").src =\n      document.getElementById(\"img2\").src;\n    document.getElementById(\"img2\").src = txt;\n  }\n</script>"
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_pcqoezt",
+            "type": "quiz-live",
+            "x": 150,
+            "y": 55,
+            "w": 980,
+            "h": 610,
+            "z": 1,
+            "data": {
+              "question": "Pourquoi faut-il une variable temporaire pour permuter les deux images ?",
+              "options": [
+                "Ce n'est pas nécessaire, on peut faire img1.src = img2.src puis img2.src = img1.src",
+                "Sinon la valeur d'origine de img1 est perdue avant d'être copiée dans img2",
+                "JavaScript l'exige par sa syntaxe",
+                "Pour respecter les bonnes pratiques uniquement, ça marcherait sans"
+              ],
+              "answer": 1,
+              "duration": 20,
+              "explanation": "Sans variable temporaire, dès qu'on écrit img1.src = img2.src, l'ancienne valeur de img1.src est perdue - impossible de la remettre dans img2 après coup."
+            },
+            "style": {}
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "chapter",
+        "title": "Exercice 5",
+        "subtitle": "Vider les champs de saisie"
+      },
+      {
+        "type": "bullets",
+        "title": "Exercice 5 - Énoncé",
+        "items": [
+          "Dans un formulaire avec champs de saisie, checkbox et boutons radio, écrivez un script qui vide <b>tous les champs de saisie</b> en appuyant sur un bouton",
+          "Ne réinitialisez PAS les boutons radio ni les checkbox"
+        ],
+        "note": "Propriétés utiles : <code>element.type</code> (ex. \"text\" pour un input texte) et <code>element.value</code>"
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_h034xxx",
+            "type": "heading",
+            "x": 60,
+            "y": 32,
+            "w": 1160,
+            "h": 60,
+            "z": 3,
+            "data": {
+              "text": "Exercice 5 - Ce qu'il faut savoir"
+            },
+            "style": {
+              "fontSize": 34,
+              "fontWeight": 800,
+              "color": "var(--sl-heading)",
+              "fontFamily": "var(--sl-font-heading)"
+            }
+          },
+          {
+            "id": "el_kknesr3",
+            "type": "shape",
+            "x": 60,
+            "y": 110,
+            "w": 190,
+            "h": 4,
+            "z": 3,
+            "data": {
+              "shape": "rect",
+              "text": ""
+            },
+            "style": {
+              "fill": "var(--sl-primary)",
+              "opacity": 1,
+              "stroke": "none"
+            }
+          },
+          {
+            "id": "el_t033xxx",
+            "type": "text",
+            "x": 60,
+            "y": 132,
+            "w": 1080,
+            "h": 470,
+            "z": 2,
+            "data": {
+              "html": "<p><code>formulaire.childNodes</code> renvoie <b>tous</b> les enfants directs du formulaire (inputs, mais aussi les retours à la ligne du HTML, comptés comme des nœuds texte).</p><p style=\"margin-top:8px\">Pour ne cibler que les champs texte, on teste <code>element.type == \"text\"</code> dans la boucle : les cases à cocher (<code>type=\"checkbox\"</code>) et boutons radio (<code>type=\"radio\"</code>) sont ainsi ignorés, comme demandé.</p>"
+            },
+            "style": {
+              "fontSize": 18,
+              "color": "var(--sl-text)",
+              "fontFamily": "var(--sl-font-body)",
+              "lineHeight": 1.5
+            }
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_h036xxx",
+            "type": "heading",
+            "x": 60,
+            "y": 32,
+            "w": 1160,
+            "h": 60,
+            "z": 3,
+            "data": {
+              "text": "Exercice 5 - Élément de correction",
+              "html": ""
+            },
+            "style": {
+              "fontSize": 34,
+              "fontWeight": 800,
+              "color": "var(--sl-heading)",
+              "fontFamily": "var(--sl-font-heading)"
+            }
+          },
+          {
+            "id": "el_kgbhyxh",
+            "type": "shape",
+            "x": 60,
+            "y": 110,
+            "w": 190,
+            "h": 4,
+            "z": 3,
+            "data": {
+              "shape": "rect",
+              "text": ""
+            },
+            "style": {
+              "fill": "var(--sl-primary)",
+              "opacity": 1,
+              "stroke": "none"
+            }
+          },
+          {
+            "id": "el_eniqche",
+            "type": "highlight",
+            "x": 60,
+            "y": 132,
+            "w": 700,
+            "h": 470,
+            "z": 2,
+            "data": {
+              "language": "javascript",
+              "code": "function reinitialiser() {\n  var formulaire = document.getElementById(\"formulaire\").childNodes;\n  for (var i = 0; i < formulaire.length; i++) {\n    if (formulaire[i].type == \"text\") {\n      formulaire[i].value = \"\";\n    }\n  }\n}",
+              "label": "Non exécutable ici (accès DOM réel requis)"
+            },
+            "style": {}
+          },
+          {
+            "id": "el_t039xxx",
+            "type": "text",
+            "x": 792,
+            "y": 134,
+            "w": 430,
+            "h": 468,
+            "z": 2,
+            "data": {
+              "html": "<p style=\"font-weight:700;color:var(--sl-heading);font-size:17px;margin:0 0 8px\">À tester en vrai</p><p>Remplir nom/prénom, cocher les cases, cliquer sur le bouton : seuls nom/prénom se vident.</p>"
+            },
+            "style": {
+              "fontSize": 15,
+              "color": "var(--sl-text)",
+              "fontFamily": "var(--sl-font-body)",
+              "lineHeight": 1.5
+            }
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "code",
+        "title": "Exercice 5 - Corrigé",
+        "language": "html",
+        "code": "<form name=\"formulaire\" id=\"formulaire\">\n  Nom : <input type=\"text\" name=\"nom\" id=\"nom\" /><br />\n  Prénom : <input type=\"text\" name=\"prenom\" /><br />\n  Enfants ?\n  <input type=\"radio\" name=\"enfants\" value=\"oui\" />Oui\n  <input type=\"radio\" name=\"enfants\" value=\"non\" checked />Non<br />\n  Marié(e) <input type=\"checkbox\" name=\"marie\" /><br />\n  <input type=\"button\" value=\"ReinitialiserTxt\"\n         onclick=\"reinitialiser()\" />\n</form>"
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_8ozynib",
+            "type": "quiz-live",
+            "x": 150,
+            "y": 55,
+            "w": 980,
+            "h": 610,
+            "z": 1,
+            "data": {
+              "question": "Comment vérifier qu'un élément de formulaire est un champ texte (et pas une checkbox) ?",
+              "options": [
+                "element.tagName == \"text\"",
+                "element.type == \"text\"",
+                "element.name == \"text\"",
+                "element instanceof Text"
+              ],
+              "answer": 1,
+              "duration": 20,
+              "explanation": "La propriété .type d'un input reflète l'attribut HTML type=\"...\" : \"text\", \"checkbox\", \"radio\", \"button\"..."
+            },
+            "style": {}
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "chapter",
+        "title": "Exercice 6",
+        "subtitle": "Activer un champ conditionnellement"
+      },
+      {
+        "type": "bullets",
+        "title": "Exercice 6 - Énoncé",
+        "items": [
+          "Si l'utilisateur coche « Femme » ET la case « Marié(e) », donnez accès au champ « Nom de jeune fille » (désactivé par défaut)"
+        ],
+        "note": "Radio/checkbox : propriété <code>checked</code> (true/false). Champ de saisie : propriété <code>readOnly</code> (true/false)"
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_h042xxx",
+            "type": "heading",
+            "x": 60,
+            "y": 32,
+            "w": 1160,
+            "h": 60,
+            "z": 3,
+            "data": {
+              "text": "Exercice 6 - Ce qu'il faut savoir"
+            },
+            "style": {
+              "fontSize": 34,
+              "fontWeight": 800,
+              "color": "var(--sl-heading)",
+              "fontFamily": "var(--sl-font-heading)"
+            }
+          },
+          {
+            "id": "el_m43s0f6",
+            "type": "shape",
+            "x": 60,
+            "y": 110,
+            "w": 190,
+            "h": 4,
+            "z": 3,
+            "data": {
+              "shape": "rect",
+              "text": ""
+            },
+            "style": {
+              "fill": "var(--sl-primary)",
+              "opacity": 1,
+              "stroke": "none"
+            }
+          },
+          {
+            "id": "el_t041xxx",
+            "type": "text",
+            "x": 60,
+            "y": 132,
+            "w": 1080,
+            "h": 470,
+            "z": 2,
+            "data": {
+              "html": "<p>Deux propriétés booléennes à combiner :</p><ul><li><code>radioFemme.checked</code> - vrai si le bouton radio « Femme » est sélectionné</li><li><code>checkboxMarie.checked</code> - vrai si la case « Marié(e) » est cochée</li></ul><p style=\"margin-top:8px\">Condition : <code>if (radioFemme.checked &amp;&amp; checkboxMarie.checked)</code> → <code>champ.readOnly = false</code> (déverrouillé), sinon <code>readOnly = true</code> ET on vide le champ (<code>value = \"\"</code>) pour ne pas garder une ancienne saisie invalide.</p>"
+            },
+            "style": {
+              "fontSize": 18,
+              "color": "var(--sl-text)",
+              "fontFamily": "var(--sl-font-body)",
+              "lineHeight": 1.5
+            }
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_h044xxx",
+            "type": "heading",
+            "x": 60,
+            "y": 32,
+            "w": 1160,
+            "h": 60,
+            "z": 3,
+            "data": {
+              "text": "Exercice 6 - Élément de correction",
+              "html": ""
+            },
+            "style": {
+              "fontSize": 34,
+              "fontWeight": 800,
+              "color": "var(--sl-heading)",
+              "fontFamily": "var(--sl-font-heading)"
+            }
+          },
+          {
+            "id": "el_swpu3qb",
+            "type": "shape",
+            "x": 60,
+            "y": 110,
+            "w": 190,
+            "h": 4,
+            "z": 3,
+            "data": {
+              "shape": "rect",
+              "text": ""
+            },
+            "style": {
+              "fill": "var(--sl-primary)",
+              "opacity": 1,
+              "stroke": "none"
+            }
+          },
+          {
+            "id": "el_6c42ghs",
+            "type": "highlight",
+            "x": 60,
+            "y": 132,
+            "w": 700,
+            "h": 470,
+            "z": 2,
+            "data": {
+              "language": "javascript",
+              "code": "function verifier() {\n  var radioFemme = document.getElementById(\"femme\");\n  var checkboxMarie = document.getElementById(\"marie\");\n  var nomjf = document.getElementById(\"nomjf\");\n  if (radioFemme.checked && checkboxMarie.checked) {\n    nomjf.readOnly = false;\n  } else {\n    nomjf.readOnly = true;\n    nomjf.value = \"\";\n  }\n}",
+              "label": "Non exécutable ici (accès DOM réel requis)"
+            },
+            "style": {}
+          },
+          {
+            "id": "el_t047xxx",
+            "type": "text",
+            "x": 792,
+            "y": 134,
+            "w": 430,
+            "h": 468,
+            "z": 2,
+            "data": {
+              "html": "<p style=\"font-weight:700;color:var(--sl-heading);font-size:17px;margin:0 0 8px\">À tester en vrai</p><p>Cocher Femme seule : rien. Cocher Femme + Marié(e) : le champ se débloque.</p>"
+            },
+            "style": {
+              "fontSize": 15,
+              "color": "var(--sl-text)",
+              "fontFamily": "var(--sl-font-body)",
+              "lineHeight": 1.5
+            }
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "code",
+        "title": "Exercice 6 - Corrigé",
+        "language": "html",
+        "code": "Marié(e) <input type=\"checkbox\" id=\"marie\" onchange=\"verifier()\" /><br />\nSexe :\n<input type=\"radio\" name=\"sexe\" id=\"homme\" onchange=\"verifier()\" />Homme\n<input type=\"radio\" name=\"sexe\" id=\"femme\" onchange=\"verifier()\" />Femme<br />\nNom de jeune fille :\n<input type=\"text\" id=\"nomjf\" readonly=\"readonly\" />"
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_5a5mz59",
+            "type": "quiz-live",
+            "x": 150,
+            "y": 55,
+            "w": 980,
+            "h": 610,
+            "z": 1,
+            "data": {
+              "question": "Que se passe-t-il si l'utilisateur décoche « Marié(e) » après avoir débloqué le champ « nom de jeune fille » ?",
+              "options": [
+                "Rien, le champ reste débloqué",
+                "Le champ redevient readOnly ET se vide (value = \"\")",
+                "Le champ redevient readOnly mais garde sa valeur",
+                "Une erreur JavaScript"
+              ],
+              "answer": 1,
+              "duration": 20,
+              "explanation": "Le bloc else fait les deux choses : readOnly = true ET value = \"\" - sinon une valeur invalide resterait affichée alors que le champ n'est plus censé être rempli."
+            },
+            "style": {}
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "chapter",
+        "title": "Exercice 7",
+        "subtitle": "Rechercher une planète (fichier externe)"
+      },
+      {
+        "type": "bullets",
+        "title": "Exercice 7 - Énoncé",
+        "items": [
+          "Avec les données d'un tableau de planètes (distance au Soleil, diamètre), permettez à l'utilisateur de saisir un nom de planète et d'afficher ses caractéristiques au clic sur un bouton",
+          "La saisie doit être insensible à la casse (majuscules/minuscules)",
+          "Placez les fonctions dans un fichier <code>.js</code> externe",
+          "Utilisez de préférence plusieurs tableaux à une dimension plutôt qu'un tableau multidimensionnel"
+        ]
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_h050xxx",
+            "type": "heading",
+            "x": 60,
+            "y": 32,
+            "w": 1160,
+            "h": 60,
+            "z": 3,
+            "data": {
+              "text": "Exercice 7 - Ce qu'il faut savoir"
+            },
+            "style": {
+              "fontSize": 34,
+              "fontWeight": 800,
+              "color": "var(--sl-heading)",
+              "fontFamily": "var(--sl-font-heading)"
+            }
+          },
+          {
+            "id": "el_y4jr1zs",
+            "type": "shape",
+            "x": 60,
+            "y": 110,
+            "w": 190,
+            "h": 4,
+            "z": 3,
+            "data": {
+              "shape": "rect",
+              "text": ""
+            },
+            "style": {
+              "fill": "var(--sl-primary)",
+              "opacity": 1,
+              "stroke": "none"
+            }
+          },
+          {
+            "id": "el_t049xxx",
+            "type": "text",
+            "x": 60,
+            "y": 132,
+            "w": 1080,
+            "h": 470,
+            "z": 2,
+            "data": {
+              "html": "<p><b>Fichier externe :</b> <code>&lt;script src=\"TD3Ex7.js\"&gt;&lt;/script&gt;</code> - le fichier .js ne contient QUE du JavaScript, sans balise <code>&lt;script&gt;</code>.</p><p style=\"margin-top:8px\"><b>Tableaux parallèles :</b> <code>arrPlanete[i]</code>, <code>arrDistance[i]</code> et <code>arrDiametre[i]</code> décrivent la même planète au même index <code>i</code>.</p><p style=\"margin-top:8px\"><b>Insensible à la casse :</b> comparer <code>nom.toUpperCase()</code> des deux côtés, pas le texte brut.</p>"
+            },
+            "style": {
+              "fontSize": 18,
+              "color": "var(--sl-text)",
+              "fontFamily": "var(--sl-font-body)",
+              "lineHeight": 1.5
+            }
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_h052xxx",
+            "type": "heading",
+            "x": 60,
+            "y": 32,
+            "w": 1160,
+            "h": 60,
+            "z": 3,
+            "data": {
+              "text": "Exercice 7 - Élément de correction (logique de recherche)",
+              "html": ""
+            },
+            "style": {
+              "fontSize": 34,
+              "fontWeight": 800,
+              "color": "var(--sl-heading)",
+              "fontFamily": "var(--sl-font-heading)"
+            }
+          },
+          {
+            "id": "el_w2waa8y",
+            "type": "shape",
+            "x": 60,
+            "y": 110,
+            "w": 190,
+            "h": 4,
+            "z": 3,
+            "data": {
+              "shape": "rect",
+              "text": ""
+            },
+            "style": {
+              "fill": "var(--sl-primary)",
+              "opacity": 1,
+              "stroke": "none"
+            }
+          },
+          {
+            "id": "el_os0yc08",
+            "type": "code-live",
+            "x": 60,
+            "y": 132,
+            "w": 790,
+            "h": 470,
+            "z": 2,
+            "data": {
+              "language": "javascript",
+              "code": "function chercherPlanete(nomSaisi) {\n  var arrPlanete = [\"Mercure\", \"Venus\", \"Terre\", \"Mars\"];\n  var arrDistance = [36000000, 67000000, 93000000, 141000000];\n  var arrDiametre = [3100, 7700, 7920, 4200];\n  var i = 0, trouve = false, resultat = null;\n  while (!trouve && i < arrPlanete.length) {\n    if (arrPlanete[i].toUpperCase() === nomSaisi.toUpperCase()) {\n      resultat = { distance: arrDistance[i], diametre: arrDiametre[i] };\n      trouve = true;\n    }\n    i++;\n  }\n  return resultat;\n}\n\nconsole.log(chercherPlanete(\"mars\"));   // trouvé, insensible à la casse\nconsole.log(chercherPlanete(\"pluton\")); // null, pas dans la liste\n",
+              "autoRun": false
+            },
+            "style": {}
+          },
+          {
+            "id": "el_t055xxx",
+            "type": "text",
+            "x": 882,
+            "y": 134,
+            "w": 340,
+            "h": 468,
+            "z": 2,
+            "data": {
+              "html": "<div style=\"padding-left:2px\"><p style=\"font-weight:700;color:var(--sl-heading);font-size:17px;margin:0 0 8px\">Dans la vraie page</p><p>La fonction <code>affiche()</code> du corrigé lit le champ input, appelle cette recherche, puis écrit le résultat dans 2 autres champs (readonly).</p><p style=\"color:var(--sl-muted);font-size:13px;margin:12px 0 0\">▶ Exécuter, essayer d'autres noms.</p></div>"
+            },
+            "style": {
+              "fontSize": 15,
+              "color": "var(--sl-text)",
+              "fontFamily": "var(--sl-font-body)",
+              "lineHeight": 1.5
+            }
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "code",
+        "title": "Exercice 7 - Corrigé",
+        "language": "javascript",
+        "code": "function verifNomPlanete(nom1, nom2) {\n  if (nom1 != nom2) return false;\n  else return true;\n}\nfunction affiche() {\n  var nomPlanete = document.getElementById(\"planete\").value;\n  var i = 0;\n  var arrPlanete = new Array(\"Mercure\", \"Venus\", \"Terre\", \"Mars\");\n  var arrDistance = new Array(36000000, 67000000, 93000000, 141000000);\n  var arrDiametre = new Array(3100, 7700, 7920, 4200);\n  var trouve = false;\n  while (!trouve && i < arrPlanete.length) {\n    if (verifNomPlanete(arrPlanete[i].toUpperCase(), nomPlanete.toUpperCase())) {\n      document.getElementById(\"distance\").value = arrDistance[i];\n      document.getElementById(\"diametre\").value = arrDiametre[i];\n      trouve = true;\n    }\n    i++;\n  }\n  if (!trouve) alert(\"Votre planete n'est pas dans la liste !\");\n}"
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_hguk5w3",
+            "type": "quiz-live",
+            "x": 150,
+            "y": 55,
+            "w": 980,
+            "h": 610,
+            "z": 1,
+            "data": {
+              "question": "Pourquoi comparer <code>arrPlanete[i].toUpperCase()</code> et <code>nomPlanete.toUpperCase()</code> plutôt que les chaînes brutes ?",
+              "options": [
+                "Pour accélérer la recherche",
+                "Pour rendre la comparaison insensible à la casse (majuscules/minuscules)",
+                "toUpperCase() est obligatoire avant un ===",
+                "Pour éviter une erreur de syntaxe"
+              ],
+              "answer": 1,
+              "duration": 20,
+              "explanation": "\"Mars\" et \"mars\" sont des chaînes différentes pour ===. En mettant les deux en majuscules avant de comparer, la casse saisie par l'utilisateur n'a plus d'importance."
+            },
+            "style": {}
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "bullets",
+        "title": "Ce qu'il faut retenir",
+        "items": [
+          "<code>element.style.xxx</code> pour changer un style, <code>element.value</code> pour lire/écrire un champ",
+          "<code>onload</code> attend le chargement complet ; <code>onMouseOver</code>/<code>onMouseOut</code> encadrent le survol",
+          "<code>getElementsByTagName</code> / <code>document.images</code> renvoient une <b>collection</b>, à parcourir en boucle",
+          "Permuter deux valeurs = toujours passer par une variable temporaire",
+          "<code>checked</code> (radio/checkbox) et <code>readOnly</code> (champ texte) sont des booléens",
+          "Un fichier <code>.js</code> externe ne contient jamais de balise <code>&lt;script&gt;</code>"
+        ],
+        "note": "La plupart des scripts DOM ne se testent que dans une vraie page - ouvrez toujours le .html."
+      },
+      {
+        "type": "title",
+        "eyebrow": "Fin du TD 3",
+        "title": "Des questions ?",
+        "subtitle": "Pensez au dépôt Moodle - TD3_Nom_Prenom.zip"
+      }
+    ],
+    "reviewComments": [],
+    "typography": {
+      "heading": 52,
+      "text": 22
+    }
+  },
+  "bookmarks": [],
+  "notes": {},
+  "revision": {}
+}

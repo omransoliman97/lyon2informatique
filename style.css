@@ -580,3 +580,41 @@ footer a:hover {
     font-size: 1.1rem;
   }
 }
+
+/* QCM groups: a CM heading followed by a row of compact game cards
+   (e.g. "QCM CM1" -> Partie 1 / Partie 2 / ...). Lets a CM section host
+   several QCM games, each still opening in its own page. */
+.qcm-group {
+  margin-bottom: 30px;
+}
+
+.qcm-group:last-child {
+  margin-bottom: 0;
+}
+
+.qcm-group-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+  padding-left: 12px;
+  border-left: 4px solid var(--learning-section-color);
+}
+
+.qcm-games-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.qcm-game-card {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px 20px;
+  min-width: 170px;
+}
+
+.qcm-game-label {
+  font-weight: 600;
+  flex: 1;
+}

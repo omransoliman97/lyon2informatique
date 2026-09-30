@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>TD 1 — Les bases de JavaScript</title>
+
+<script>
+  (function () {
+    var t = localStorage.getItem('theme') || 'dark';
+    if (t === 'light') document.documentElement.setAttribute('data-theme', 'light');
+  })();
+</script>
+
+<style>
+  :root{
+    --sl-primary:#8bc34a;
+    --sl-primary-dark:#aed581;
+    --sl-primary-soft:#1a2e15;
+    --sl-accent:#aed581;
+    --sl-heading:#f0f0f0;
+    --sl-text:#c8c8c8;
+    --sl-muted:#8a8a8a;
+    --sl-bg:#0f1115;
+    --sl-surface:#1a1d23;
+    --sl-surface-2:#22262e;
+    --sl-border:#2f333b;
+    --sl-tag:#25292f;
+    --sl-code-bg:#0d0f12;
+    --sl-code-text:#d4d4d4;
+    --sl-correct-bg:#0f2e1a;
+    --sl-wrong-bg:#2e0f0f;
+    --sl-shadow:0 4px 20px rgba(0,0,0,.35);
+    --sl-font-heading:'Segoe UI',system-ui,-apple-system,sans-serif;
+    --sl-font-body:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+    --sl-font-mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  html[data-theme="light"],
+  body[data-theme="light"]{
+    --sl-primary:#7cb342;
+    --sl-primary-dark:#558b2f;
+    --sl-primary-soft:#f1f8e9;
+    --sl-accent:#a4c639;
+    --sl-heading:#1a1a1a;
+    --sl-text:#424242;
+    --sl-muted:#757575;
+    --sl-bg:#f5f5f5;
+    --sl-surface:#ffffff;
+    --sl-surface-2:#ffffff;
+    --sl-border:#e8e8e8;
+    --sl-tag:#f5f5f5;
+    --sl-code-bg:#1e1e1e;
+    --sl-code-text:#d4d4d4;
+    --sl-correct-bg:#f0fdf4;
+    --sl-wrong-bg:#fef2f2;
+    --sl-shadow:0 4px 20px rgba(0,0,0,.06);
+  }
+
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0}
+  body{
+    font-family:var(--sl-font-body);background:var(--sl-bg);color:var(--sl-text);
+    display:flex;flex-direction:column;overflow:hidden;-webkit-font-smoothing:antialiased;
+    transition:background-color .2s ease, color .2s ease;
+  }
+
+  .navbar{flex:0 0 auto;background:var(--sl-surface);border-bottom:1px solid var(--sl-border);
+    padding:0 20px;height:64px;display:flex;align-items:center;z-index:30}
+  .nav-container{width:100%;max-width:1500px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:20px}
+  .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--sl-heading);font-weight:700;font-size:15px}
+  .nav-logo img{height:34px;width:auto;display:block;border-radius:6px}
+  .nav-logo span{white-space:nowrap}
+  .nav-menu{display:flex;align-items:center;gap:6px;list-style:none;margin:0;padding:0}
+  .nav-menu > li{position:relative}
+  .nav-link,.dropbtn{display:flex;align-items:center;gap:5px;padding:8px 14px;font-size:14px;font-weight:600;
+    color:var(--sl-text);text-decoration:none;border-radius:8px;transition:.15s;cursor:pointer;background:none;border:none;font-family:inherit}
+  .nav-link:hover,.dropbtn:hover{background:var(--sl-primary-soft);color:var(--sl-primary)}
+  .arrow{font-size:10px;transition:transform .15s;line-height:1}
+  .dropdown:hover .arrow{transform:rotate(180deg)}
+  .dropdown-content{display:none;position:absolute;top:100%;left:0;min-width:240px;
+    background:var(--sl-surface);border:1px solid var(--sl-border);border-radius:10px;
+    box-shadow:0 12px 32px rgba(0,0,0,.22);padding:6px;z-index:100;margin-top:8px}
+  .dropdown:hover .dropdown-content,
+  .dropdown:focus-within .dropdown-content{display:block}
+  .dropdown-content a{display:block;padding:9px 14px;font-size:13.5px;color:var(--sl-text);text-decoration:none;border-radius:6px;transition:.12s}
+  .dropdown-content a:hover{background:var(--sl-primary-soft);color:var(--sl-primary)}
+  .theme-toggle{width:38px;height:38px;border-radius:9px;background:var(--sl-tag);border:1px solid var(--sl-border);
+    color:var(--sl-heading);cursor:pointer;display:grid;place-items:center;transition:.15s;padding:0;margin-left:6px}
+  .theme-toggle:hover{background:var(--sl-primary-soft);border-color:var(--sl-primary);color:var(--sl-primary)}
+  .theme-toggle svg{display:block}
+
+  .topbar{height:46px;flex:0 0 46px;display:flex;align-items:center;gap:12px;
+    padding:0 20px;background:var(--sl-surface);border-bottom:1px solid var(--sl-border);z-index:20}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:600;color:var(--sl-heading);font-size:13px}
+  .brand .dot{width:8px;height:8px;border-radius:50%;background:var(--sl-primary);box-shadow:0 0 0 3px var(--sl-primary-soft)}
+  .spacer{flex:1}
+  .counter{font-size:12px;color:var(--sl-muted);font-variant-numeric:tabular-nums;
+    background:var(--sl-tag);border:1px solid var(--sl-border);padding:3px 10px;border-radius:999px}
+  .icon-btn{font:inherit;font-size:12.5px;font-weight:600;color:var(--sl-heading);
+    background:var(--sl-surface);border:1px solid var(--sl-border);
+    padding:5px 12px;border-radius:7px;cursor:pointer;transition:.15s}
+  .icon-btn:hover{background:var(--sl-primary-soft);border-color:var(--sl-primary);color:var(--sl-primary-dark)}
+
+  #stage{flex:1;min-height:0;display:flex;padding:14px 16px 6px}
+  .slide{flex:1;min-width:0;min-height:0;background:var(--sl-surface);border-radius:6px;
+    box-shadow:var(--sl-shadow);display:flex;flex-direction:column;overflow:hidden;position:relative;
+    animation:fadeUp .25s ease both;transition:background-color .2s ease}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+  .slide-body{padding:44px 56px 20px;overflow:auto;flex:1;min-height:0}
+  .slide-body::-webkit-scrollbar,.canvas-wrap::-webkit-scrollbar,.codeblock::-webkit-scrollbar{width:8px;height:8px}
+  .slide-body::-webkit-scrollbar-thumb,.codeblock::-webkit-scrollbar-thumb{background:var(--sl-border);border-radius:8px}
+
+  .slide-footer{flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;
+    padding:10px 40px 14px;font-size:11px;color:var(--sl-muted)}
+  .slide-footer .pg{font-variant-numeric:tabular-nums}
+
+  .s-title{align-items:center;justify-content:center;text-align:center;
+    padding:60px 48px;gap:14px;flex:1;display:flex;flex-direction:column;
+    background:radial-gradient(900px 400px at 50% -10%, var(--sl-primary-soft) 0%, transparent 65%), var(--sl-surface)}
+  .s-title .eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--sl-primary)}
+  .s-title h1{margin:6px 0 0;font-family:var(--sl-font-heading);
+    font-size:clamp(28px,4.4vw,54px);line-height:1.1;color:var(--sl-heading);font-weight:800;max-width:1000px}
+  .s-title .sub{font-size:clamp(15px,1.5vw,19px);color:var(--sl-muted);max-width:820px;line-height:1.55;margin:2px 0 0}
+  .s-title .meta{margin-top:22px;font-size:13px;color:var(--sl-muted);display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+  .s-title .meta span{background:var(--sl-tag);border:1px solid var(--sl-border);padding:5px 12px;border-radius:999px}
+
+  .s-chapter{flex:1;display:flex;flex-direction:column;justify-content:center;padding:60px 80px;gap:4px;position:relative;background:var(--sl-surface)}
+  .s-chapter .chapter-num{font-family:var(--sl-font-heading);font-size:clamp(60px,10vw,140px);font-weight:800;
+    color:var(--sl-primary);line-height:1;letter-spacing:-.04em;margin-bottom:8px}
+  .s-chapter h2{margin:0;font-family:var(--sl-font-heading);font-size:clamp(30px,4.5vw,52px);
+    font-weight:800;color:var(--sl-heading);letter-spacing:-.02em;line-height:1.1}
+  .s-chapter p{margin:10px 0 0;font-size:clamp(16px,1.7vw,21px);color:var(--sl-muted);font-weight:400}
+  .s-chapter::after{content:"";position:absolute;left:80px;bottom:80px;width:120px;height:5px;background:var(--sl-accent);border-radius:3px}
+
+  .slide h2.title{font-family:var(--sl-font-heading);font-size:clamp(22px,2.6vw,32px);font-weight:800;color:var(--sl-heading);margin:0 0 10px}
+  .rule{width:170px;height:5px;background:var(--sl-accent);border-radius:3px;margin:0 0 30px}
+
+  ul.bullets{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:14px}
+  ul.bullets > li{position:relative;padding-left:30px;font-size:clamp(15px,1.45vw,19px);line-height:1.65;color:var(--sl-text)}
+  ul.bullets > li::before{content:"";position:absolute;left:4px;top:.62em;width:10px;height:10px;background:var(--sl-primary)}
+  ul.bullets ul{margin:10px 0 0;padding-left:6px;list-style:none;display:flex;flex-direction:column;gap:8px}
+  ul.bullets ul li{position:relative;padding-left:22px;color:var(--sl-muted);font-size:.94em}
+  ul.bullets ul li::before{content:"";position:absolute;left:4px;top:.72em;width:7px;height:7px;border-radius:50%;border:2px solid var(--sl-primary)}
+
+  code{font-family:var(--sl-font-mono);font-size:.88em;background:var(--sl-tag);
+    border:1px solid var(--sl-border);border-radius:4px;padding:1px 6px;color:var(--sl-primary-dark);white-space:nowrap}
+  .note{margin-top:28px;border-left:4px solid var(--sl-primary);background:var(--sl-primary-soft);
+    padding:14px 18px;border-radius:0 8px 8px 0;font-size:15px;line-height:1.6;color:var(--sl-primary-dark)}
+  .note::before{content:"💡 "}
+
+  .codeblock{border-radius:8px;overflow:hidden;background:var(--sl-code-bg);display:flex;flex-direction:column;min-height:0}
+  .code-head{display:flex;align-items:center;gap:10px;padding:10px 16px;background:var(--sl-code-bg);border-bottom:1px solid #333;flex:0 0 auto}
+  .code-head .lang{font-family:var(--sl-font-mono);font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--sl-primary);font-weight:800}
+  .code-head .label{font-size:11px;color:var(--sl-primary);margin-left:auto;font-weight:600;letter-spacing:.06em}
+  .codeblock pre{margin:0;padding:14px 0;overflow:auto;flex:1;min-height:0;
+    font-family:var(--sl-font-mono);font-size:13.5px;line-height:1.7;display:flex;flex-direction:column}
+  .code-row{display:flex;gap:16px;padding:0 16px}
+  .code-row .ln{color:#5a5a5a;user-select:none;text-align:right;min-width:24px;flex-shrink:0;font-variant-numeric:tabular-nums}
+  .code-row .lc{white-space:pre;color:var(--sl-code-text);flex:1}
+  .codeblock pre::-webkit-scrollbar-thumb{background:#444}
+
+  .tok-kw{color:#c586c0;font-weight:600}
+  .tok-str{color:#ce9178}
+  .tok-com{color:#6a9955;font-style:italic}
+  .tok-num{color:#b5cea8}
+  .tok-glob{color:#4ec9b0}
+  .tok-tag{color:#569cd6}
+  .tok-attr{color:#9cdcfe}
+
+  .run-btn{margin-left:auto;font:inherit;font-size:12px;font-weight:700;color:#fff;background:var(--sl-primary);
+    border:none;padding:5px 14px;border-radius:6px;cursor:pointer;transition:.15s}
+  .run-btn:hover{background:var(--sl-primary-dark)}
+  .run-out{margin:0;padding:12px 16px;background:#0d0d0d;border-top:1px solid #333;
+    font-family:var(--sl-font-mono);font-size:13px;color:#b5cea8;
+    max-height:130px;overflow:auto;white-space:pre-wrap;flex:0 0 auto}
+
+  .code-explanation{margin-top:18px;border-left:4px solid var(--sl-primary);background:var(--sl-primary-soft);
+    padding:14px 18px;border-radius:0 8px 8px 0;font-size:15px;line-height:1.6;color:var(--sl-primary-dark)}
+  .code-explanation p{margin:0 0 6px}
+  .code-explanation p:last-child{margin-bottom:0}
+
+  .split-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;flex:1;min-height:0}
+  .split-col{display:flex;flex-direction:column;min-height:0;min-width:0;gap:10px}
+  .split-label{font-size:12px;font-weight:800;color:var(--sl-heading);text-transform:uppercase;letter-spacing:.08em}
+  .split-col .codeblock{flex:1;min-height:0}
+
+  .canvas-wrap{position:relative;flex:1;min-height:0;overflow:hidden;background:var(--sl-surface)}
+  .canvas-stage{position:absolute;left:50%;top:50%;width:1280px;height:720px;
+    margin-left:-640px;margin-top:-360px;transform-origin:center center;background:var(--sl-surface)}
+  .cv-heading{font-family:var(--sl-font-heading);font-weight:800;color:var(--sl-heading);line-height:1.2}
+  .cv-shape{border-radius:0}
+  .cv-text{overflow:auto}
+  .cv-text p{margin:0 0 10px}
+  .cv-text ul{margin:8px 0;padding-left:22px}
+  .cv-text li{margin-bottom:7px}
+  .cv-text pre{white-space:pre-wrap}
+  .cv-highlight,.cv-table{display:flex;flex-direction:column;min-height:0}
+  .cv-highlight .codeblock{flex:1;min-height:0}
+
+  table.cv-table-el{width:100%;border-collapse:collapse;font-size:15px;font-family:var(--sl-font-body)}
+  table.cv-table-el th,table.cv-table-el td{padding:9px 12px;text-align:left;border:1px solid var(--sl-border);color:var(--sl-text)}
+  table.cv-table-el th{background:var(--sl-primary);color:#fff;font-weight:700;font-size:13.5px;letter-spacing:.02em}
+  table.cv-table-el tr:nth-child(even) td{background:var(--sl-surface-2)}
+
+  .quiz{display:flex;flex-direction:column;gap:16px;height:100%;background:var(--sl-surface);
+    border:1px solid var(--sl-border);border-radius:12px;padding:26px 30px;overflow:auto;box-shadow:var(--sl-shadow)}
+  .quiz-top{display:flex;align-items:center;gap:10px}
+  .quiz-badge{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--sl-primary);border:1.5px solid var(--sl-primary);padding:3px 11px;border-radius:999px}
+  .quiz-timer{font-size:12px;color:var(--sl-muted);margin-left:auto;background:var(--sl-tag);
+    border:1px solid var(--sl-border);padding:3px 10px;border-radius:999px}
+  .quiz-q{margin:0;font-family:var(--sl-font-heading);font-size:24px;line-height:1.35;color:var(--sl-heading);font-weight:700}
+  .quiz-options{display:flex;flex-direction:column;gap:10px}
+  .quiz-opt{display:flex;align-items:flex-start;gap:14px;text-align:left;font:inherit;font-size:16px;line-height:1.45;
+    color:var(--sl-text);background:var(--sl-surface-2);border:2px solid var(--sl-border);border-radius:10px;padding:13px 16px;cursor:pointer;transition:.15s}
+  .quiz-opt:hover:not(:disabled){border-color:var(--sl-primary);background:var(--sl-primary-soft);transform:translateX(3px)}
+  .quiz-opt:disabled{cursor:default}
+  .quiz-opt .k{flex:0 0 26px;height:26px;border-radius:6px;background:var(--sl-tag);border:1px solid var(--sl-border);
+    display:grid;place-items:center;font-weight:800;font-size:13px;color:var(--sl-muted)}
+  .quiz-opt.correct{border-color:#22c55e;background:var(--sl-correct-bg)}
+  .quiz-opt.correct .k{background:#22c55e;color:#fff;border-color:#22c55e}
+  .quiz-opt.wrong{border-color:#ef4444;background:var(--sl-wrong-bg)}
+  .quiz-opt.wrong .k{background:#ef4444;color:#fff;border-color:#ef4444}
+  .quiz-exp{background:var(--sl-primary-soft);border-left:4px solid var(--sl-primary);
+    padding:13px 16px;border-radius:0 8px 8px 0;font-size:15px;line-height:1.6;color:var(--sl-primary-dark)}
+
+  .bottom-nav{flex:0 0 auto;display:flex;align-items:center;gap:14px;padding:10px 20px 16px}
+  .nav-btn{font:inherit;font-size:14px;font-weight:700;color:var(--sl-heading);
+    background:var(--sl-surface);border:1px solid var(--sl-border);padding:10px 20px;border-radius:9px;cursor:pointer;transition:.15s;white-space:nowrap}
+  .nav-btn:hover:not(:disabled){background:var(--sl-primary);color:#fff;border-color:var(--sl-primary)}
+  .nav-btn:disabled{opacity:.4;cursor:not-allowed}
+  .progress{flex:1;height:5px;background:var(--sl-border);border-radius:99px;overflow:hidden}
+  .progress-bar{height:100%;width:0;background:var(--sl-primary);border-radius:99px;transition:width .25s}
+
+  .drawer-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.5);opacity:0;pointer-events:none;transition:.2s;z-index:40}
+  .drawer-backdrop.open{opacity:1;pointer-events:auto}
+  .drawer{position:fixed;top:0;right:0;bottom:0;width:390px;max-width:92vw;background:var(--sl-surface);
+    box-shadow:-14px 0 40px rgba(0,0,0,.3);transform:translateX(102%);transition:transform .25s ease;z-index:50;display:flex;flex-direction:column}
+  .drawer.open{transform:none}
+  .drawer h2{margin:0;padding:20px 22px 14px;font-size:16px;color:var(--sl-heading);border-bottom:1px solid var(--sl-border);font-family:var(--sl-font-heading)}
+  .drawer ol{margin:0;padding:10px;list-style:none;overflow:auto;flex:1}
+  .drawer li button{display:flex;gap:12px;width:100%;text-align:left;font:inherit;font-size:14px;line-height:1.4;
+    color:var(--sl-text);background:none;border:none;padding:10px 12px;border-radius:8px;cursor:pointer}
+  .drawer li button:hover{background:var(--sl-tag)}
+  .drawer li button.active{background:var(--sl-primary-soft);color:var(--sl-primary-dark);font-weight:700}
+  .drawer li button .n{flex:0 0 26px;font-size:11px;font-weight:700;color:var(--sl-muted);
+    background:var(--sl-tag);border:1px solid var(--sl-border);border-radius:5px;height:20px;display:grid;place-items:center;margin-top:1px}
+  .drawer li.chapter button{font-weight:800;color:var(--sl-heading)}
+  .drawer li.chapter button .n{background:var(--sl-primary);color:#fff;border-color:var(--sl-primary)}
+
+  @media (max-width:900px){
+    .nav-logo span{display:none}
+    .nav-link,.dropbtn{padding:8px 10px;font-size:13px}
+    .dropdown-content{min-width:200px}
+    .split-grid{grid-template-columns:1fr}
+  }
+  @media (max-width:820px){
+    .slide-body{padding:26px 22px 18px}
+    .s-chapter{padding:40px 32px}
+    .s-chapter::after{left:32px;bottom:50px}
+    .brand span:last-child{display:none}
+    #stage{padding:8px}
+  }
+  @media (max-width:560px){
+    .nav-menu .dropdown{display:none}
+  }
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-container">
+    <a class="nav-logo" href="../index.html">
+      <img src="../images/logo.png" alt="Logo" onerror="this.style.display='none'">
+      <span>Informatique Lyon 2</span>
+    </a>
+    <ul class="nav-menu">
+      <li><a href="../index.html#links-section" class="nav-link">Liens</a></li>
+      <li class="dropdown">
+        <a href="../l1.html" class="dropbtn">L1 <span class="arrow">&#9662;</span></a>
+        <div class="dropdown-content">
+          <a href="../l1.html#learning-section">Ressources d'apprentissage</a>
+          <a href="../l1.html#ai-section">L'IA</a>
+        </div>
+      </li>
+      <li class="dropdown">
+        <a href="../index.html" class="dropbtn">L2 <span class="arrow">&#9662;</span></a>
+        <div class="dropdown-content">
+          <a href="../index.html#learning-section">Ressources d'apprentissage</a>
+          <a href="../index.html#ai-section">L'IA</a>
+        </div>
+      </li>
+      <li>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Theme">☀️</button>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<header class="topbar">
+  <div class="brand"><span class="dot"></span><span>TD 1 — Les bases de JavaScript</span></div>
+  <div class="spacer"></div>
+  <div class="counter" id="counter">1 / 1</div>
+  <button class="icon-btn" id="tocBtn">☰ Sommaire</button>
+</header>
+
+<main id="stage"></main>
+
+<div class="bottom-nav">
+  <button class="nav-btn" id="prev">← Précédent</button>
+  <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+  <button class="nav-btn" id="next">Suivant →</button>
+</div>
+
+<div class="drawer-backdrop" id="backdrop"></div>
+<aside class="drawer" id="drawer">
+  <h2>Sommaire</h2>
+  <ol id="tocList"></ol>
+</aside>
+
+<script id="deck" type="application/json">
+{
+  "deck": {
+    "footerText": "TD1 — Programmation Web front-end",
+    "slides": [
+      { "type": "title",
+        "eyebrow": "Programmation Web front-end - ICOM Lyon 2",
+        "title": "TD 1 : Les bases de JavaScript",
+        "subtitle": "Expressions, conditions, boucles et chaînes de caractères",
+        "author": "L1 Informatique", "date": "2026" },
+      { "type": "bullets", "title": "Organisez votre travail",
+        "items": [
+          "Créez sur votre machine un dossier <code>TDJavaScript_Nom_Prenom</code>",
+          "Chaque semaine, un sous-dossier de travail : <code>TD1_Nom_Prenom</code>, <code>TD2_Nom_Prenom</code>, …",
+          "À la fin du TD : compressez le dossier en <code>.zip</code> et déposez-le sur Moodle, dans la boîte de dépôt du TD",
+          "Un fichier <code>.html</code> par exercice, testez au fur et à mesure" ],
+        "note": "Le rendu se fait sur Moodle, en <b>.zip</b>." },
+      { "type": "canvas", "elements": [
+          { "id":"h1","type":"heading","x":60,"y":36,"w":1160,"h":60,"z":3,
+            "data":{"text":"La console : votre outil n°1 pour déboguer"},
+            "style":{"fontSize":34,"fontWeight":800,"color":"var(--sl-heading)","fontFamily":"var(--sl-font-heading)"}},
+          { "id":"r1","type":"shape","x":60,"y":112,"w":170,"h":5,"z":3,
+            "data":{"shape":"rect"},"style":{"fill":"var(--sl-accent)","opacity":1,"stroke":"none"}},
+          { "id":"t1","type":"text","x":60,"y":150,"w":560,"h":520,"z":2,
+            "data":{"html":"<p>La <b>console</b> affiche les erreurs JavaScript et CSS de la page, et permet de tester du code à la volée.</p><ul><li><b>Firefox</b> : Développement › Outils de développement › Console</li><li><b>Chrome</b> : Plus d'outils › Outils de développement › Console</li><li>Raccourci commun : <code>Ctrl</code> + <code>Maj</code> + <code>I</code></li></ul><p>Chaque erreur indique le <b>message</b>, le <b>fichier</b> et la <b>ligne</b> (cliquable).</p>"},
+            "style":{"fontSize":18,"color":"var(--sl-text)","lineHeight":1.5}},
+          { "id":"c1","type":"highlight","x":648,"y":150,"w":576,"h":364,"z":2,
+            "data":{"language":"html","label":"HTML",
+              "code":"<!DOCTYPE html>\n<html lang=\"fr\">\n<head><meta charset=\"utf-8\" /></head>\n<body>\n  <script>\n    let prixHT = 100;\n    let tva = 0.20;\n    document.write(\"Prix TTC : \" + prixTTC);   // faute de frappe : prixTTC n'existe pas\n  <\/script>\n</body>\n</html>"}},
+          { "id":"t2","type":"text","x":648,"y":524,"w":576,"h":180,"z":2,
+            "data":{"html":"<p>La console affiche&nbsp;:</p><p><code>Uncaught ReferenceError:<br>prixTTC is not defined</code><br><code>&nbsp;&nbsp;&nbsp;&nbsp;at exercice.html:8</code></p><p>→ variable mal orthographiée (<code>prixTTC</code> au lieu de <code>prixHT</code>).</p>"},
+            "style":{"fontSize":16,"color":"var(--sl-text)","lineHeight":1.5}}
+        ] },
+      { "type": "bullets", "title": "Afficher un résultat, lire une saisie",
+        "items": [
+          "<code>console.log(valeur)</code> : dans la console (déboguer, tester rapidement)",
+          "<code>document.write(texte)</code> : écrit directement dans la page HTML",
+          "<code>alert(message)</code> : boîte de dialogue bloquante",
+          "<code>prompt(\"question\")</code> : demande une saisie et renvoie une <b>chaîne</b>" ],
+        "note": "<code>prompt</code> renvoie <b>toujours</b> une chaîne &rarr; penser à <code>parseInt</code> / <code>parseFloat</code>." },
+      { "type": "chapter", "title": "Exercice 1", "subtitle": "Évaluer des expressions" },
+      { "type": "bullets", "title": "Exercice 1 : Énoncé",
+        "items": [
+          "Affichez la valeur de chacune des expressions suivantes :",
+          { "text": "Expressions à évaluer :",
+            "sub": ["7 + 5","\"7\" + \"5\"","7 == 7","7 <= 7","(7 >= 5) && (5 < 5)","(7 >= 5) || (5 > 5)"] } ],
+        "note": "Pour chaque expression : quelle valeur ? quel type ?" },
+      { "type": "canvas", "elements": [
+          { "id":"h2","type":"heading","x":60,"y":36,"w":1160,"h":60,"z":3,
+            "data":{"text":"Exercice 1 : Résultats attendus"},
+            "style":{"fontSize":34,"fontWeight":800,"color":"var(--sl-heading)","fontFamily":"var(--sl-font-heading)"}},
+          { "id":"r2","type":"shape","x":60,"y":112,"w":170,"h":5,"z":3,
+            "data":{"shape":"rect"},"style":{"fill":"var(--sl-accent)","opacity":1,"stroke":"none"}},
+          { "id":"tb1","type":"table","x":60,"y":150,"w":780,"h":430,"z":2,
+            "data":{"rows":[
+                ["Expression","Valeur","Type"],
+                ["7 + 5","12","number"],
+                ["\"7\" + \"5\"","\"75\"","string"],
+                ["7 == 7","true","boolean"],
+                ["7 <= 7","true","boolean"],
+                ["(7 >= 5) && (5 < 5)","false","boolean"],
+                ["(7 >= 5) || (5 > 5)","true","boolean"]
+              ]}},
+          { "id":"t3","type":"text","x":872,"y":170,"w":352,"h":380,"z":2,
+            "data":{"html":"<p><b>Le piège :</b></p><p><code>7 + 5</code> → deux nombres → <b>12</b>.</p><p><code>\"7\" + \"5\"</code> → une chaîne → collage → <b>\"75\"</b> (et non 12&nbsp;!).</p>"},
+            "style":{"fontSize":17,"color":"var(--sl-text)","lineHeight":1.5}}
+        ] },
+      { "type": "canvas", "elements": [
+          { "id":"h3","type":"heading","x":60,"y":36,"w":1160,"h":60,"z":3,
+            "data":{"text":"Exercice 1 : Correction"},
+            "style":{"fontSize":34,"fontWeight":800,"color":"var(--sl-heading)","fontFamily":"var(--sl-font-heading)"}},
+          { "id":"r3","type":"shape","x":60,"y":112,"w":170,"h":5,"z":3,
+            "data":{"shape":"rect"},"style":{"fill":"var(--sl-accent)","opacity":1,"stroke":"none"}},
+          { "id":"c2","type":"code-live","x":60,"y":150,"w":790,"h":470,"z":2,
+            "data":{"language":"javascript",
+              "code":"// A recopier dans la console (F12)\n\nconsole.log(7 + 5);               // 12\nconsole.log(\"7\" + \"5\");           // 75\nconsole.log(7 == 7);              // true\nconsole.log(7 <= 7);              // true\nconsole.log((7 >= 5) && (5 < 5)); // false\nconsole.log((7 >= 5) || (5 > 5)); // true"}},
+          { "id":"t4","type":"text","x":882,"y":152,"w":340,"h":468,"z":2,
+            "data":{"html":"<div style=\"padding-left:2px\"><p style=\"font-weight:700;color:var(--sl-heading);font-size:17px;margin:0 0 8px\">Résultat attendu</p><div style=\"font-family:var(--sl-font-mono,monospace);font-size:13px;line-height:1.5;background:var(--sl-tag);color:var(--sl-heading);border:1px solid var(--sl-border);border-radius:8px;padding:8px 10px;white-space:pre;overflow-x:auto;margin:6px 0\">12\n75\ntrue\ntrue\nfalse\ntrue</div><p style=\"margin:8px 0 0\">Le résultat de <code>\"7\"+\"5\"</code> est la <b>chaîne</b> <code>\"75\"</code> (concaténation), pas le nombre 12.</p><p style=\"color:var(--sl-muted);font-size:13px;margin:12px 0 0\">▶ Exécuter, puis modifier les valeurs et relancer.</p></div>"},
+            "style":{"fontSize":15,"color":"var(--sl-text)","lineHeight":1.5}}
+        ] },
+      { "type": "code", "title": "Exercice 1 : Corrigé (TD1Ex1.html)", "language": "html",
+        "code": "<!DOCTYPE html>\n<html lang=\"fr\">\n<head><meta charset=\"utf-8\" /></head>\n<body>\n  <h1>Exercice 1</h1>\n  <script>\n    document.write(7+5);              document.write(\"<br />\");\n    document.write(\"7\"+\"5\");          document.write(\"<br />\");\n    document.write(7==7);             document.write(\"<br />\");\n    document.write(7<=7);             document.write(\"<br />\");\n    document.write((7>=5)&&(5<5));    document.write(\"<br />\");\n    document.write((7>=5)||(5>5));    document.write(\"<br />\");\n  <\/script>\n</body>\n</html>",
+        "explanation": "<p>Version fournie : chaque résultat est écrit dans la page avec <code>document.write</code>, séparé par <code>&lt;br /&gt;</code>.</p><p>Affichage dans la page : <code>12 / 75 / true / true / false / true</code>.</p>" },
+      { "type": "canvas", "elements":[
+          { "id":"q1","type":"quiz-live","x":150,"y":55,"w":980,"h":610,"z":1,
+            "data":{"question":"Que vaut l'expression <code>\"7\" + \"5\"</code> en JavaScript ?",
+              "options":["12","\"75\"","57","NaN"],
+              "answer":1,"duration":30,
+              "explanation":"Dès qu'un opérande de <code>+</code> est une chaîne, JavaScript fait une <b>concaténation</b> : <code>\"7\" + \"5\"</code> donne la chaîne <code>\"75\"</code>. Avec des nombres, <code>7 + 5</code> donnerait <code>12</code>."}} ] },
+      { "type": "chapter", "title": "Exercice 2", "subtitle": "Lire et valider une saisie" },
+      { "type": "bullets", "title": "Exercice 2 : Énoncé",
+        "items": [
+          "Écrivez un programme JavaScript qui <b>demande à l'utilisateur</b> une valeur entre 1 et 100.",
+          "Si la valeur est correcte (entre 1 et 100) : <b>affichez-la</b>.",
+          "Sinon : <b>affichez un message d'erreur</b>." ],
+        "note": "Que se passe-t-il si l'utilisateur tape « abc » ou laisse vide ?" },
+      { "type": "canvas", "elements": [
+          { "id":"h4","type":"heading","x":60,"y":36,"w":1160,"h":60,"z":3,
+            "data":{"text":"Exercice 2 : Ce qu'il faut savoir"},
+            "style":{"fontSize":34,"fontWeight":800,"color":"var(--sl-heading)","fontFamily":"var(--sl-font-heading)"}},
+          { "id":"r4","type":"shape","x":60,"y":112,"w":170,"h":5,"z":3,
+            "data":{"shape":"rect"},"style":{"fill":"var(--sl-accent)","opacity":1,"stroke":"none"}},
+          { "id":"t5","type":"text","x":60,"y":150,"w":760,"h":520,"z":2,
+            "data":{"html":"<p><code>prompt(\"…\")</code> ouvre une boîte de saisie et renvoie <b>toujours une chaîne</b> (ou <code>null</code> si on annule).</p><p><code>parseFloat(chaine)</code> convertit en nombre décimal. Si la conversion échoue, on obtient la valeur spéciale <code>NaN</code>.</p><p><code>isNaN(x)</code> renvoie <code>true</code> si <code>x</code> n'est pas un nombre valide.</p><p><b>Condition de rejet :</b> <code>isNaN(n) || n &lt; 1 || n &gt; 100</code></p><p>Structure : <code>if (…) { message d'erreur } else { affichage }</code></p>"},
+            "style":{"fontSize":19,"color":"var(--sl-text)","lineHeight":1.5}}
+        ] },
+      { "type": "canvas", "elements": [
+          { "id":"h5","type":"heading","x":60,"y":36,"w":1160,"h":60,"z":3,
+            "data":{"text":"Exercice 2 : Correction"},
+            "style":{"fontSize":34,"fontWeight":800,"color":"var(--sl-heading)","fontFamily":"var(--sl-font-heading)"}},
+          { "id":"r5","type":"shape","x":60,"y":112,"w":170,"h":5,"z":3,
+            "data":{"shape":"rect"},"style":{"fill":"var(--sl-accent)","opacity":1,"stroke":"none"}},
+          { "id":"c3","type":"code-live","x":60,"y":150,"w":790,"h":470,"z":2,
+            "data":{"language":"javascript",
+              "code":"// En TD : n = parseFloat(prompt(\"Valeur ?\"))\nlet n = parseFloat(\"42\");   // change la valeur\n\nif (isNaN(n) || n < 1 || n > 100) {\n  console.log(\"Valeur erronee !\");\n} else {\n  console.log(\"Votre valeur : \" + n);\n}"}},
+          { "id":"t6","type":"text","x":882,"y":152,"w":340,"h":468,"z":2,
+            "data":{"html":"<div style=\"padding-left:2px\"><p style=\"font-weight:700;color:var(--sl-heading);font-size:17px;margin:0 0 8px\">Résultat attendu</p><ul style=\"margin:4px 0;padding-left:18px;list-style:disc\"><li style=\"margin:2px 0\"><code>\"42\"</code> → Votre valeur : 42</li><li style=\"margin:2px 0\"><code>\"0\"</code>, <code>\"150\"</code>, <code>\"abc\"</code> → Valeur erronée&nbsp;!</li><li style=\"margin:2px 0\"><code>\"1\"</code> et <code>\"100\"</code> → acceptées (bornes incluses)</li></ul><p style=\"color:var(--sl-muted);font-size:13px;margin:12px 0 0\">▶ Exécuter, puis modifier les valeurs et relancer.</p></div>"},
+            "style":{"fontSize":15,"color":"var(--sl-text)","lineHeight":1.5}}
+        ] },
+      { "type": "code", "title": "Exercice 2 : Corrigé (TD1Ex2Test.html)", "language": "html",
+        "code": "<!DOCTYPE html>\n<html lang=\"fr\">\n<head><meta charset=\"utf-8\" /></head>\n<body>\n  <script>\n    let n = parseFloat(prompt(\"Entrez une valeur entre 1 et 100 : \"));\n    if ((isNaN(n)) || (n < 1) || (n > 100)) {\n      document.write(\"Valeur erronée !\");\n    } else {\n      document.write(\"Votre valeur : \" + n);\n    }\n  <\/script>\n</body>\n</html>",
+        "explanation": "<p><code>prompt</code> lit la saisie, <code>parseFloat</code> la convertit.</p><p>La condition regroupe les 3 cas d'erreur avec des <code>||</code> ; sinon on affiche la valeur.</p>" },
+      { "type": "canvas", "elements":[
+          { "id":"q2","type":"quiz-live","x":150,"y":55,"w":980,"h":610,"z":1,
+            "data":{"question":"Après <code>var n = prompt(\"Âge ?\")</code>, l'utilisateur tape <code>20</code>. Que vaut <code>n + 1</code> ?",
+              "options":["21","\"201\"","20","Erreur"],
+              "answer":1,"duration":30,
+              "explanation":"<code>prompt</code> renvoie <b>toujours une chaîne</b> : <code>n</code> vaut <code>\"20\"</code>. Donc <code>n + 1</code> fait une concaténation &rarr; <code>\"201\"</code>. Il faut convertir : <code>parseInt(n) + 1</code> vaut <code>21</code>."}} ] },
+      { "type": "chapter", "title": "Exercice 3", "subtitle": "Calculer une factorielle" },
+      { "type": "bullets", "title": "Exercice 3 : Énoncé",
+        "items": [
+          "Calculez et affichez la <b>factorielle</b> de <code>n</code>, saisi par l'utilisateur.",
+          { "text": "n! = 1 &times; 2 &times; … &times; n",
+            "sub": ["1! = 1","2! = 1 &times; 2 = 2","3! = 1 &times; 2 &times; 3 = 6","4! = 1 &times; 2 &times; 3 &times; 4 = 24"] } ],
+        "note": "Par convention 0! = 1." },
+      { "type": "canvas", "elements": [
+          { "id":"h6","type":"heading","x":60,"y":36,"w":1160,"h":60,"z":3,
+            "data":{"text":"Exercice 3 : Ce qu'il faut savoir"},
+            "style":{"fontSize":34,"fontWeight":800,"color":"var(--sl-heading)","fontFamily":"var(--sl-font-heading)"}},
+          { "id":"r6","type":"shape","x":60,"y":112,"w":170,"h":5,"z":3,
+            "data":{"shape":"rect"},"style":{"fill":"var(--sl-accent)","opacity":1,"stroke":"none"}},
+          { "id":"t7","type":"text","x":60,"y":150,"w":760,"h":520,"z":2,
+            "data":{"html":"<p><b>Le patron « accumulateur » :</b></p><ol><li>Une variable résultat initialisée à l'élément neutre : <code>fact = 1</code> (neutre de la multiplication)</li><li>Une <b>boucle</b> <code>for (i = 2; i &lt;= n; i++)</code></li><li>À chaque tour : <code>fact = fact * i</code></li><li>Après la boucle : afficher <code>fact</code></li></ol><p>Version <code>while</code> équivalente : <code>while (i &lt;= n) { fact = fact * i; i++; }</code></p><p>Vérifier que la saisie est numérique (<code>isNaN</code>).</p>"},
+            "style":{"fontSize":18,"color":"var(--sl-text)","lineHeight":1.5}}
+        ] },
+      { "type": "canvas", "elements": [
+          { "id":"h7","type":"heading","x":60,"y":36,"w":1160,"h":60,"z":3,
+            "data":{"text":"Exercice 3 : Correction"},
+            "style":{"fontSize":34,"fontWeight":800,"color":"var(--sl-heading)","fontFamily":"var(--sl-font-heading)"}},
+          { "id":"r7","type":"shape","x":60,"y":112,"w":170,"h":5,"z":3,
+            "data":{"shape":"rect"},"style":{"fill":"var(--sl-accent)","opacity":1,"stroke":"none"}},
+          { "id":"c4","type":"code-live","x":60,"y":150,"w":790,"h":470,"z":2,
+            "data":{"language":"javascript",
+              "code":"// En TD : n = parseInt(prompt(\"n :\", \"5\"))\nlet n = parseInt(\"5\");\n\nif (!isNaN(n)) {\n  let fact = 1;\n  for (let i = 2; i <= n; i++) {\n    fact = fact * i;\n  }\n  console.log(n + \"! = \" + fact);\n} else {\n  console.log(\"Pas un nombre\");\n}"}},
+          { "id":"t8","type":"text","x":882,"y":152,"w":340,"h":468,"z":2,
+            "data":{"html":"<div style=\"padding-left:2px\"><p style=\"font-weight:700;color:var(--sl-heading);font-size:17px;margin:0 0 8px\">Résultat attendu</p><ul style=\"margin:4px 0;padding-left:18px;list-style:disc\"><li style=\"margin:2px 0\">n = 1 → 1</li><li style=\"margin:2px 0\">n = 5 → 120</li><li style=\"margin:2px 0\">n = 6 → 720</li><li style=\"margin:2px 0\">n = 10 → 3 628 800</li></ul><p style=\"margin:8px 0 0\">La boucle part de <code>i = 2</code> : multiplier par 1 est inutile.</p><p style=\"color:var(--sl-muted);font-size:13px;margin:12px 0 0\">▶ Exécuter, puis modifier les valeurs et relancer.</p></div>"},
+            "style":{"fontSize":15,"color":"var(--sl-text)","lineHeight":1.5}}
+        ] },
+      { "type": "split", "title": "Exercice 3 : Les deux corrigés officiels",
+        "left": { "label": "TD1Ex3Factorielle.html — for", "language": "javascript",
+          "code": "let n = parseInt(prompt(\"Taille factorielle : \", \"5\"));\nif (!isNaN(n)) {\n  let fact = 1;\n  for (let i = 2; i <= n; i++) {\n    fact = fact * i;\n  }\n  document.write(\"Factorielle de \" + n + \"=\" + fact);\n} else {\n  document.write(\"La valeur n'est pas numérique\");\n}" },
+        "right": { "label": "TD1Ex3FactorielleWhile.html — while", "language": "javascript",
+          "code": "let nombreSaisi = prompt(\"Merci de saisir un nombre\");\nlet compteur = 1;\nlet resultat = 1;\nif (isNaN(nombreSaisi))\n  alert('saisissez un nombre');\nelse {\n  document.write(nombreSaisi + \"! = \");\n  while (compteur <= nombreSaisi) {\n    resultat = resultat * compteur;\n    compteur = compteur + 1;\n  }\n}\ndocument.write(resultat);" } },
+      { "type": "canvas", "elements":[
+          { "id":"q3","type":"quiz-live","x":150,"y":55,"w":980,"h":610,"z":1,
+            "data":{"question":"Avec <code>fact = 1</code> puis <code>for (i = 2; i &lt;= n; i++) fact = fact * i;</code>, que vaut <code>fact</code> pour <code>n = 4</code> ?",
+              "options":["8","24","10","12"],
+              "answer":1,"duration":30,
+              "explanation":"La boucle multiplie <code>fact</code> par 2, puis 3, puis 4 : <code>1 &times; 2 &times; 3 &times; 4 = 24</code>. C'est bien 4!."}} ] },
+      { "type": "chapter", "title": "Exercice 4", "subtitle": "Dessiner un carré d'étoiles" },
+      { "type": "bullets", "title": "Exercice 4 : Énoncé",
+        "items": [
+          "Demandez un nombre entre 1 et 10 et dessinez un <b>carré</b> de cette taille avec le caractère <code>*</code>.",
+          { "text": "Exemple : taille = 3 &rarr;",
+            "sub": ["* * *","* * *","* * *"] } ],
+        "note": "Indice : une boucle pour les lignes, une boucle pour les colonnes." },
+      { "type": "canvas", "elements": [
+          { "id":"h8","type":"heading","x":60,"y":36,"w":1160,"h":60,"z":3,
+            "data":{"text":"Exercice 4 : Ce qu'il faut savoir"},
+            "style":{"fontSize":34,"fontWeight":800,"color":"var(--sl-heading)","fontFamily":"var(--sl-font-heading)"}},
+          { "id":"r8","type":"shape","x":60,"y":112,"w":170,"h":5,"z":3,
+            "data":{"shape":"rect"},"style":{"fill":"var(--sl-accent)","opacity":1,"stroke":"none"}},
+          { "id":"t9","type":"text","x":60,"y":150,"w":760,"h":520,"z":2,
+            "data":{"html":"<p><b>Boucles imbriquées :</b></p><ul><li>Boucle <b>externe</b> <code>i</code> : parcourt les <b>lignes</b> (0 → n-1)</li><li>Boucle <b>interne</b> <code>j</code> : parcourt les <b>colonnes</b> (0 → n-1) et écrit un <code>*</code></li><li>À la fin de chaque ligne : passer à la ligne (<code>&lt;br /&gt;</code> dans la page, ou <code>console.log</code> de la ligne accumulée)</li></ul><p>Nombre total d'étoiles : <code>n × n</code>.</p><p>Sans page HTML, on construit chaque ligne dans une chaîne (<code>ligne = ligne + \"*\"</code>) puis on l'affiche.</p>"},
+            "style":{"fontSize":18,"color":"var(--sl-text)","lineHeight":1.5}}
+        ] },
+      { "type": "canvas", "elements": [
+          { "id":"h9","type":"heading","x":60,"y":36,"w":1160,"h":60,"z":3,
+            "data":{"text":"Exercice 4 : Correction"},
+            "style":{"fontSize":34,"fontWeight":800,"color":"var(--sl-heading)","fontFamily":"var(--sl-font-heading)"}},
+          { "id":"r9","type":"shape","x":60,"y":112,"w":170,"h":5,"z":3,
+            "data":{"shape":"rect"},"style":{"fill":"var(--sl-accent)","opacity":1,"stroke":"none"}},
+          { "id":"c5","type":"code-live","x":60,"y":150,"w":790,"h":470,"z":2,
+            "data":{"language":"javascript",
+              "code":"// En TD : n = parseInt(prompt(\"Taille :\", \"3\"))\nlet n = 5;\n\nfor (let i = 0; i < n; i++) {     // lignes\n  let ligne = \"\";\n  for (let j = 0; j < n; j++) {   // colonnes\n    ligne = ligne + \"*\";\n  }\n  console.log(ligne);\n}"}},
+          { "id":"t10","type":"text","x":882,"y":152,"w":340,"h":468,"z":2,
+            "data":{"html":"<div style=\"padding-left:2px\"><p style=\"font-weight:700;color:var(--sl-heading);font-size:17px;margin:0 0 8px\">Résultat attendu</p><p style=\"margin:0 0 4px\"><b>n = 5 :</b></p><div style=\"font-family:var(--sl-font-mono,monospace);font-size:13px;line-height:1.5;background:var(--sl-tag);color:var(--sl-heading);border:1px solid var(--sl-border);border-radius:8px;padding:8px 10px;white-space:pre;overflow-x:auto;margin:6px 0\">*****\n*****\n*****\n*****\n*****</div><p style=\"margin:8px 0 0\">La boucle interne remplit une ligne ; la boucle externe répète n fois.</p><p style=\"color:var(--sl-muted);font-size:13px;margin:12px 0 0\">▶ Exécuter, puis modifier les valeurs et relancer.</p></div>"},
+            "style":{"fontSize":15,"color":"var(--sl-text)","lineHeight":1.5}}
+        ] },
+      { "type": "code", "title": "Exercice 4 : Corrigé (TD1Ex4Carre.html)", "language": "html",
+        "code": "<!DOCTYPE html>\n<html lang=\"fr\">\n<head><meta charset=\"utf-8\" /></head>\n<body>\n  <h1>Exercice 4</h1>\n  <script>\n    let n = parseInt(prompt(\"Taille du carre : \", \"3\"));\n    for (let i = 0; i < n; i++) {\n      for (let j = 0; j < n; j++) {\n        document.write(\"*\");\n      }\n      document.write(\"<br />\");\n    }\n  <\/script>\n</body>\n</html>",
+        "explanation": "<p>La boucle interne écrit <code>n</code> étoiles sur la ligne courante.</p><p>Après la boucle interne, <code>document.write(\"&lt;br /&gt;\")</code> provoque le retour à la ligne dans la page.</p>" },
+      { "type": "canvas", "elements":[
+          { "id":"q4","type":"quiz-live","x":150,"y":55,"w":980,"h":610,"z":1,
+            "data":{"question":"Pour <code>n = 3</code>, combien de fois s'exécute <code>document.write(\"*\")</code> ?",
+              "options":["3","6","9","12"],
+              "answer":2,"duration":30,
+              "explanation":"Boucles imbriquées : la ligne interne (3 étoiles) est répétée 3 fois &rarr; <code>3 &times; 3 = 9</code> exécutions."}} ] },
+      { "type": "chapter", "title": "Exercice 4 bis", "subtitle": "Dessiner un triangle isocèle" },
+      { "type": "canvas", "elements": [
+          { "id":"h10","type":"heading","x":60,"y":36,"w":1160,"h":60,"z":3,
+            "data":{"text":"Exercice 4 bis : Énoncé"},
+            "style":{"fontSize":34,"fontWeight":800,"color":"var(--sl-heading)","fontFamily":"var(--sl-font-heading)"}},
+          { "id":"r10","type":"shape","x":60,"y":112,"w":170,"h":5,"z":3,
+            "data":{"shape":"rect"},"style":{"fill":"var(--sl-accent)","opacity":1,"stroke":"none"}},
+          { "id":"t11","type":"text","x":60,"y":150,"w":560,"h":300,"z":2,
+            "data":{"html":"<p>Demandez la <b>taille</b> d'un triangle et dessinez un <b>triangle isocèle</b> à l'aide de <code>*</code>.</p><p>Chaque ligne : quelques espaces, puis un nombre <b>impair</b> d'étoiles.</p>"},
+            "style":{"fontSize":19,"color":"var(--sl-text)","lineHeight":1.5}},
+          { "id":"c6","type":"highlight","x":648,"y":150,"w":576,"h":340,"z":2,
+            "data":{"language":"text","label":"Résultat",
+              "code":"Exemple : taille donnee par l'utilisateur : 5\n\n    *\n   ***\n  *****\n *******\n*********"}}
+        ] },
+      { "type": "canvas", "elements": [
+          { "id":"h11","type":"heading","x":60,"y":36,"w":1160,"h":60,"z":3,
+            "data":{"text":"Exercice 4 bis : Ce qu'il faut savoir"},
+            "style":{"fontSize":34,"fontWeight":800,"color":"var(--sl-heading)","fontFamily":"var(--sl-font-heading)"}},
+          { "id":"r11","type":"shape","x":60,"y":112,"w":170,"h":5,"z":3,
+            "data":{"shape":"rect"},"style":{"fill":"var(--sl-accent)","opacity":1,"stroke":"none"}},
+          { "id":"t12","type":"text","x":60,"y":150,"w":760,"h":520,"z":2,
+            "data":{"html":"<p>Pour la ligne numéro <code>i</code> (de 1 à n) :</p><ul><li><b>Espaces</b> avant : <code>n - i</code></li><li><b>Étoiles</b> : <code>2 × i - 1</code> (1, 3, 5, 7, …&nbsp;— toujours impair)</li></ul><p>Trois boucles :</p><ol><li>externe : la ligne <code>i</code></li><li>interne 1 : écrire les <code>n - i</code> espaces</li><li>interne 2 : écrire les <code>2i - 1</code> étoiles</li></ol><p>Puis retour à la ligne.</p>"},
+            "style":{"fontSize":18,"color":"var(--sl-text)","lineHeight":1.5}}
+        ] },
+      { "type": "canvas", "elements": [
+          { "id":"h12","type":"heading","x":60,"y":36,"w":1160,"h":60,"z":3,
+            "data":{"text":"Exercice 4 bis : Correction"},
+            "style":{"fontSize":34,"fontWeight":800,"color":"var(--sl-heading)","fontFamily":"var(--sl-font-heading)"}},
+          { "id":"r12","type":"shape","x":60,"y":112,"w":170,"h":5,"z":3,
+            "data":{"shape":"rect"},"style":{"fill":"var(--sl-accent)","opacity":1,"stroke":"none"}},
+          { "id":"c7","type":"code-live","x":60,"y":150,"w":790,"h":470,"z":2,
+            "data":{"language":"javascript",
+              "code":"// En TD : n = parseInt(prompt(\"Hauteur :\", \"5\"))\nlet n = 5;\n\nfor (let i = 1; i <= n; i++) {\n  let ligne = \"\";\n  for (let e = 0; e < n - i; e++)  ligne += \" \";\n  for (let j = 0; j < 2*i - 1; j++) ligne += \"*\";\n  console.log(ligne);\n}"}},
+          { "id":"t13","type":"text","x":882,"y":152,"w":340,"h":468,"z":2,
+            "data":{"html":"<div style=\"padding-left:2px\"><p style=\"font-weight:700;color:var(--sl-heading);font-size:17px;margin:0 0 8px\">Résultat attendu</p><p style=\"margin:0 0 4px\"><b>n = 5 :</b></p><div style=\"font-family:var(--sl-font-mono,monospace);font-size:13px;line-height:1.5;background:var(--sl-tag);color:var(--sl-heading);border:1px solid var(--sl-border);border-radius:8px;padding:8px 10px;white-space:pre;overflow-x:auto;margin:6px 0\">    *\n   ***\n  *****\n *******\n*********</div><p style=\"margin:8px 0 0\">Ligne 1 : 4 espaces + 1 étoile. Ligne 5 : 0 espace + 9 étoiles.</p><p style=\"color:var(--sl-muted);font-size:13px;margin:12px 0 0\">▶ Exécuter, puis modifier les valeurs et relancer.</p></div>"},
+            "style":{"fontSize":15,"color":"var(--sl-text)","lineHeight":1.5}}
+        ] },
+      { "type": "canvas", "elements":[
+          { "id":"q5","type":"quiz-live","x":150,"y":55,"w":980,"h":610,"z":1,
+            "data":{"question":"Dans un triangle isocèle d'étoiles, combien d'étoiles sur la ligne numéro <code>i</code> ?",
+              "options":["i","2 &times; i","2 &times; i - 1","i + 1"],
+              "answer":2,"duration":30,
+              "explanation":"On veut 1, 3, 5, 7, … étoiles : la suite des <b>impairs</b>, soit <code>2 &times; i - 1</code> pour <code>i</code> allant de 1 à n."}} ] },
+      { "type": "chapter", "title": "Exercice 5", "subtitle": "Une mini-calculatrice" },
+      { "type": "bullets", "title": "Exercice 5 : Énoncé",
+        "items": [
+          "Écrivez un programme qui calcule, <b>au choix</b>, la somme, la différence, le produit ou le quotient de deux nombres.",
+          "Il faut <b>prévenir la division par zéro</b> par une instruction adéquate." ],
+        "note": "En JS, 10 / 0 ne plante pas : ça vaut Infinity. À nous de tester." },
+      { "type": "canvas", "elements": [
+          { "id":"h13","type":"heading","x":60,"y":36,"w":1160,"h":60,"z":3,
+            "data":{"text":"Exercice 5 : Ce qu'il faut savoir"},
+            "style":{"fontSize":34,"fontWeight":800,"color":"var(--sl-heading)","fontFamily":"var(--sl-font-heading)"}},
+          { "id":"r13","type":"shape","x":60,"y":112,"w":170,"h":5,"z":3,
+            "data":{"shape":"rect"},"style":{"fill":"var(--sl-accent)","opacity":1,"stroke":"none"}},
+          { "id":"t14","type":"text","x":60,"y":150,"w":760,"h":520,"z":2,
+            "data":{"html":"<p><b>Choisir selon une valeur</b> : <code>switch (op) { case \"+\": … break; … }</code> (ou une cascade de <code>if / else if</code>).</p><p><b>Division par zéro</b> : en JavaScript il n'y a pas d'exception <code>10 / 0</code> → <code>Infinity</code>, <code>0 / 0</code> → <code>NaN</code>.</p><p>On ajoute un test explicite avant de diviser :</p><p><code>if (b == 0) { message d'erreur } else { resultat = a / b; }</code></p><p>Ne pas oublier <code>parseFloat</code> sur les deux nombres saisis.</p>"},
+            "style":{"fontSize":18,"color":"var(--sl-text)","lineHeight":1.5}}
+        ] },
+      { "type": "canvas", "elements": [
+          { "id":"h14","type":"heading","x":60,"y":36,"w":1160,"h":60,"z":3,
+            "data":{"text":"Exercice 5 : Correction"},
+            "style":{"fontSize":34,"fontWeight":800,"color":"var(--sl-heading)","fontFamily":"var(--sl-font-heading)"}},
+          { "id":"r14","type":"shape","x":60,"y":112,"w":170,"h":5,"z":3,
+            "data":{"shape":"rect"},"style":{"fill":"var(--sl-accent)","opacity":1,"stroke":"none"}},
+          { "id":"c8","type":"code-live","x":60,"y":150,"w":790,"h":470,"z":2,
+            "data":{"language":"javascript",
+              "code":"// En TD : a, b, op saisis avec prompt()\nlet a = 12;\nlet b = 0;\nlet op = \"/\";   // \"+\" \"-\" \"*\" \"/\"\n\nlet resultat;\n\nif (op == \"+\") {\n    resultat = a + b;\n} else if (op == \"-\") {\n    resultat = a - b;\n} else if (op == \"*\") {\n    resultat = a * b;\n} else if (op == \"/\") {\n    if (b == 0) {\n        resultat = \"Division par 0 impossible !\";\n    } else {\n        resultat = a / b;\n    }\n} else {\n    resultat = \"Operation inconnue\";\n}\n\nconsole.log(a + op + b + \" = \" + resultat);"}},
+          { "id":"t15","type":"text","x":882,"y":152,"w":340,"h":468,"z":2,
+            "data":{"html":"<div style=\"padding-left:2px\"><p style=\"font-weight:700;color:var(--sl-heading);font-size:17px;margin:0 0 8px\">Résultat attendu</p><ul style=\"margin:4px 0;padding-left:18px;list-style:disc\"><li style=\"margin:2px 0\"><code>12 / 0</code> → « Division par zéro impossible ! »</li><li style=\"margin:2px 0\"><code>12 / 4</code> → 3</li><li style=\"margin:2px 0\"><code>12 * 3</code> → 36</li><li style=\"margin:2px 0\"><code>12 - 5</code> → 7</li></ul><p style=\"margin:8px 0 0\">Sans le test <code>b == 0</code> : <code>12 / 0</code> donnerait <code>Infinity</code>.</p><p style=\"color:var(--sl-muted);font-size:13px;margin:12px 0 0\">▶ Exécuter, puis modifier les valeurs et relancer.</p></div>"},
+            "style":{"fontSize":15,"color":"var(--sl-text)","lineHeight":1.5}}
+        ] },
+      { "type": "canvas", "elements":[
+          { "id":"q6","type":"quiz-live","x":150,"y":55,"w":980,"h":610,"z":1,
+            "data":{"question":"En JavaScript, que vaut <code>10 / 0</code> ?",
+              "options":["0","Une erreur qui arrête le script","Infinity","null"],
+              "answer":2,"duration":30,
+              "explanation":"JavaScript ne lève <b>pas</b> d'exception : <code>10 / 0</code> vaut <code>Infinity</code> (et <code>0 / 0</code> vaut <code>NaN</code>). D'où le test <code>if (b === 0)</code> demandé par l'énoncé."}} ] },
+      { "type": "chapter", "title": "Exercice 6", "subtitle": "Compter des occurrences dans une chaîne" },
+      { "type": "bullets", "title": "Exercice 6 : Énoncé",
+        "items": [
+          "Écrivez un programme qui calcule le <b>nombre d'occurrences d'une lettre</b> dans une chaîne.",
+          "La lettre et la chaîne sont saisies par l'utilisateur.",
+          { "text": "Outils imposés :",
+            "sub": ["<code>chaine.length</code> — longueur de la chaîne","<code>chaine.charAt(position)</code> — caractère à la position donnée"] } ],
+        "note": "Les positions vont de 0 à length - 1." },
+      { "type": "canvas", "elements": [
+          { "id":"h15","type":"heading","x":60,"y":36,"w":1160,"h":60,"z":3,
+            "data":{"text":"Exercice 6 : Ce qu'il faut savoir"},
+            "style":{"fontSize":34,"fontWeight":800,"color":"var(--sl-heading)","fontFamily":"var(--sl-font-heading)"}},
+          { "id":"r15","type":"shape","x":60,"y":112,"w":170,"h":5,"z":3,
+            "data":{"shape":"rect"},"style":{"fill":"var(--sl-accent)","opacity":1,"stroke":"none"}},
+          { "id":"t16","type":"text","x":60,"y":150,"w":760,"h":520,"z":2,
+            "data":{"html":"<p><b>Parcourir une chaîne :</b> <code>for (var i = 0; i &lt; chaine.length; i++) { … chaine.charAt(i) … }</code></p><p><b>Compter :</b> un accumulateur <code>compteur = 0</code>, incrémenté (<code>compteur++</code>) chaque fois que <code>chaine.charAt(i) == lettre</code>.</p><ul><li><code>length</code> est une <b>propriété</b> (sans parenthèses)</li><li><code>charAt(i)</code> est une <b>méthode</b> (avec parenthèses)</li><li>Attention à la <b>casse</b> : <code>\"A\"</code> ≠ <code>\"a\"</code></li></ul>"},
+            "style":{"fontSize":18,"color":"var(--sl-text)","lineHeight":1.5}}
+        ] },
+      { "type": "canvas", "elements": [
+          { "id":"h16","type":"heading","x":62,"y":36,"w":1160,"h":60,"z":3,
+            "data":{"text":"Exercice 6 : Correction"},
+            "style":{"fontSize":34,"fontWeight":800,"color":"var(--sl-heading)","fontFamily":"var(--sl-font-heading)"}},
+          { "id":"r16","type":"shape","x":60,"y":112,"w":170,"h":5,"z":3,
+            "data":{"shape":"rect"},"style":{"fill":"var(--sl-accent)","opacity":1,"stroke":"none"}},
+          { "id":"c9","type":"code-live","x":60,"y":150,"w":790,"h":470,"z":2,
+            "data":{"language":"javascript",
+              "code":"// En TD : chaine et lettre saisies avec prompt()\nlet chaine = \"anticonstitutionnellement\";\nlet lettre = \"t\";\n\nlet compteur = 0;\nfor (let i = 0; i < chaine.length; i++) {\n  if (chaine.charAt(i) == lettre) {\n    compteur = compteur + 1;\n  }\n}\nconsole.log(lettre + \" : \" + compteur + \" fois\");"}},
+          { "id":"t17","type":"text","x":882,"y":152,"w":340,"h":468,"z":2,
+            "data":{"html":"<div style=\"padding-left:2px\"><p style=\"font-weight:700;color:var(--sl-heading);font-size:17px;margin:0 0 8px\">Résultat attendu</p><p style=\"margin:0\">Pour <code>\"anticonstitutionnellement\"</code> et la lettre <code>\"t\"</code> :</p><p style=\"font-size:24px;margin:6px 0;color:var(--sl-heading)\"><b>5</b> occurrences</p><p style=\"margin:0\">Essaie <code>\"n\"</code> (→ 4), ou <code>\"N\"</code> pour l'effet de la casse.</p><p style=\"color:var(--sl-muted);font-size:13px;margin:12px 0 0\">▶ Exécuter, puis modifier les valeurs et relancer.</p></div>"},
+            "style":{"fontSize":15,"color":"var(--sl-text)","lineHeight":1.5}}
+        ] },
+      { "type": "canvas", "elements":[
+          { "id":"q7","type":"quiz-live","x":150,"y":55,"w":980,"h":610,"z":1,
+            "data":{"question":"Que renvoie <code>\"bonjour\".charAt(2)</code> ?",
+              "options":["\"b\"","\"o\"","\"n\"","2"],
+              "answer":2,"duration":30,
+              "explanation":"Les positions commencent à <b>0</b> : b&rarr;0, o&rarr;1, n&rarr;2. <code>charAt(2)</code> renvoie donc <code>\"n\"</code>."}} ] },
+      { "type": "bullets", "title": "Ce qu'il faut retenir",
+        "items": [
+          "<code>+</code> : addition <i>ou</i> concaténation : surveiller les types",
+          "<code>prompt</code> renvoie une <b>chaîne</b> &rarr; <code>parseInt</code> / <code>parseFloat</code>",
+          "Valider une saisie : <code>isNaN(n) || n &lt; min || n &gt; max</code>",
+          "Accumulateur : <code>fact = 1</code> puis <code>fact = fact * i</code> dans une boucle",
+          "Boucles imbriquées pour les dessins (carré, triangle)",
+          "Parcours de chaîne : <code>charAt(i)</code> pour <code>i</code> de 0 à <code>length - 1</code>" ],
+        "note": "La console est votre meilleure amie pour déboguer." },
+      { "type": "title", "eyebrow": "Fin du TD 1", "title": "Des questions ?",
+        "subtitle": "Pensez au dépôt Moodle : TD1_Nom_Prenom.zip",
+        "email": "valentin.lachand-pascal@univ-lyon2.fr" }
+    ]
+  }
+}
+</script>
+
+<script>
+(function () {
+  "use strict";
+
+  var deck;
+  try {
+    deck = JSON.parse(document.getElementById("deck").textContent);
+  } catch (e) {
+    document.getElementById("stage").innerHTML =
+      '<div class="slide"><div class="slide-body">' +
+      '<h2 style="color:#c00">Erreur de lecture du JSON</h2>' +
+      '<pre style="white-space:pre-wrap;background:var(--sl-tag);padding:12px;border-radius:6px">' +
+      String(e && e.message ? e.message : e) + "</pre></div></div>";
+    return;
+  }
+
+  var slides = deck.deck.slides;
+  var current = 0;
+  var chapterNumbers = {};
+  (function () {
+    var n = 0;
+    slides.forEach(function (s, i) {
+      if (s.type === "chapter") { n++; chapterNumbers[i] = n; }
+    });
+  })();
+
+  var SAFE_TAGS = /^<\/?(?:a|b|i|em|strong|br|code|pre|span|p|ul|ol|li|small|sub|sup|u|div|h[1-6])(?:\s[^<>]*)?\/?>/i;
+  function safeHtml(s){
+    if (s == null) return "";
+    s = String(s);
+    var out = "";
+    for (var i = 0; i < s.length; i++){
+      var c = s[i];
+      if (c === "<"){
+        var m = s.slice(i).match(SAFE_TAGS);
+        if (m){ out += m[0]; i += m[0].length - 1; continue; }
+        out += "&lt;";
+      } else if (c === ">"){
+        out += "&gt;";
+      } else if (c === "&"){
+        var e = s.slice(i).match(/^&(?:[a-zA-Z]+|#\d+|#x[0-9a-fA-F]+);/);
+        if (e){ out += e[0]; i += e[0].length - 1; } else { out += "&amp;"; }
+      } else {
+        out += c;
+      }
+    }
+    return out;
+  }
+  function escapeHtml(s){
+    return String(s == null ? "" : s)
+      .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+  }
+
+  function highlight(code, lang){
+    var esc = escapeHtml(code);
+    lang = (lang || "").toLowerCase();
+    if (lang === "html" || lang === "xml"){
+      esc = esc.replace(/([\w-]+)=("[^"]*")/g, function(_,a,v){
+        return '<span class="tok-attr">' + a + '</span>=<span class="tok-str">' + v + '</span>';
+      });
+      esc = esc.replace(/(&lt;\/?)([a-zA-Z][\w-]*)/g, function(_,br,name){
+        return br + '<span class="tok-tag">' + name + '</span>';
+      });
+      esc = esc.replace(/(&lt;!--[\s\S]*?--&gt;)/g, '<span class="tok-com">$1</span>');
+      return esc;
+    }
+    return esc.replace(
+      /(\/\/[^\n]*|\/\*[\s\S]*?\*\/)|("(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*')|\b(function|var|let|const|if|else|for|while|do|return|new|true|false|null|undefined|typeof|break|continue|switch|case|default|this|in|of)\b|\b(document|window|navigator|screen|console|alert|prompt|parseInt|parseFloat|isNaN|Math|Array|String|Number|Object)\b|\b(\d+(?:\.\d+)?)\b/g,
+      function (m, com, str, kw, glob, num){
+        if (com) return '<span class="tok-com">' + com + "</span>";
+        if (str) return '<span class="tok-str">' + str + "</span>";
+        if (kw)  return '<span class="tok-kw">'  + kw  + "</span>";
+        if (glob) return '<span class="tok-glob">' + glob + "</span>";
+        if (num) return '<span class="tok-num">' + num + "</span>";
+        return m;
+      }
+    );
+  }
+
+  var UNITLESS = { opacity:1, zIndex:1, fontWeight:1, lineHeight:1, order:1, flexGrow:1, zoom:1 };
+  function applyStyle(node, style){
+    if (!style) return;
+    Object.keys(style).forEach(function(k){
+      var v = style[k];
+      if (v === undefined || v === null || v === "") return;
+      if (k === "fill"){ node.style.background = v; return; }
+      if (k === "stroke"){ if (v !== "none") node.style.border = v; return; }
+      var cssK = k.replace(/[A-Z]/g, function(m){ return "-" + m.toLowerCase(); });
+      if (UNITLESS[k]) node.style.setProperty(cssK, String(v));
+      else node.style.setProperty(cssK, typeof v === "number" ? v + "px" : v);
+    });
+  }
+
+  function codeBlock(lang, code, label){
+    var wrap = document.createElement("div");
+    wrap.className = "codeblock";
+    var head = document.createElement("div");
+    head.className = "code-head";
+    head.innerHTML = '<span class="lang">' + escapeHtml((lang || "code").toUpperCase()) + "</span>" +
+      (label ? '<span class="label">' + escapeHtml(label) + "</span>" : "");
+    var pre = document.createElement("pre");
+    var lines = String(code).split("\n");
+    var html = "";
+    lines.forEach(function(line, i){
+      html += '<span class="code-row"><span class="ln">' + (i + 1) +
+              '</span><span class="lc">' + (highlight(line, lang) || " ") + '</span></span>';
+    });
+    pre.innerHTML = html;
+    wrap.appendChild(head);
+    wrap.appendChild(pre);
+    return wrap;
+  }
+
+  function renderQuiz(d){
+    var box = document.createElement("div"); box.className = "quiz";
+    var top = document.createElement("div"); top.className = "quiz-top";
+    top.innerHTML = '<span class="quiz-badge">Quiz</span>' +
+      '<span class="quiz-timer">⏱ ' + (d.duration || 20) + " s</span>";
+    var q = document.createElement("h3"); q.className = "quiz-q"; q.innerHTML = safeHtml(d.question);
+    var opts = document.createElement("div"); opts.className = "quiz-options";
+    var exp = document.createElement("div"); exp.className = "quiz-exp"; exp.hidden = true;
+    exp.innerHTML = safeHtml(d.explanation || "");
+    var answered = false;
+    (d.options || []).forEach(function(text, i){
+      var b = document.createElement("button"); b.className = "quiz-opt";
+      b.innerHTML = '<span class="k">' + "ABCD".charAt(i) + '</span><span class="t">' + safeHtml(text) + "</span>";
+      b.addEventListener("click", function(){
+        if (answered) return; answered = true;
+        Array.prototype.forEach.call(opts.children, function(btn, j){
+          btn.disabled = true;
+          if (j === d.answer) btn.classList.add("correct");
+        });
+        if (i !== d.answer) b.classList.add("wrong");
+        exp.hidden = false;
+      });
+      opts.appendChild(b);
+    });
+    box.appendChild(top); box.appendChild(q); box.appendChild(opts); box.appendChild(exp);
+    return box;
+  }
+
+  function renderCodeLive(d){
+    var box = document.createElement("div");
+    box.style.cssText = "display:flex;flex-direction:column;height:100%;min-height:0";
+    var wrap = document.createElement("div"); wrap.className = "codeblock";
+    wrap.style.cssText = "flex:1;min-height:0";
+    var head = document.createElement("div"); head.className = "code-head";
+    head.innerHTML = '<span class="lang">' + escapeHtml((d.language || "js").toUpperCase()) + '</span>';
+    var btn = document.createElement("button"); btn.className = "run-btn"; btn.textContent = "▶ Exécuter";
+    head.appendChild(btn);
+    var pre = document.createElement("pre");
+    var lines = String(d.code).split("\n"); var html = "";
+    lines.forEach(function(line, i){
+      html += '<span class="code-row"><span class="ln">' + (i + 1) +
+              '</span><span class="lc">' + (highlight(line, d.language) || " ") + '</span></span>';
+    });
+    pre.innerHTML = html;
+    wrap.appendChild(head); wrap.appendChild(pre);
+    var out = document.createElement("pre"); out.className = "run-out";
+    out.textContent = "Sortie console — cliquez sur ▶ Exécuter";
+    btn.addEventListener("click", function(){
+      var logs = []; var orig = console.log;
+      console.log = function(){
+        var parts = Array.prototype.map.call(arguments, function(a){
+          if (a === null) return "null";
+          if (typeof a === "object"){ try { return JSON.stringify(a); } catch(e){ return String(a); } }
+          return String(a);
+        });
+        logs.push(parts.join(" "));
+      };
+      try { new Function(d.code)(); }
+      catch (err){ logs.push("⚠ " + err.name + " : " + err.message); }
+      console.log = orig;
+      out.textContent = logs.length ? logs.join("\n") : "(aucune sortie)";
+    });
+    box.appendChild(wrap); box.appendChild(out);
+    return box;
+  }
+
+  function renderTableElement(d){
+    var tbl = document.createElement("table");
+    tbl.className = "cv-table-el";
+    var st = d.style || {};
+    var rows = d.rows || [];
+    rows.forEach(function(row, ri){
+      var tr = document.createElement("tr");
+      row.forEach(function(cell){
+        var el = document.createElement(ri === 0 ? "th" : "td");
+        el.innerHTML = safeHtml(cell);
+        if (st.borderColor) el.style.borderColor = st.borderColor;
+        tr.appendChild(el);
+      });
+      tbl.appendChild(tr);
+    });
+    if (st.headerBg){
+      Array.prototype.forEach.call(tbl.querySelectorAll("th"), function(th){
+        th.style.background = st.headerBg;
+      });
+    }
+    if (st.headerColor){
+      Array.prototype.forEach.call(tbl.querySelectorAll("th"), function(th){
+        th.style.color = st.headerColor;
+      });
+    }
+    return tbl;
+  }
+
+  function renderCanvasElement(e){
+    var d = e.data || {};
+    var node = null;
+    switch (e.type){
+      case "heading": node = document.createElement("div"); node.className = "cv-heading";
+        node.innerHTML = safeHtml(d.text || d.html || ""); break;
+      case "shape": node = document.createElement("div"); node.className = "cv-shape"; break;
+      case "text": node = document.createElement("div"); node.className = "cv-text";
+        node.innerHTML = safeHtml(d.html || d.text || ""); break;
+      case "highlight": node = document.createElement("div"); node.className = "cv-highlight";
+        node.appendChild(codeBlock(d.language, d.code || "", d.label)); break;
+      case "table": node = document.createElement("div"); node.className = "cv-table";
+        node.appendChild(renderTableElement(d)); break;
+      case "quiz-live": node = renderQuiz(d); break;
+      case "code-live": node = renderCodeLive(d); break;
+      default: node = document.createElement("div"); node.className = "cv-text";
+        node.innerHTML = safeHtml(d.html || d.text || "");
+    }
+    node.style.position = "absolute";
+    node.style.left = e.x + "px"; node.style.top = e.y + "px";
+    node.style.width = e.w + "px"; node.style.height = e.h + "px";
+    node.style.zIndex = e.z || 1; node.style.overflow = "hidden";
+    applyStyle(node, e.style);
+    return node;
+  }
+
+  function renderSplit(s){
+    var body = document.createElement("div");
+    body.className = "slide-body";
+    body.style.display = "flex";
+    body.style.flexDirection = "column";
+
+    var hd = document.createElement("div");
+    hd.innerHTML = '<h2 class="title">' + safeHtml(s.title) + '</h2><div class="rule"></div>';
+    body.appendChild(hd);
+
+    var grid = document.createElement("div");
+    grid.className = "split-grid";
+
+    [s.left, s.right].forEach(function(side){
+      if (!side) return;
+      var col = document.createElement("div");
+      col.className = "split-col";
+      var lbl = document.createElement("div");
+      lbl.className = "split-label";
+      lbl.textContent = side.label || "";
+      col.appendChild(lbl);
+      if (side.type === "code" || side.code){
+        col.appendChild(codeBlock(side.language, side.code, null));
+      }
+      grid.appendChild(col);
+    });
+
+    body.appendChild(grid);
+    return body;
+  }
+
+  function renderSlide(s, pageNum, chapNum){
+    var slide = document.createElement("section");
+    slide.className = "slide";
+    var body;
+
+    if (s.type === "title"){
+      body = document.createElement("div"); body.className = "s-title";
+      var html = "";
+      if (s.eyebrow) html += '<div class="eyebrow">' + safeHtml(s.eyebrow) + "</div>";
+      html += "<h1>" + safeHtml(s.title) + "</h1>";
+      if (s.subtitle) html += '<p class="sub">' + safeHtml(s.subtitle) + "</p>";
+      var meta = [];
+      if (s.author) meta.push("<span>" + safeHtml(s.author) + "</span>");
+      if (s.date)   meta.push("<span>" + safeHtml(s.date)   + "</span>");
+      if (s.email)  meta.push("<span>" + safeHtml(s.email)  + "</span>");
+      if (meta.length) html += '<div class="meta">' + meta.join("") + "</div>";
+      body.innerHTML = html;
+      slide.appendChild(body);
+    }
+    else if (s.type === "chapter"){
+      body = document.createElement("div"); body.className = "s-chapter";
+      var num = String(chapNum || 1).padStart(2, "0");
+      body.innerHTML = '<div class="chapter-num">' + num + '</div>' +
+        "<h2>" + safeHtml(s.title) + "</h2>" +
+        (s.subtitle ? "<p>" + safeHtml(s.subtitle) + "</p>" : "");
+      slide.appendChild(body);
+    }
+    else if (s.type === "bullets"){
+      body = document.createElement("div"); body.className = "slide-body";
+      var h = '<h2 class="title">' + safeHtml(s.title) + '</h2><div class="rule"></div><ul class="bullets">';
+      (s.items || []).forEach(function(it){
+        if (typeof it === "string") h += "<li>" + safeHtml(it) + "</li>";
+        else {
+          h += "<li>" + safeHtml(it.text || "");
+          if (it.sub && it.sub.length){
+            h += "<ul>";
+            it.sub.forEach(function(sub){ h += "<li>" + safeHtml(sub) + "</li>"; });
+            h += "</ul>";
+          }
+          h += "</li>";
+        }
+      });
+      h += "</ul>";
+      if (s.note) h += '<div class="note">' + safeHtml(s.note) + "</div>";
+      body.innerHTML = h;
+      slide.appendChild(body);
+    }
+    else if (s.type === "code"){
+      body = document.createElement("div"); body.className = "slide-body";
+      body.style.display = "flex"; body.style.flexDirection = "column";
+      var hd = document.createElement("div");
+      hd.innerHTML = '<h2 class="title">' + safeHtml(s.title) + '</h2><div class="rule"></div>';
+      body.appendChild(hd);
+      var cb = codeBlock(s.language, s.code);
+      cb.style.flex = "1"; cb.style.minHeight = "0";
+      body.appendChild(cb);
+      if (s.explanation){
+        var ex = document.createElement("div");
+        ex.className = "code-explanation";
+        ex.innerHTML = safeHtml(s.explanation);
+        body.appendChild(ex);
+      }
+      slide.appendChild(body);
+    }
+    else if (s.type === "split"){
+      slide.appendChild(renderSplit(s));
+    }
+    else if (s.type === "canvas"){
+      var wrap = document.createElement("div"); wrap.className = "canvas-wrap";
+      var stage = document.createElement("div"); stage.className = "canvas-stage";
+      (s.elements || []).forEach(function(e){ stage.appendChild(renderCanvasElement(e)); });
+      wrap.appendChild(stage); slide.appendChild(wrap);
+      var fit = function(){
+        var w = wrap.clientWidth, hgt = wrap.clientHeight;
+        if (!w || !hgt) return;
+        var sc = Math.min(w / 1280, hgt / 720);
+        stage.style.transform = "scale(" + sc + ")";
+      };
+      if (window.ResizeObserver) new ResizeObserver(fit).observe(wrap);
+      else window.addEventListener("resize", fit);
+      requestAnimationFrame(fit); setTimeout(fit, 40);
+    }
+    else {
+      body = document.createElement("div"); body.className = "slide-body";
+      body.innerHTML = '<h2 class="title">' + safeHtml(s.title || s.type) + '</h2><div class="rule"></div><pre>' +
+        escapeHtml(JSON.stringify(s, null, 2)) + '</pre>';
+      slide.appendChild(body);
+    }
+
+    var footer = document.createElement("div"); footer.className = "slide-footer";
+    footer.innerHTML = '<span>' + escapeHtml(deck.deck.footerText || "TD1 — Programmation Web front-end") +
+                       '</span><span class="pg">' + pageNum + '</span>';
+    slide.appendChild(footer);
+    return slide;
+  }
+
+  var stage    = document.getElementById("stage");
+  var counter  = document.getElementById("counter");
+  var bar      = document.getElementById("progressBar");
+  var prevBtn  = document.getElementById("prev");
+  var nextBtn  = document.getElementById("next");
+
+  function goTo(i){
+    current = Math.max(0, Math.min(slides.length - 1, i));
+    stage.innerHTML = "";
+    stage.appendChild(renderSlide(slides[current], current + 1, chapterNumbers[current]));
+    counter.textContent = (current + 1) + " / " + slides.length;
+    bar.style.width = ((current + 1) / slides.length * 100) + "%";
+    prevBtn.disabled = current === 0;
+    nextBtn.disabled = current === slides.length - 1;
+    highlightToc();
+    try { history.replaceState(null, "", "#s" + (current + 1)); } catch(e){}
+  }
+
+  prevBtn.addEventListener("click", function(){ goTo(current - 1); });
+  nextBtn.addEventListener("click", function(){ goTo(current + 1); });
+
+  document.addEventListener("keydown", function(ev){
+    if (ev.target && /INPUT|TEXTAREA/.test(ev.target.tagName)) return;
+    if (ev.key === "ArrowRight" || ev.key === "PageDown" || ev.key === " "){ ev.preventDefault(); goTo(current + 1); }
+    else if (ev.key === "ArrowLeft" || ev.key === "PageUp"){ ev.preventDefault(); goTo(current - 1); }
+    else if (ev.key === "Home"){ goTo(0); }
+    else if (ev.key === "End"){ goTo(slides.length - 1); }
+    else if (ev.key === "s" || ev.key === "S"){ toggleDrawer(); }
+    else if (ev.key === "Escape"){ closeDrawer(); }
+  });
+
+  var drawer = document.getElementById("drawer");
+  var backdrop = document.getElementById("backdrop");
+  var tocList = document.getElementById("tocList");
+  var tocBtn = document.getElementById("tocBtn");
+
+  function slideLabel(s){
+    if (s.type === "canvas"){
+      var h = (s.elements || []).filter(function(e){ return e.type === "heading"; })[0];
+      return h ? (h.data.text || h.data.html || "Diapositive") : "Diapositive";
+    }
+    if (s.type === "chapter") return s.title + (s.subtitle ? " — " + s.subtitle : "");
+    if (s.type === "title") return s.title;
+    return s.title || "Diapositive";
+  }
+
+  slides.forEach(function(s, i){
+    var li = document.createElement("li");
+    if (s.type === "chapter") li.className = "chapter";
+    var b = document.createElement("button");
+    b.innerHTML = '<span class="n">' + (i + 1) + '</span><span>' + safeHtml(slideLabel(s)) + "</span>";
+    b.addEventListener("click", function(){ goTo(i); closeDrawer(); });
+    li.appendChild(b); tocList.appendChild(li);
+  });
+
+  function highlightToc(){
+    Array.prototype.forEach.call(tocList.children, function(li, i){
+      li.firstChild.classList.toggle("active", i === current);
+    });
+    var act = tocList.querySelector("button.active");
+    if (act && drawer.classList.contains("open")) act.scrollIntoView({ block: "nearest" });
+  }
+  function openDrawer(){ drawer.classList.add("open"); backdrop.classList.add("open"); highlightToc(); }
+  function closeDrawer(){ drawer.classList.remove("open"); backdrop.classList.remove("open"); }
+  function toggleDrawer(){ drawer.classList.contains("open") ? closeDrawer() : openDrawer(); }
+
+  tocBtn.addEventListener("click", toggleDrawer);
+  backdrop.addEventListener("click", closeDrawer);
+
+  var start = 0;
+  var m = /#s(\d+)/.exec(location.hash);
+  if (m) start = Math.min(slides.length - 1, Math.max(0, parseInt(m[1], 10) - 1));
+  goTo(start);
+})();
+</script>
+
+<script>
+  (function () {
+    const themeToggle = document.getElementById('theme-toggle');
+    const root = document.documentElement;
+    const sunIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>`;
+    const moonIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`;
+
+    const currentTheme = localStorage.getItem('theme') || 'dark';
+    if (currentTheme === 'light') {
+      root.setAttribute('data-theme', 'light');
+      themeToggle.innerHTML = moonIcon;
+    } else {
+      root.removeAttribute('data-theme');
+      themeToggle.innerHTML = sunIcon;
+    }
+
+    themeToggle.addEventListener('click', () => {
+      if (root.hasAttribute('data-theme')) {
+        root.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'dark');
+        themeToggle.innerHTML = sunIcon;
+      } else {
+        root.setAttribute('data-theme', 'light');
+        localStorage.setItem('theme', 'light');
+        themeToggle.innerHTML = moonIcon;
+      }
+    });
+  })();
+</script>
+</body>
+</html>

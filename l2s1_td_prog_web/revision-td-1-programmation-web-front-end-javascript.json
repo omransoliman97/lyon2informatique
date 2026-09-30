@@ -1,0 +1,1663 @@
+{
+  "type": "presentaforge-revision",
+  "v": 1,
+  "exportedAt": "2026-09-30T16:01:07.785Z",
+  "course": {
+    "title": "TD 1 — Programmation Web front-end (JavaScript)",
+    "author": "ICOM Lyon 2 — L1 Informatique",
+    "slideCount": 45
+  },
+  "deck": {
+    "schemaVersion": 2,
+    "metadata": {
+      "title": "TD 1 — Programmation Web front-end (JavaScript)",
+      "author": "ICOM Lyon 2 — L1 Informatique",
+      "created": "2026-09-10",
+      "modified": "2026-09-22",
+      "_mediaOptimizeSig": "0:0"
+    },
+    "theme": "icom",
+    "showSlideNumber": true,
+    "footerText": "TD1 — Programmation Web front-end",
+    "autoNumberChapters": true,
+    "slides": [
+      {
+        "type": "title",
+        "eyebrow": "Programmation Web front-end - ICOM Lyon 2",
+        "title": "TD 1 : Les bases de JavaScript",
+        "subtitle": "Expressions, conditions, boucles et chaînes de caractères",
+        "author": "L1 Informatique",
+        "date": "2026"
+      },
+      {
+        "type": "bullets",
+        "title": "Organisez votre travail",
+        "items": [
+          "Créez sur votre machine un dossier <code>TDJavaScript_Nom_Prenom</code>",
+          "Chaque semaine, un sous-dossier de travail : <code>TD1_Nom_Prenom</code>, <code>TD2_Nom_Prenom</code>, …",
+          "À la fin du TD : compressez le dossier en <code>.zip</code> et déposez-le sur Moodle, dans la boîte de dépôt du TD",
+          "Un fichier <code>.html</code> par exercice, testez au fur et à mesure"
+        ],
+        "note": "Le rendu se fait sur Moodle, en <b>.zip</b>."
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_h001xxx",
+            "type": "heading",
+            "x": 60,
+            "y": 32,
+            "w": 1160,
+            "h": 60,
+            "z": 3,
+            "data": {
+              "text": "La console : votre outil n°1 pour déboguer"
+            },
+            "style": {
+              "fontSize": 34,
+              "fontWeight": 800,
+              "color": "var(--sl-heading)",
+              "fontFamily": "var(--sl-font-heading)"
+            }
+          },
+          {
+            "id": "el_bar002x",
+            "type": "shape",
+            "x": 60,
+            "y": 110,
+            "w": 190,
+            "h": 4,
+            "z": 3,
+            "data": {
+              "shape": "rect",
+              "text": ""
+            },
+            "style": {
+              "fill": "var(--sl-primary)",
+              "opacity": 1,
+              "stroke": "none"
+            }
+          },
+          {
+            "id": "el_t003xxx",
+            "type": "text",
+            "x": 60,
+            "y": 132,
+            "w": 560,
+            "h": 520,
+            "z": 2,
+            "data": {
+              "html": "<p>La <b>console</b> affiche les erreurs JavaScript et CSS de la page, et permet de tester du code à la volée.</p><ul><li><b>Firefox</b> : Développement › Outils de développement › Console</li><li><b>Chrome</b> : Plus d'outils › Outils de développement › Console</li><li>Raccourci commun : <code>Ctrl</code> + <code>Maj</code> + <code>I</code></li></ul><p>Chaque erreur indique le <b>message</b>, le <b>fichier</b> et la <b>ligne</b> (cliquable).</p>",
+              "text": "La console affiche les erreurs JavaScript et CSS de la page, et permet de tester du code à la volée.\nFirefox : Développement › Outils de développement › Console\nChrome : Plus d'outils › Outils de développement › Console\nRaccourci commun : Ctrl + Maj + I\nChaque erreur indique le message, le fichier et la ligne (cliquable)."
+            },
+            "style": {
+              "fontSize": 18,
+              "color": "var(--sl-text)",
+              "fontFamily": "var(--sl-font-body)",
+              "lineHeight": 1.5
+            }
+          },
+          {
+            "id": "el_hl004xx",
+            "type": "highlight",
+            "x": 648,
+            "y": 110,
+            "w": 576,
+            "h": 364,
+            "z": 2,
+            "data": {
+              "language": "html",
+              "code": "<!DOCTYPE html>\n<html lang=\"fr\">\n<head><meta charset=\"utf-8\" /></head>\n<body>\n  <script>\n    let prixHT = 100;\n    let tva = 0.20;\n    document.write(\"Prix TTC : \" + prixTTC);   // faute de frappe : prixTTC n'existe pas\n  </script>\n</body>\n</html>\n",
+              "label": "HTML"
+            },
+            "style": {
+              "fontSize": 17
+            }
+          },
+          {
+            "id": "el_t005xxx",
+            "type": "text",
+            "x": 648,
+            "y": 474,
+            "w": 576,
+            "h": 231,
+            "z": 2,
+            "data": {
+              "html": "<p>La console affiche&nbsp;:</p><p><code>Uncaught ReferenceError:<br>prixTTC is not defined</code><br><code>&nbsp;&nbsp;&nbsp;&nbsp;at exercice.html:8</code></p><p>→ variable mal orthographiée (<code>prixTTC</code> au lieu de <code>prixHT</code>).</p>",
+              "text": "La console affiche :\nUncaught ReferenceError:\nprixTTC is not defined\n    at exercice.html:8\n→ variable mal orthographiée (prixTTC au lieu de prixHT)."
+            },
+            "style": {
+              "fontSize": 16,
+              "color": "var(--sl-text)",
+              "fontFamily": "var(--sl-font-body)",
+              "lineHeight": 1.5
+            }
+          }
+        ],
+        "connectors": [
+          {
+            "id": "conn_ugbnwng",
+            "sourceId": "el_t003xxx",
+            "sourceAnchor": "bottom",
+            "targetId": "el_t003xxx",
+            "targetAnchor": "right",
+            "lineType": "elbow",
+            "arrowEnd": true,
+            "arrowStart": false,
+            "label": "",
+            "style": {
+              "stroke": "#818cf8",
+              "strokeWidth": 3,
+              "opacity": 1
+            },
+            "waypoints": [
+              {
+                "x": 340,
+                "y": 682
+              },
+              {
+                "x": 340,
+                "y": 393
+              },
+              {
+                "x": 650,
+                "y": 392
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "bullets",
+        "title": "Afficher un résultat, lire une saisie",
+        "items": [
+          "<code>console.log(valeur)</code> : dans la console (déboguer, tester rapidement)",
+          "<code>document.write(texte)</code> : écrit directement dans la page HTML",
+          "<code>alert(message)</code> : boîte de dialogue bloquante",
+          "<code>prompt(\"question\")</code> : demande une saisie et renvoie une <b>chaîne</b>"
+        ],
+        "note": "<code>prompt</code> renvoie <b>toujours</b> une chaîne &rarr; penser à <code>parseInt</code> / <code>parseFloat</code>."
+      },
+      {
+        "type": "chapter",
+        "title": "Exercice 1",
+        "subtitle": "Évaluer des expressions"
+      },
+      {
+        "type": "bullets",
+        "title": "Exercice 1 : Énoncé",
+        "items": [
+          "Affichez la valeur de chacune des expressions suivantes :",
+          {
+            "text": "Expressions à évaluer :",
+            "sub": [
+              "7 + 5",
+              "\"7\" + \"5\"",
+              "7 == 7",
+              "7 <= 7",
+              "(7 >= 5) && (5 < 5)",
+              "(7 >= 5) || (5 > 5)"
+            ]
+          }
+        ],
+        "note": "Pour chaque expression : quelle valeur ? quel type ?"
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_h010xxx",
+            "type": "heading",
+            "x": 60,
+            "y": 32,
+            "w": 1160,
+            "h": 60,
+            "z": 3,
+            "data": {
+              "text": "Exercice 1 : Résultats attendus",
+              "html": ""
+            },
+            "style": {
+              "fontSize": 34,
+              "fontWeight": 800,
+              "color": "var(--sl-heading)",
+              "fontFamily": "var(--sl-font-heading)"
+            }
+          },
+          {
+            "id": "el_bar011x",
+            "type": "shape",
+            "x": 60,
+            "y": 110,
+            "w": 190,
+            "h": 4,
+            "z": 3,
+            "data": {
+              "shape": "rect",
+              "text": ""
+            },
+            "style": {
+              "fill": "var(--sl-primary)",
+              "opacity": 1,
+              "stroke": "none"
+            }
+          },
+          {
+            "id": "el_tb012xx",
+            "type": "table",
+            "x": 60,
+            "y": 140,
+            "w": 780,
+            "h": 430,
+            "z": 2,
+            "data": {
+              "rows": [
+                [
+                  "Expression",
+                  "Valeur",
+                  "Type"
+                ],
+                [
+                  "7 + 5",
+                  "12",
+                  "number"
+                ],
+                [
+                  "\"7\" + \"5\"",
+                  "\"75\"",
+                  "string"
+                ],
+                [
+                  "7 == 7",
+                  "true",
+                  "boolean"
+                ],
+                [
+                  "7 <= 7",
+                  "true",
+                  "boolean"
+                ],
+                [
+                  "(7 >= 5) && (5 < 5)",
+                  "false",
+                  "boolean"
+                ],
+                [
+                  "(7 >= 5) || (5 > 5)",
+                  "true",
+                  "boolean"
+                ]
+              ]
+            },
+            "style": {
+              "color": "var(--sl-text)",
+              "headerBg": "var(--sl-primary)",
+              "headerColor": "#ffffff",
+              "borderColor": "var(--sl-border)"
+            }
+          },
+          {
+            "id": "el_t013xxx",
+            "type": "text",
+            "x": 872,
+            "y": 154,
+            "w": 352,
+            "h": 380,
+            "z": 2,
+            "data": {
+              "html": "<p><b>Le piège :</b></p><p><code>7 + 5</code> → deux nombres → <b>12</b>.</p><p><code>\"7\" + \"5\"</code> → une chaîne → collage → <b>\"75\"</b> (et non 12&nbsp;!).</p>",
+              "text": "Le piège :\n7 + 5 → deux nombres → 12.\n\"7\" + \"5\" → une chaîne → collage → \"75\" (et non 12 !)."
+            },
+            "style": {
+              "fontSize": 17,
+              "color": "var(--sl-text)",
+              "fontFamily": "var(--sl-font-body)",
+              "lineHeight": 1.5
+            }
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_h014xxx",
+            "type": "heading",
+            "x": 59,
+            "y": 32,
+            "w": 1160,
+            "h": 60,
+            "z": 3,
+            "data": {
+              "text": "Exercice 1 : Correction",
+              "html": ""
+            },
+            "style": {
+              "fontSize": 34,
+              "fontWeight": 800,
+              "color": "var(--sl-heading)",
+              "fontFamily": "var(--sl-font-heading)"
+            }
+          },
+          {
+            "id": "el_bar015x",
+            "type": "shape",
+            "x": 60,
+            "y": 110,
+            "w": 190,
+            "h": 4,
+            "z": 3,
+            "data": {
+              "shape": "rect",
+              "text": ""
+            },
+            "style": {
+              "fill": "var(--sl-primary)",
+              "opacity": 1,
+              "stroke": "none"
+            }
+          },
+          {
+            "id": "el_cl016xx",
+            "type": "code-live",
+            "x": 60,
+            "y": 132,
+            "w": 790,
+            "h": 470,
+            "z": 2,
+            "data": {
+              "language": "javascript",
+              "code": "// A recopier dans la console (F12)\n\nconsole.log(7 + 5);               // 12\nconsole.log(\"7\" + \"5\");           // 75\nconsole.log(7 == 7);              // true\nconsole.log(7 <= 7);              // true\nconsole.log((7 >= 5) && (5 < 5)); // false\nconsole.log((7 >= 5) || (5 > 5)); // true\n",
+              "autoRun": false
+            },
+            "style": {}
+          },
+          {
+            "id": "el_t017xxx",
+            "type": "text",
+            "x": 882,
+            "y": 134,
+            "w": 340,
+            "h": 468,
+            "z": 2,
+            "data": {
+              "html": "<div style=\"padding-left:2px\"><p style=\"font-weight:700;color:var(--sl-heading);font-size:17px;margin:0 0 8px\">Résultat attendu</p><div style=\"font-family:var(--sl-font-mono,monospace);font-size:13px;line-height:1.5;background:var(--sl-tag);color:var(--sl-heading);border:1px solid var(--sl-border);border-radius:8px;padding:8px 10px;white-space:pre;overflow-x:auto;margin:6px 0\">12\n75\ntrue\ntrue\nfalse\ntrue</div><p style=\"margin:8px 0 0\">Le résultat de <code>\"7\"+\"5\"</code> est la <b>chaîne</b> <code>\"75\"</code> (concaténation), pas le nombre 12.</p><p style=\"color:var(--sl-muted);font-size:13px;margin:12px 0 0\">▶ Exécuter, puis modifier les valeurs et relancer.</p></div>",
+              "text": "Résultat attendu\n12\n75\ntrue\ntrue\nfalse\ntrue\nLe résultat de \"7\"+\"5\" est la chaîne \"75\" (concaténation), pas le nombre 12.\n▶ Exécuter, puis modifier les valeurs et relancer."
+            },
+            "style": {
+              "fontSize": 15,
+              "color": "var(--sl-text)",
+              "fontFamily": "var(--sl-font-body)",
+              "lineHeight": 1.5
+            }
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "code",
+        "title": "Exercice 1 : Corrigé (TD1Ex1.html)",
+        "language": "html",
+        "code": "<!DOCTYPE html>\n<html lang=\"fr\">\n<head><meta charset=\"utf-8\" /></head>\n<body>\n  <h1>Exercice 1</h1>\n  <script>\n    document.write(7+5);              document.write(\"<br />\");\n    document.write(\"7\"+\"5\");          document.write(\"<br />\");\n    document.write(7==7);             document.write(\"<br />\");\n    document.write(7<=7);             document.write(\"<br />\");\n    document.write((7>=5)&&(5<5));    document.write(\"<br />\");\n    document.write((7>=5)||(5>5));    document.write(\"<br />\");\n  </script>\n</body>\n</html>",
+        "explanation": "<p>Version fournie : chaque résultat est écrit dans la page avec <code>document.write</code>, séparé par <code>&lt;br /&gt;</code>.</p><p>Affichage dans la page : <code>12 / 75 / true / true / false / true</code>.</p>"
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_qz018xx",
+            "type": "quiz-live",
+            "x": 150,
+            "y": 55,
+            "w": 980,
+            "h": 610,
+            "z": 1,
+            "data": {
+              "question": "Que vaut l'expression <code>\"7\" + \"5\"</code> en JavaScript ?",
+              "options": [
+                "12",
+                "\"75\"",
+                "57",
+                "NaN"
+              ],
+              "answer": 1,
+              "duration": 30,
+              "explanation": "Dès qu'un opérande de <code>+</code> est une chaîne, JavaScript fait une <b>concaténation</b> : <code>\"7\" + \"5\"</code> donne la chaîne <code>\"75\"</code>. Avec des nombres, <code>7 + 5</code> donnerait <code>12</code>."
+            },
+            "style": {}
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "chapter",
+        "title": "Exercice 2",
+        "subtitle": "Lire et valider une saisie"
+      },
+      {
+        "type": "bullets",
+        "title": "Exercice 2 : Énoncé",
+        "items": [
+          "Écrivez un programme JavaScript qui <b>demande à l'utilisateur</b> une valeur entre 1 et 100.",
+          "Si la valeur est correcte (entre 1 et 100) : <b>affichez-la</b>.",
+          "Sinon : <b>affichez un message d'erreur</b>."
+        ],
+        "note": "Que se passe-t-il si l'utilisateur tape « abc » ou laisse vide ?"
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_h019xxx",
+            "type": "heading",
+            "x": 60,
+            "y": 32,
+            "w": 1160,
+            "h": 60,
+            "z": 3,
+            "data": {
+              "text": "Exercice 2 : Ce qu'il faut savoir",
+              "html": ""
+            },
+            "style": {
+              "fontSize": 34,
+              "fontWeight": 800,
+              "color": "var(--sl-heading)",
+              "fontFamily": "var(--sl-font-heading)"
+            }
+          },
+          {
+            "id": "el_bar020x",
+            "type": "shape",
+            "x": 60,
+            "y": 110,
+            "w": 190,
+            "h": 4,
+            "z": 3,
+            "data": {
+              "shape": "rect",
+              "text": ""
+            },
+            "style": {
+              "fill": "var(--sl-primary)",
+              "opacity": 1,
+              "stroke": "none"
+            }
+          },
+          {
+            "id": "el_t021xxx",
+            "type": "text",
+            "x": 60,
+            "y": 132,
+            "w": 760,
+            "h": 520,
+            "z": 2,
+            "data": {
+              "html": "<p><code>prompt(\"…\")</code> ouvre une boîte de saisie et renvoie <b>toujours une chaîne</b> (ou <code>null</code> si on annule).</p><p><code>parseFloat(chaine)</code> convertit en nombre décimal. Si la conversion échoue, on obtient la valeur spéciale <code>NaN</code>.</p><p><code>isNaN(x)</code> renvoie <code>true</code> si <code>x</code> n'est pas un nombre valide.</p><p><b>Condition de rejet :</b> <code>isNaN(n) || n &lt; 1 || n &gt; 100</code></p><p>Structure : <code>if (…) { message d'erreur } else { affichage }</code></p>"
+            },
+            "style": {
+              "fontSize": 19,
+              "color": "var(--sl-text)",
+              "fontFamily": "var(--sl-font-body)",
+              "lineHeight": 1.5
+            }
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_h022xxx",
+            "type": "heading",
+            "x": 60,
+            "y": 32,
+            "w": 1160,
+            "h": 60,
+            "z": 3,
+            "data": {
+              "text": "Exercice 2 : Correction",
+              "html": ""
+            },
+            "style": {
+              "fontSize": 34,
+              "fontWeight": 800,
+              "color": "var(--sl-heading)",
+              "fontFamily": "var(--sl-font-heading)"
+            }
+          },
+          {
+            "id": "el_bar023x",
+            "type": "shape",
+            "x": 60,
+            "y": 110,
+            "w": 190,
+            "h": 4,
+            "z": 3,
+            "data": {
+              "shape": "rect",
+              "text": ""
+            },
+            "style": {
+              "fill": "var(--sl-primary)",
+              "opacity": 1,
+              "stroke": "none"
+            }
+          },
+          {
+            "id": "el_cl024xx",
+            "type": "code-live",
+            "x": 60,
+            "y": 132,
+            "w": 790,
+            "h": 470,
+            "z": 2,
+            "data": {
+              "language": "javascript",
+              "code": "// En TD : n = parseFloat(prompt(\"Valeur ?\"))\nlet n = parseFloat(\"42\");   // change la valeur\n\nif (isNaN(n) || n < 1 || n > 100) {\n  console.log(\"Valeur erronee !\");\n} else {\n  console.log(\"Votre valeur : \" + n);\n}\n",
+              "autoRun": false
+            },
+            "style": {}
+          },
+          {
+            "id": "el_t025xxx",
+            "type": "text",
+            "x": 882,
+            "y": 134,
+            "w": 340,
+            "h": 468,
+            "z": 2,
+            "data": {
+              "html": "<div style=\"padding-left:2px\"><p style=\"font-weight:700;color:var(--sl-heading);font-size:17px;margin:0 0 8px\">Résultat attendu</p><ul style=\"margin:4px 0;padding-left:18px;list-style:disc\"><li style=\"margin:2px 0\"><code>\"42\"</code> → Votre valeur : 42</li><li style=\"margin:2px 0\"><code>\"0\"</code>, <code>\"150\"</code>, <code>\"abc\"</code> → Valeur erronée&nbsp;!</li><li style=\"margin:2px 0\"><code>\"1\"</code> et <code>\"100\"</code> → acceptées (bornes incluses)</li></ul><p style=\"color:var(--sl-muted);font-size:13px;margin:12px 0 0\">▶ Exécuter, puis modifier les valeurs et relancer.</p></div>"
+            },
+            "style": {
+              "fontSize": 15,
+              "color": "var(--sl-text)",
+              "fontFamily": "var(--sl-font-body)",
+              "lineHeight": 1.5
+            }
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "code",
+        "title": "Exercice 2 : Corrigé (TD1Ex2Test.html)",
+        "language": "html",
+        "code": "<!DOCTYPE html>\n<html lang=\"fr\">\n<head><meta charset=\"utf-8\" /></head>\n<body>\n  <script>\n    let n = parseFloat(prompt(\"Entrez une valeur entre 1 et 100 : \"));\n    if ((isNaN(n)) || (n < 1) || (n > 100)) {\n      document.write(\"Valeur erronée !\");\n    } else {\n      document.write(\"Votre valeur : \" + n);\n    }\n  </script>\n</body>\n</html>",
+        "explanation": "<p><code>prompt</code> lit la saisie, <code>parseFloat</code> la convertit.</p><p>La condition regroupe les 3 cas d'erreur avec des <code>||</code> ; sinon on affiche la valeur.</p>"
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_qz026xx",
+            "type": "quiz-live",
+            "x": 150,
+            "y": 55,
+            "w": 980,
+            "h": 610,
+            "z": 1,
+            "data": {
+              "question": "Après <code>var n = prompt(\"Âge ?\")</code>, l'utilisateur tape <code>20</code>. Que vaut <code>n + 1</code> ?",
+              "options": [
+                "21",
+                "\"201\"",
+                "20",
+                "Erreur"
+              ],
+              "answer": 1,
+              "duration": 30,
+              "explanation": "<code>prompt</code> renvoie <b>toujours une chaîne</b> : <code>n</code> vaut <code>\"20\"</code>. Donc <code>n + 1</code> fait une concaténation &rarr; <code>\"201\"</code>. Il faut convertir : <code>parseInt(n) + 1</code> vaut <code>21</code>."
+            },
+            "style": {}
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "chapter",
+        "title": "Exercice 3",
+        "subtitle": "Calculer une factorielle"
+      },
+      {
+        "type": "bullets",
+        "title": "Exercice 3 : Énoncé",
+        "items": [
+          "Calculez et affichez la <b>factorielle</b> de <code>n</code>, saisi par l'utilisateur.",
+          {
+            "text": "n! = 1 &times; 2 &times; … &times; n",
+            "sub": [
+              "1! = 1",
+              "2! = 1 &times; 2 = 2",
+              "3! = 1 &times; 2 &times; 3 = 6",
+              "4! = 1 &times; 2 &times; 3 &times; 4 = 24"
+            ]
+          }
+        ],
+        "note": "Par convention 0! = 1."
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_h027xxx",
+            "type": "heading",
+            "x": 60,
+            "y": 32,
+            "w": 1160,
+            "h": 60,
+            "z": 3,
+            "data": {
+              "text": "Exercice 3 : Ce qu'il faut savoir",
+              "html": ""
+            },
+            "style": {
+              "fontSize": 34,
+              "fontWeight": 800,
+              "color": "var(--sl-heading)",
+              "fontFamily": "var(--sl-font-heading)"
+            }
+          },
+          {
+            "id": "el_bar028x",
+            "type": "shape",
+            "x": 60,
+            "y": 110,
+            "w": 190,
+            "h": 4,
+            "z": 3,
+            "data": {
+              "shape": "rect",
+              "text": ""
+            },
+            "style": {
+              "fill": "var(--sl-primary)",
+              "opacity": 1,
+              "stroke": "none"
+            }
+          },
+          {
+            "id": "el_t029xxx",
+            "type": "text",
+            "x": 60,
+            "y": 132,
+            "w": 760,
+            "h": 520,
+            "z": 2,
+            "data": {
+              "html": "<p><b>Le patron « accumulateur » :</b></p><ol><li>Une variable résultat initialisée à l'élément neutre : <code>fact = 1</code> (neutre de la multiplication)</li><li>Une <b>boucle</b> <code>for (i = 2; i &lt;= n; i++)</code></li><li>À chaque tour : <code>fact = fact * i</code></li><li>Après la boucle : afficher <code>fact</code></li></ol><p>Version <code>while</code> équivalente : <code>while (i &lt;= n) { fact = fact * i; i++; }</code></p><p>Vérifier que la saisie est numérique (<code>isNaN</code>).</p>"
+            },
+            "style": {
+              "fontSize": 18,
+              "color": "var(--sl-text)",
+              "fontFamily": "var(--sl-font-body)",
+              "lineHeight": 1.5
+            }
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_h030xxx",
+            "type": "heading",
+            "x": 60,
+            "y": 32,
+            "w": 1160,
+            "h": 60,
+            "z": 3,
+            "data": {
+              "text": "Exercice 3 : Correction",
+              "html": ""
+            },
+            "style": {
+              "fontSize": 34,
+              "fontWeight": 800,
+              "color": "var(--sl-heading)",
+              "fontFamily": "var(--sl-font-heading)"
+            }
+          },
+          {
+            "id": "el_bar031x",
+            "type": "shape",
+            "x": 60,
+            "y": 110,
+            "w": 190,
+            "h": 4,
+            "z": 3,
+            "data": {
+              "shape": "rect",
+              "text": ""
+            },
+            "style": {
+              "fill": "var(--sl-primary)",
+              "opacity": 1,
+              "stroke": "none"
+            }
+          },
+          {
+            "id": "el_cl032xx",
+            "type": "code-live",
+            "x": 60,
+            "y": 132,
+            "w": 790,
+            "h": 470,
+            "z": 2,
+            "data": {
+              "language": "javascript",
+              "code": "// En TD : n = parseInt(prompt(\"n :\", \"5\"))\nlet n = parseInt(\"5\");\n\nif (!isNaN(n)) {\n  let fact = 1;\n  for (let i = 2; i <= n; i++) {\n    fact = fact * i;\n  }\n  console.log(n + \"! = \" + fact);\n} else {\n  console.log(\"Pas un nombre\");\n}\n",
+              "autoRun": false
+            },
+            "style": {}
+          },
+          {
+            "id": "el_t033xxx",
+            "type": "text",
+            "x": 882,
+            "y": 134,
+            "w": 340,
+            "h": 468,
+            "z": 2,
+            "data": {
+              "html": "<div style=\"padding-left:2px\"><p style=\"font-weight:700;color:var(--sl-heading);font-size:17px;margin:0 0 8px\">Résultat attendu</p><ul style=\"margin:4px 0;padding-left:18px;list-style:disc\"><li style=\"margin:2px 0\">n = 1 → 1</li><li style=\"margin:2px 0\">n = 5 → 120</li><li style=\"margin:2px 0\">n = 6 → 720</li><li style=\"margin:2px 0\">n = 10 → 3 628 800</li></ul><p style=\"margin:8px 0 0\">La boucle part de <code>i = 2</code> : multiplier par 1 est inutile.</p><p style=\"color:var(--sl-muted);font-size:13px;margin:12px 0 0\">▶ Exécuter, puis modifier les valeurs et relancer.</p></div>"
+            },
+            "style": {
+              "fontSize": 15,
+              "color": "var(--sl-text)",
+              "fontFamily": "var(--sl-font-body)",
+              "lineHeight": 1.5
+            }
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "split",
+        "title": "Exercice 3 : Les deux corrigés officiels",
+        "left": {
+          "label": "TD1Ex3Factorielle.html — for",
+          "type": "code",
+          "language": "javascript",
+          "code": "let n = parseInt(prompt(\"Taille factorielle : \", \"5\"));\nif (!isNaN(n)) {\n  let fact = 1;\n  for (let i = 2; i <= n; i++) {\n    fact = fact * i;\n  }\n  document.write(\"Factorielle de \" + n + \"=\" + fact);\n} else {\n  document.write(\"La valeur n'est pas numérique\");\n}"
+        },
+        "right": {
+          "label": "TD1Ex3FactorielleWhile.html — while",
+          "type": "code",
+          "language": "javascript",
+          "code": "let nombreSaisi = prompt(\"Merci de saisir un nombre\");\nlet compteur = 1;\nlet resultat = 1;\nif (isNaN(nombreSaisi))\n  alert('saisissez un nombre');\nelse {\n  document.write(nombreSaisi + \"! = \");\n  while (compteur <= nombreSaisi) {\n    resultat = resultat * compteur;\n    compteur = compteur + 1;\n  }\n}\ndocument.write(resultat);"
+        }
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_qz034xx",
+            "type": "quiz-live",
+            "x": 150,
+            "y": 55,
+            "w": 980,
+            "h": 610,
+            "z": 1,
+            "data": {
+              "question": "Avec <code>fact = 1</code> puis <code>for (i = 2; i &lt;= n; i++) fact = fact * i;</code>, que vaut <code>fact</code> pour <code>n = 4</code> ?",
+              "options": [
+                "8",
+                "24",
+                "10",
+                "12"
+              ],
+              "answer": 1,
+              "duration": 30,
+              "explanation": "La boucle multiplie <code>fact</code> par 2, puis 3, puis 4 : <code>1 &times; 2 &times; 3 &times; 4 = 24</code>. C'est bien 4!."
+            },
+            "style": {}
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "chapter",
+        "title": "Exercice 4",
+        "subtitle": "Dessiner un carré d'étoiles"
+      },
+      {
+        "type": "bullets",
+        "title": "Exercice 4 : Énoncé",
+        "items": [
+          "Demandez un nombre entre 1 et 10 et dessinez un <b>carré</b> de cette taille avec le caractère <code>*</code>.",
+          {
+            "text": "Exemple : taille = 3 &rarr;",
+            "sub": [
+              "* * *",
+              "* * *",
+              "* * *"
+            ]
+          }
+        ],
+        "note": "Indice : une boucle pour les lignes, une boucle pour les colonnes."
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_h035xxx",
+            "type": "heading",
+            "x": 60,
+            "y": 32,
+            "w": 1160,
+            "h": 60,
+            "z": 3,
+            "data": {
+              "text": "Exercice 4 : Ce qu'il faut savoir",
+              "html": ""
+            },
+            "style": {
+              "fontSize": 34,
+              "fontWeight": 800,
+              "color": "var(--sl-heading)",
+              "fontFamily": "var(--sl-font-heading)"
+            }
+          },
+          {
+            "id": "el_bar036x",
+            "type": "shape",
+            "x": 60,
+            "y": 110,
+            "w": 190,
+            "h": 4,
+            "z": 3,
+            "data": {
+              "shape": "rect",
+              "text": ""
+            },
+            "style": {
+              "fill": "var(--sl-primary)",
+              "opacity": 1,
+              "stroke": "none"
+            }
+          },
+          {
+            "id": "el_t037xxx",
+            "type": "text",
+            "x": 60,
+            "y": 132,
+            "w": 760,
+            "h": 520,
+            "z": 2,
+            "data": {
+              "html": "<p><b>Boucles imbriquées :</b></p><ul><li>Boucle <b>externe</b> <code>i</code> : parcourt les <b>lignes</b> (0 → n-1)</li><li>Boucle <b>interne</b> <code>j</code> : parcourt les <b>colonnes</b> (0 → n-1) et écrit un <code>*</code></li><li>À la fin de chaque ligne : passer à la ligne (<code>&lt;br /&gt;</code> dans la page, ou <code>console.log</code> de la ligne accumulée)</li></ul><p>Nombre total d'étoiles : <code>n × n</code>.</p><p>Sans page HTML, on construit chaque ligne dans une chaîne (<code>ligne = ligne + \"*\"</code>) puis on l'affiche.</p>"
+            },
+            "style": {
+              "fontSize": 18,
+              "color": "var(--sl-text)",
+              "fontFamily": "var(--sl-font-body)",
+              "lineHeight": 1.5
+            }
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_h038xxx",
+            "type": "heading",
+            "x": 60,
+            "y": 32,
+            "w": 1160,
+            "h": 60,
+            "z": 3,
+            "data": {
+              "text": "Exercice 4 : Correction",
+              "html": ""
+            },
+            "style": {
+              "fontSize": 34,
+              "fontWeight": 800,
+              "color": "var(--sl-heading)",
+              "fontFamily": "var(--sl-font-heading)"
+            }
+          },
+          {
+            "id": "el_bar039x",
+            "type": "shape",
+            "x": 60,
+            "y": 110,
+            "w": 190,
+            "h": 4,
+            "z": 3,
+            "data": {
+              "shape": "rect",
+              "text": ""
+            },
+            "style": {
+              "fill": "var(--sl-primary)",
+              "opacity": 1,
+              "stroke": "none"
+            }
+          },
+          {
+            "id": "el_cl040xx",
+            "type": "code-live",
+            "x": 60,
+            "y": 132,
+            "w": 790,
+            "h": 470,
+            "z": 2,
+            "data": {
+              "language": "javascript",
+              "code": "// En TD : n = parseInt(prompt(\"Taille :\", \"3\"))\nlet n = 5;\n\nfor (let i = 0; i < n; i++) {     // lignes\n  let ligne = \"\";\n  for (let j = 0; j < n; j++) {   // colonnes\n    ligne = ligne + \"*\";\n  }\n  console.log(ligne);\n}\n",
+              "autoRun": false
+            },
+            "style": {}
+          },
+          {
+            "id": "el_t041xxx",
+            "type": "text",
+            "x": 882,
+            "y": 134,
+            "w": 340,
+            "h": 468,
+            "z": 2,
+            "data": {
+              "html": "<div style=\"padding-left:2px\"><p style=\"font-weight:700;color:var(--sl-heading);font-size:17px;margin:0 0 8px\">Résultat attendu</p><p style=\"margin:0 0 4px\"><b>n = 5 :</b></p><div style=\"font-family:var(--sl-font-mono,monospace);font-size:13px;line-height:1.5;background:var(--sl-tag);color:var(--sl-heading);border:1px solid var(--sl-border);border-radius:8px;padding:8px 10px;white-space:pre;overflow-x:auto;margin:6px 0\">*****\n*****\n*****\n*****\n*****</div><p style=\"margin:8px 0 0\">La boucle interne remplit une ligne ; la boucle externe répète n fois.</p><p style=\"color:var(--sl-muted);font-size:13px;margin:12px 0 0\">▶ Exécuter, puis modifier les valeurs et relancer.</p></div>"
+            },
+            "style": {
+              "fontSize": 15,
+              "color": "var(--sl-text)",
+              "fontFamily": "var(--sl-font-body)",
+              "lineHeight": 1.5
+            }
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "code",
+        "title": "Exercice 4 : Corrigé (TD1Ex4Carre.html)",
+        "language": "html",
+        "code": "<!DOCTYPE html>\n<html lang=\"fr\">\n<head><meta charset=\"utf-8\" /></head>\n<body>\n  <h1>Exercice 4</h1>\n  <script>\n    let n = parseInt(prompt(\"Taille du carre : \", \"3\"));\n    for (let i = 0; i < n; i++) {\n      for (let j = 0; j < n; j++) {\n        document.write(\"*\");\n      }\n      document.write(\"<br />\");\n    }\n  </script>\n</body>\n</html>",
+        "explanation": "<p>La boucle interne écrit <code>n</code> étoiles sur la ligne courante.</p><p>Après la boucle interne, <code>document.write(\"&lt;br /&gt;\")</code> provoque le retour à la ligne dans la page.</p>"
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_qz042xx",
+            "type": "quiz-live",
+            "x": 150,
+            "y": 55,
+            "w": 980,
+            "h": 610,
+            "z": 1,
+            "data": {
+              "question": "Pour <code>n = 3</code>, combien de fois s'exécute <code>document.write(\"*\")</code> ?",
+              "options": [
+                "3",
+                "6",
+                "9",
+                "12"
+              ],
+              "answer": 2,
+              "duration": 30,
+              "explanation": "Boucles imbriquées : la ligne interne (3 étoiles) est répétée 3 fois &rarr; <code>3 &times; 3 = 9</code> exécutions."
+            },
+            "style": {}
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "chapter",
+        "title": "Exercice 4 bis",
+        "subtitle": "Dessiner un triangle isocèle"
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_h043xxx",
+            "type": "heading",
+            "x": 60,
+            "y": 32,
+            "w": 1160,
+            "h": 60,
+            "z": 3,
+            "data": {
+              "text": "Exercice 4 bis : Énoncé",
+              "html": ""
+            },
+            "style": {
+              "fontSize": 34,
+              "fontWeight": 800,
+              "color": "var(--sl-heading)",
+              "fontFamily": "var(--sl-font-heading)"
+            }
+          },
+          {
+            "id": "el_bar044x",
+            "type": "shape",
+            "x": 60,
+            "y": 110,
+            "w": 190,
+            "h": 4,
+            "z": 3,
+            "data": {
+              "shape": "rect",
+              "text": ""
+            },
+            "style": {
+              "fill": "var(--sl-primary)",
+              "opacity": 1,
+              "stroke": "none"
+            }
+          },
+          {
+            "id": "el_t045xxx",
+            "type": "text",
+            "x": 60,
+            "y": 132,
+            "w": 560,
+            "h": 300,
+            "z": 2,
+            "data": {
+              "html": "<p>Demandez la <b>taille</b> d'un triangle et dessinez un <b>triangle isocèle</b> à l'aide de <code>*</code>.</p><p>Chaque ligne : quelques espaces, puis un nombre <b>impair</b> d'étoiles.</p>"
+            },
+            "style": {
+              "fontSize": 19,
+              "color": "var(--sl-text)",
+              "fontFamily": "var(--sl-font-body)",
+              "lineHeight": 1.5
+            }
+          },
+          {
+            "id": "el_hl046xx",
+            "type": "highlight",
+            "x": 648,
+            "y": 132,
+            "w": 576,
+            "h": 340,
+            "z": 2,
+            "data": {
+              "language": "text",
+              "code": "Exemple : taille donnee par l'utilisateur : 5\n\n    *\n   ***\n  *****\n *******\n*********\n",
+              "label": "Résultat"
+            },
+            "style": {
+              "fontSize": 17
+            }
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_h047xxx",
+            "type": "heading",
+            "x": 60,
+            "y": 32,
+            "w": 1160,
+            "h": 60,
+            "z": 3,
+            "data": {
+              "text": "Exercice 4 bis : Ce qu'il faut savoir",
+              "html": ""
+            },
+            "style": {
+              "fontSize": 34,
+              "fontWeight": 800,
+              "color": "var(--sl-heading)",
+              "fontFamily": "var(--sl-font-heading)"
+            }
+          },
+          {
+            "id": "el_bar048x",
+            "type": "shape",
+            "x": 60,
+            "y": 110,
+            "w": 190,
+            "h": 4,
+            "z": 3,
+            "data": {
+              "shape": "rect",
+              "text": ""
+            },
+            "style": {
+              "fill": "var(--sl-primary)",
+              "opacity": 1,
+              "stroke": "none"
+            }
+          },
+          {
+            "id": "el_t049xxx",
+            "type": "text",
+            "x": 60,
+            "y": 132,
+            "w": 760,
+            "h": 520,
+            "z": 2,
+            "data": {
+              "html": "<p>Pour la ligne numéro <code>i</code> (de 1 à n) :</p><ul><li><b>Espaces</b> avant : <code>n - i</code></li><li><b>Étoiles</b> : <code>2 × i - 1</code> (1, 3, 5, 7, …&nbsp;— toujours impair)</li></ul><p>Trois boucles :</p><ol><li>externe : la ligne <code>i</code></li><li>interne 1 : écrire les <code>n - i</code> espaces</li><li>interne 2 : écrire les <code>2i - 1</code> étoiles</li></ol><p>Puis retour à la ligne.</p>"
+            },
+            "style": {
+              "fontSize": 18,
+              "color": "var(--sl-text)",
+              "fontFamily": "var(--sl-font-body)",
+              "lineHeight": 1.5
+            }
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_h050xxx",
+            "type": "heading",
+            "x": 60,
+            "y": 32,
+            "w": 1160,
+            "h": 60,
+            "z": 3,
+            "data": {
+              "text": "Exercice 4 bis : Correction",
+              "html": ""
+            },
+            "style": {
+              "fontSize": 34,
+              "fontWeight": 800,
+              "color": "var(--sl-heading)",
+              "fontFamily": "var(--sl-font-heading)"
+            }
+          },
+          {
+            "id": "el_bar051x",
+            "type": "shape",
+            "x": 60,
+            "y": 110,
+            "w": 190,
+            "h": 4,
+            "z": 3,
+            "data": {
+              "shape": "rect",
+              "text": ""
+            },
+            "style": {
+              "fill": "var(--sl-primary)",
+              "opacity": 1,
+              "stroke": "none"
+            }
+          },
+          {
+            "id": "el_cl052xx",
+            "type": "code-live",
+            "x": 60,
+            "y": 132,
+            "w": 790,
+            "h": 470,
+            "z": 2,
+            "data": {
+              "language": "javascript",
+              "code": "// En TD : n = parseInt(prompt(\"Hauteur :\", \"5\"))\nlet n = 5;\n\nfor (let i = 1; i <= n; i++) {\n  let ligne = \"\";\n  for (let e = 0; e < n - i; e++)  ligne += \" \";\n  for (let j = 0; j < 2*i - 1; j++) ligne += \"*\";\n  console.log(ligne);\n}\n",
+              "autoRun": false
+            },
+            "style": {}
+          },
+          {
+            "id": "el_t053xxx",
+            "type": "text",
+            "x": 882,
+            "y": 134,
+            "w": 340,
+            "h": 468,
+            "z": 2,
+            "data": {
+              "html": "<div style=\"padding-left:2px\"><p style=\"font-weight:700;color:var(--sl-heading);font-size:17px;margin:0 0 8px\">Résultat attendu</p><p style=\"margin:0 0 4px\"><b>n = 5 :</b></p><div style=\"font-family:var(--sl-font-mono,monospace);font-size:13px;line-height:1.5;background:var(--sl-tag);color:var(--sl-heading);border:1px solid var(--sl-border);border-radius:8px;padding:8px 10px;white-space:pre;overflow-x:auto;margin:6px 0\">    *\n   ***\n  *****\n *******\n*********</div><p style=\"margin:8px 0 0\">Ligne 1 : 4 espaces + 1 étoile. Ligne 5 : 0 espace + 9 étoiles.</p><p style=\"color:var(--sl-muted);font-size:13px;margin:12px 0 0\">▶ Exécuter, puis modifier les valeurs et relancer.</p></div>"
+            },
+            "style": {
+              "fontSize": 15,
+              "color": "var(--sl-text)",
+              "fontFamily": "var(--sl-font-body)",
+              "lineHeight": 1.5
+            }
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_qz054xx",
+            "type": "quiz-live",
+            "x": 150,
+            "y": 55,
+            "w": 980,
+            "h": 610,
+            "z": 1,
+            "data": {
+              "question": "Dans un triangle isocèle d'étoiles, combien d'étoiles sur la ligne numéro <code>i</code> ?",
+              "options": [
+                "i",
+                "2 &times; i",
+                "2 &times; i - 1",
+                "i + 1"
+              ],
+              "answer": 2,
+              "duration": 30,
+              "explanation": "On veut 1, 3, 5, 7, … étoiles : la suite des <b>impairs</b>, soit <code>2 &times; i - 1</code> pour <code>i</code> allant de 1 à n."
+            },
+            "style": {}
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "chapter",
+        "title": "Exercice 5",
+        "subtitle": "Une mini-calculatrice"
+      },
+      {
+        "type": "bullets",
+        "title": "Exercice 5 : Énoncé",
+        "items": [
+          "Écrivez un programme qui calcule, <b>au choix</b>, la somme, la différence, le produit ou le quotient de deux nombres.",
+          "Il faut <b>prévenir la division par zéro</b> par une instruction adéquate."
+        ],
+        "note": "En JS, 10 / 0 ne plante pas : ça vaut Infinity. À nous de tester."
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_h055xxx",
+            "type": "heading",
+            "x": 60,
+            "y": 32,
+            "w": 1160,
+            "h": 60,
+            "z": 3,
+            "data": {
+              "text": "Exercice 5 : Ce qu'il faut savoir",
+              "html": ""
+            },
+            "style": {
+              "fontSize": 34,
+              "fontWeight": 800,
+              "color": "var(--sl-heading)",
+              "fontFamily": "var(--sl-font-heading)"
+            }
+          },
+          {
+            "id": "el_bar056x",
+            "type": "shape",
+            "x": 60,
+            "y": 110,
+            "w": 190,
+            "h": 4,
+            "z": 3,
+            "data": {
+              "shape": "rect",
+              "text": ""
+            },
+            "style": {
+              "fill": "var(--sl-primary)",
+              "opacity": 1,
+              "stroke": "none"
+            }
+          },
+          {
+            "id": "el_t057xxx",
+            "type": "text",
+            "x": 60,
+            "y": 132,
+            "w": 760,
+            "h": 520,
+            "z": 2,
+            "data": {
+              "html": "<p><b>Choisir selon une valeur</b> : <code>switch (op) { case \"+\": … break; … }</code> (ou une cascade de <code>if / else if</code>).</p><p><b>Division par zéro</b> : en JavaScript il n'y a pas d'exception <code>10 / 0</code> → <code>Infinity</code>, <code>0 / 0</code> → <code>NaN</code>.</p><p>On ajoute un test explicite avant de diviser :</p><p><code>if (b == 0) { message d'erreur } else { resultat = a / b; }</code></p><p>Ne pas oublier <code>parseFloat</code> sur les deux nombres saisis.</p>",
+              "text": "Choisir selon une valeur : switch (op) { case \"+\": … break; … } (ou une cascade de if / else if).\nDivision par zéro : en JavaScript il n'y a pas d'exception 10 / 0 → Infinity, 0 / 0 → NaN.\nOn ajoute un test explicite avant de diviser :\nif (b == 0) { message d'erreur } else { resultat = a / b; }\nNe pas oublier parseFloat sur les deux nombres saisis."
+            },
+            "style": {
+              "fontSize": 18,
+              "color": "var(--sl-text)",
+              "fontFamily": "var(--sl-font-body)",
+              "lineHeight": 1.5
+            }
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_h058xxx",
+            "type": "heading",
+            "x": 60,
+            "y": 32,
+            "w": 1160,
+            "h": 60,
+            "z": 3,
+            "data": {
+              "text": "Exercice 5 : Correction",
+              "html": ""
+            },
+            "style": {
+              "fontSize": 34,
+              "fontWeight": 800,
+              "color": "var(--sl-heading)",
+              "fontFamily": "var(--sl-font-heading)"
+            }
+          },
+          {
+            "id": "el_bar059x",
+            "type": "shape",
+            "x": 60,
+            "y": 110,
+            "w": 190,
+            "h": 4,
+            "z": 3,
+            "data": {
+              "shape": "rect",
+              "text": ""
+            },
+            "style": {
+              "fill": "var(--sl-primary)",
+              "opacity": 1,
+              "stroke": "none"
+            }
+          },
+          {
+            "id": "el_cl060xx",
+            "type": "code-live",
+            "x": 60,
+            "y": 132,
+            "w": 790,
+            "h": 470,
+            "z": 2,
+            "data": {
+              "language": "javascript",
+              "code": "// En TD : a, b, op saisis avec prompt()\nlet a = 12;\nlet b = 0;\nlet op = \"/\";   // \"+\" \"-\" \"*\" \"/\"\n\nlet resultat;\n\nif (op == \"+\") {\n    resultat = a + b;\n} else if (op == \"-\") {\n    resultat = a - b;\n} else if (op == \"*\") {\n    resultat = a * b;\n} else if (op == \"/\") {\n    if (b == 0) {\n        resultat = \"Division par 0 impossible !\";\n    } else {\n        resultat = a / b;\n    }\n} else {\n    resultat = \"Operation inconnue\";\n}\n\nconsole.log(a + op + b + \" = \" + resultat);",
+              "autoRun": false
+            },
+            "style": {}
+          },
+          {
+            "id": "el_t061xxx",
+            "type": "text",
+            "x": 882,
+            "y": 134,
+            "w": 340,
+            "h": 468,
+            "z": 2,
+            "data": {
+              "html": "<div style=\"padding-left:2px\"><p style=\"font-weight:700;color:var(--sl-heading);font-size:17px;margin:0 0 8px\">Résultat attendu</p><ul style=\"margin:4px 0;padding-left:18px;list-style:disc\"><li style=\"margin:2px 0\"><code>12 / 0</code> → « Division par zéro impossible ! »</li><li style=\"margin:2px 0\"><code>12 / 4</code> → 3</li><li style=\"margin:2px 0\"><code>12 * 3</code> → 36</li><li style=\"margin:2px 0\"><code>12 - 5</code> → 7</li></ul><p style=\"margin:8px 0 0\">Sans le test <code>b == 0</code> : <code>12 / 0</code> donnerait <code>Infinity</code>.</p><p style=\"color:var(--sl-muted);font-size:13px;margin:12px 0 0\">▶ Exécuter, puis modifier les valeurs et relancer.</p></div>",
+              "text": "Résultat attendu\n12 / 0 → « Division par zéro impossible ! »\n12 / 4 → 3\n12 * 3 → 36\n12 - 5 → 7\nSans le test b == 0 : 12 / 0 donnerait Infinity.\n▶ Exécuter, puis modifier les valeurs et relancer."
+            },
+            "style": {
+              "fontSize": 15,
+              "color": "var(--sl-text)",
+              "fontFamily": "var(--sl-font-body)",
+              "lineHeight": 1.5
+            }
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_qz062xx",
+            "type": "quiz-live",
+            "x": 150,
+            "y": 55,
+            "w": 980,
+            "h": 610,
+            "z": 1,
+            "data": {
+              "question": "En JavaScript, que vaut <code>10 / 0</code> ?",
+              "options": [
+                "0",
+                "Une erreur qui arrête le script",
+                "Infinity",
+                "null"
+              ],
+              "answer": 2,
+              "duration": 30,
+              "explanation": "JavaScript ne lève <b>pas</b> d'exception : <code>10 / 0</code> vaut <code>Infinity</code> (et <code>0 / 0</code> vaut <code>NaN</code>). D'où le test <code>if (b === 0)</code> demandé par l'énoncé."
+            },
+            "style": {}
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "chapter",
+        "title": "Exercice 6",
+        "subtitle": "Compter des occurrences dans une chaîne"
+      },
+      {
+        "type": "bullets",
+        "title": "Exercice 6 : Énoncé",
+        "items": [
+          "Écrivez un programme qui calcule le <b>nombre d'occurrences d'une lettre</b> dans une chaîne.",
+          "La lettre et la chaîne sont saisies par l'utilisateur.",
+          {
+            "text": "Outils imposés :",
+            "sub": [
+              "<code>chaine.length</code> — longueur de la chaîne",
+              "<code>chaine.charAt(position)</code> — caractère à la position donnée"
+            ]
+          }
+        ],
+        "note": "Les positions vont de 0 à length - 1."
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_h063xxx",
+            "type": "heading",
+            "x": 60,
+            "y": 32,
+            "w": 1160,
+            "h": 60,
+            "z": 3,
+            "data": {
+              "text": "Exercice 6 : Ce qu'il faut savoir",
+              "html": ""
+            },
+            "style": {
+              "fontSize": 34,
+              "fontWeight": 800,
+              "color": "var(--sl-heading)",
+              "fontFamily": "var(--sl-font-heading)"
+            }
+          },
+          {
+            "id": "el_bar064x",
+            "type": "shape",
+            "x": 60,
+            "y": 110,
+            "w": 190,
+            "h": 4,
+            "z": 3,
+            "data": {
+              "shape": "rect",
+              "text": ""
+            },
+            "style": {
+              "fill": "var(--sl-primary)",
+              "opacity": 1,
+              "stroke": "none"
+            }
+          },
+          {
+            "id": "el_t065xxx",
+            "type": "text",
+            "x": 60,
+            "y": 132,
+            "w": 760,
+            "h": 520,
+            "z": 2,
+            "data": {
+              "html": "<p><b>Parcourir une chaîne :</b> <code>for (var i = 0; i &lt; chaine.length; i++) { … chaine.charAt(i) … }</code></p><p><b>Compter :</b> un accumulateur <code>compteur = 0</code>, incrémenté (<code>compteur++</code>) chaque fois que <code>chaine.charAt(i) == lettre</code>.</p><ul><li><code>length</code> est une <b>propriété</b> (sans parenthèses)</li><li><code>charAt(i)</code> est une <b>méthode</b> (avec parenthèses)</li><li>Attention à la <b>casse</b> : <code>\"A\"</code> ≠ <code>\"a\"</code></li></ul>",
+              "text": "Parcourir une chaîne : for (var i = 0; i < chaine.length; i++) { … chaine.charAt(i) … }\nCompter : un accumulateur compteur = 0, incrémenté (compteur++) chaque fois que chaine.charAt(i) == lettre.\nlength est une propriété (sans parenthèses)\ncharAt(i) est une méthode (avec parenthèses)\nAttention à la casse : \"A\" ≠ \"a\""
+            },
+            "style": {
+              "fontSize": 18,
+              "color": "var(--sl-text)",
+              "fontFamily": "var(--sl-font-body)",
+              "lineHeight": 1.5
+            }
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_h066xxx",
+            "type": "heading",
+            "x": 62,
+            "y": 32,
+            "w": 1160,
+            "h": 60,
+            "z": 3,
+            "data": {
+              "text": "Exercice 6 : Correction",
+              "html": ""
+            },
+            "style": {
+              "fontSize": 34,
+              "fontWeight": 800,
+              "color": "var(--sl-heading)",
+              "fontFamily": "var(--sl-font-heading)"
+            }
+          },
+          {
+            "id": "el_bar067x",
+            "type": "shape",
+            "x": 60,
+            "y": 110,
+            "w": 190,
+            "h": 4,
+            "z": 3,
+            "data": {
+              "shape": "rect",
+              "text": ""
+            },
+            "style": {
+              "fill": "var(--sl-primary)",
+              "opacity": 1,
+              "stroke": "none"
+            }
+          },
+          {
+            "id": "el_cl068xx",
+            "type": "code-live",
+            "x": 60,
+            "y": 132,
+            "w": 790,
+            "h": 470,
+            "z": 2,
+            "data": {
+              "language": "javascript",
+              "code": "// En TD : chaine et lettre saisies avec prompt()\nlet chaine = \"anticonstitutionnellement\";\nlet lettre = \"t\";\n\nlet compteur = 0;\nfor (let i = 0; i < chaine.length; i++) {\n  if (chaine.charAt(i) == lettre) {\n    compteur = compteur + 1;\n  }\n}\nconsole.log(lettre + \" : \" + compteur + \" fois\");\n",
+              "autoRun": false
+            },
+            "style": {}
+          },
+          {
+            "id": "el_t069xxx",
+            "type": "text",
+            "x": 882,
+            "y": 134,
+            "w": 340,
+            "h": 468,
+            "z": 2,
+            "data": {
+              "html": "<div style=\"padding-left:2px\"><p style=\"font-weight:700;color:var(--sl-heading);font-size:17px;margin:0 0 8px\">Résultat attendu</p><p style=\"margin:0\">Pour <code>\"anticonstitutionnellement\"</code> et la lettre <code>\"t\"</code> :</p><p style=\"font-size:24px;margin:6px 0;color:var(--sl-heading)\"><b>5</b> occurrences</p><p style=\"margin:0\">Essaie <code>\"n\"</code> (→ 4), ou <code>\"N\"</code> pour l'effet de la casse.</p><p style=\"color:var(--sl-muted);font-size:13px;margin:12px 0 0\">▶ Exécuter, puis modifier les valeurs et relancer.</p></div>"
+            },
+            "style": {
+              "fontSize": 15,
+              "color": "var(--sl-text)",
+              "fontFamily": "var(--sl-font-body)",
+              "lineHeight": 1.5
+            }
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_qz070xx",
+            "type": "quiz-live",
+            "x": 150,
+            "y": 55,
+            "w": 980,
+            "h": 610,
+            "z": 1,
+            "data": {
+              "question": "Que renvoie <code>\"bonjour\".charAt(2)</code> ?",
+              "options": [
+                "\"b\"",
+                "\"o\"",
+                "\"n\"",
+                "2"
+              ],
+              "answer": 2,
+              "duration": 30,
+              "explanation": "Les positions commencent à <b>0</b> : b&rarr;0, o&rarr;1, n&rarr;2. <code>charAt(2)</code> renvoie donc <code>\"n\"</code>."
+            },
+            "style": {}
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "bullets",
+        "title": "Ce qu'il faut retenir",
+        "items": [
+          "<code>+</code> : addition <i>ou</i> concaténation : surveiller les types",
+          "<code>prompt</code> renvoie une <b>chaîne</b> &rarr; <code>parseInt</code> / <code>parseFloat</code>",
+          "Valider une saisie : <code>isNaN(n) || n &lt; min || n &gt; max</code>",
+          "Accumulateur : <code>fact = 1</code> puis <code>fact = fact * i</code> dans une boucle",
+          "Boucles imbriquées pour les dessins (carré, triangle)",
+          "Parcours de chaîne : <code>charAt(i)</code> pour <code>i</code> de 0 à <code>length - 1</code>"
+        ],
+        "note": "La console est votre meilleure amie pour déboguer."
+      },
+      {
+        "type": "title",
+        "eyebrow": "Fin du TD 1",
+        "title": "Des questions ?",
+        "subtitle": "Pensez au dépôt Moodle : TD1_Nom_Prenom.zip",
+        "email": "valentin.lachand-pascal@univ-lyon2.fr"
+      }
+    ],
+    "reviewComments": [],
+    "typography": {
+      "heading": 52,
+      "text": 22
+    }
+  },
+  "bookmarks": [],
+  "notes": {},
+  "revision": {}
+}

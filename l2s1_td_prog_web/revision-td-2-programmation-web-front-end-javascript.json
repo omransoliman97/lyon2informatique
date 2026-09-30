@@ -1,0 +1,1800 @@
+{
+  "type": "presentaforge-revision",
+  "v": 1,
+  "exportedAt": "2026-09-30T16:01:09.899Z",
+  "course": {
+    "title": "TD 2 - Programmation Web front-end (JavaScript)",
+    "author": "ICOM Lyon 2 - L1 Informatique",
+    "slideCount": 57
+  },
+  "deck": {
+    "schemaVersion": 2,
+    "metadata": {
+      "title": "TD 2 - Programmation Web front-end (JavaScript)",
+      "author": "ICOM Lyon 2 - L1 Informatique",
+      "created": "2026-09-16",
+      "modified": "2026-09-24",
+      "course": "Programmation web frontend"
+    },
+    "theme": "icom",
+    "showSlideNumber": true,
+    "footerText": "TD2 - Programmation Web front-end",
+    "autoNumberChapters": true,
+    "slides": [
+      {
+        "type": "title",
+        "eyebrow": "Programmation Web front-end - ICOM Lyon 2",
+        "title": "TD 2 - Le navigateur et les chaînes de caractères",
+        "subtitle": "Objet navigator, dimensions écran, formulaires et manipulation de chaînes",
+        "author": "L1 Informatique",
+        "date": "2026"
+      },
+      {
+        "type": "bullets",
+        "title": "Avant de commencer",
+        "items": [
+          "Même organisation que TD1 : dossier <code>TD2_Nom_Prenom</code>, un <code>.html</code> par exercice, dépôt <code>.zip</code> sur Moodle",
+          "Nouveauté : accéder à un champ de formulaire en JavaScript",
+          {
+            "text": "Pour un formulaire nommé et un champ nommé :",
+            "sub": [
+              "<code>&lt;form name=\"formulaire\"&gt;&lt;input id=\"email\"&gt;&lt;/form&gt;</code>",
+              "<code>document.formulaire.email.value</code> - valeur du champ"
+            ]
+          },
+          "L'événement <code>onchange</code> déclenche une fonction quand l'utilisateur quitte le champ après l'avoir modifié"
+        ],
+        "note": "<code>document.NOM_FORM.NOM_CHAMP.value</code> - le nom du formulaire, puis le nom (ou id) du champ."
+      },
+      {
+        "type": "chapter",
+        "title": "Exercice 1",
+        "subtitle": "Informations sur le navigateur"
+      },
+      {
+        "type": "bullets",
+        "title": "Exercice 1 - Énoncé",
+        "items": [
+          "Affichez le nom et la version du navigateur utilisé, ainsi que la plateforme (système d'exploitation)",
+          "Testez avec au moins 2 navigateurs différents"
+        ]
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_h003xxx",
+            "type": "heading",
+            "x": 60,
+            "y": 32,
+            "w": 1160,
+            "h": 60,
+            "z": 3,
+            "data": {
+              "text": "Exercice 1 - Ce qu'il faut savoir"
+            },
+            "style": {
+              "fontSize": 34,
+              "fontWeight": 800,
+              "color": "var(--sl-heading)",
+              "fontFamily": "var(--sl-font-heading)"
+            }
+          },
+          {
+            "id": "el_gqc355h",
+            "type": "shape",
+            "x": 60,
+            "y": 110,
+            "w": 190,
+            "h": 4,
+            "z": 3,
+            "data": {
+              "shape": "rect",
+              "text": ""
+            },
+            "style": {
+              "fill": "var(--sl-primary)",
+              "opacity": 1,
+              "stroke": "none"
+            }
+          },
+          {
+            "id": "el_t001xxx",
+            "type": "text",
+            "x": 60,
+            "y": 132,
+            "w": 600,
+            "h": 480,
+            "z": 2,
+            "data": {
+              "html": "<p>L'objet global <code>navigator</code> (BOM - Browser Object Model) décrit le navigateur :</p><ul><li><code>navigator.appName</code> - nom \"applicatif\"</li><li><code>navigator.appVersion</code> - chaîne de version détaillée</li><li><code>navigator.platform</code> - système d'exploitation (déprécié mais très répandu)</li></ul><p style=\"margin-top:10px\"><b>Le piège :</b> pour des raisons de compatibilité historique, <code>appName</code> renvoie <b>\"Netscape\"</b> dans <i>tous</i> les navigateurs modernes (Chrome, Firefox, Edge...). Ce n'est pas un bug de votre code !</p>"
+            },
+            "style": {
+              "fontSize": 18,
+              "color": "var(--sl-text)",
+              "fontFamily": "var(--sl-font-body)",
+              "lineHeight": 1.5
+            }
+          },
+          {
+            "id": "el_wezpbz8",
+            "type": "table",
+            "x": 690,
+            "y": 164,
+            "w": 530,
+            "h": 210,
+            "z": 2,
+            "data": {
+              "rows": [
+                [
+                  "Propriété",
+                  "Exemple de valeur"
+                ],
+                [
+                  "navigator.appName",
+                  "\"Netscape\" (toujours)"
+                ],
+                [
+                  "navigator.appVersion",
+                  "\"5.0 (Windows NT 10.0...)\""
+                ],
+                [
+                  "navigator.platform",
+                  "\"Win32\", \"Linux x86_64\"..."
+                ]
+              ]
+            },
+            "style": {
+              "color": "var(--sl-text)",
+              "headerBg": "var(--sl-primary)",
+              "headerColor": "#ffffff",
+              "borderColor": "var(--sl-border)"
+            }
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_h005xxx",
+            "type": "heading",
+            "x": 60,
+            "y": 32,
+            "w": 1160,
+            "h": 60,
+            "z": 3,
+            "data": {
+              "text": "Exercice 1 - Correction"
+            },
+            "style": {
+              "fontSize": 34,
+              "fontWeight": 800,
+              "color": "var(--sl-heading)",
+              "fontFamily": "var(--sl-font-heading)"
+            }
+          },
+          {
+            "id": "el_z26y3ch",
+            "type": "shape",
+            "x": 60,
+            "y": 110,
+            "w": 190,
+            "h": 4,
+            "z": 3,
+            "data": {
+              "shape": "rect",
+              "text": ""
+            },
+            "style": {
+              "fill": "var(--sl-primary)",
+              "opacity": 1,
+              "stroke": "none"
+            }
+          },
+          {
+            "id": "el_nz36rk9",
+            "type": "code-live",
+            "x": 60,
+            "y": 132,
+            "w": 790,
+            "h": 470,
+            "z": 2,
+            "data": {
+              "language": "javascript",
+              "code": "// Ces propriétés existent aussi dans ce bac à sable (navigator est disponible).\nconsole.log(\"Nom : \" + navigator.appName);\nconsole.log(\"Version : \" + navigator.appVersion);\nconsole.log(\"Plateforme : \" + navigator.platform);\n",
+              "autoRun": false
+            },
+            "style": {}
+          },
+          {
+            "id": "el_t008xxx",
+            "type": "text",
+            "x": 882,
+            "y": 134,
+            "w": 340,
+            "h": 468,
+            "z": 2,
+            "data": {
+              "html": "<div style=\"padding-left:2px\"><p style=\"font-weight:700;color:var(--sl-heading);font-size:17px;margin:0 0 8px\">À retenir</p><p><code>appName</code> vaut \"Netscape\" pour compatibilité historique - utiliser plutôt <code>navigator.userAgent</code> (chaîne complète) pour identifier précisément le navigateur.</p><p style=\"color:var(--sl-muted);font-size:13px;margin:12px 0 0\">▶ Exécuter, puis comparer avec votre propre navigateur (ouvrez la console F12 de ce cours).</p></div>"
+            },
+            "style": {
+              "fontSize": 15,
+              "color": "var(--sl-text)",
+              "fontFamily": "var(--sl-font-body)",
+              "lineHeight": 1.5
+            }
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "code",
+        "title": "Exercice 1 - Corrigé",
+        "language": "html",
+        "code": "<!DOCTYPE html>\n<html lang=\"fr\">\n\t<head>\n\t\t<meta charset=\"utf-8\" />\n\t</head>\n\t<body>\n\t\t<script>\n\t\t\tvar txt = \"Le nom du navigateur est : \"+ navigator.appName + \"<br /> version \" + navigator.appVersion + \"<br /> plateforme \" + navigator.platform;\n\t\t\tdocument.write(txt);\n\t\t</script>\n\t</body>\n</html>",
+        "explanation": "<p>Version fournie : concaténation directe dans une variable <code>txt</code>, puis un seul <code>document.write</code>.</p>"
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_51r2m2i",
+            "type": "quiz-live",
+            "x": 150,
+            "y": 55,
+            "w": 980,
+            "h": 610,
+            "z": 1,
+            "data": {
+              "question": "Que renvoie <code>navigator.appName</code> dans un navigateur moderne comme Chrome ou Firefox ?",
+              "options": [
+                "\"Chrome\" ou \"Firefox\" (le vrai nom)",
+                "\"Netscape\" (toujours)",
+                "undefined",
+                "Une erreur"
+              ],
+              "answer": 1,
+              "duration": 30,
+              "explanation": "Pour compatibilité historique, tous les navigateurs modernes renvoient \"Netscape\" pour <code>appName</code>. Pour identifier vraiment le navigateur, on utilise <code>navigator.userAgent</code>."
+            },
+            "style": {}
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "chapter",
+        "title": "Exercice 2",
+        "subtitle": "Dimensions de l'écran et de la fenêtre"
+      },
+      {
+        "type": "bullets",
+        "title": "Exercice 2 - Énoncé",
+        "items": [
+          "Affichez la définition de votre écran (en pixels), au format <code>Ecran = largeur x hauteur</code>",
+          "Changez les propriétés de l'écran (ou redimensionnez la fenêtre) et re-testez votre script",
+          {
+            "text": "Bonus (2 bis) :",
+            "sub": [
+              "Affichez aussi la taille de la <b>fenêtre</b> (<code>window.innerWidth/innerHeight</code>)",
+              "Et la zone disponible sans la barre des tâches (<code>screen.availWidth/availHeight</code>)"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_h012xxx",
+            "type": "heading",
+            "x": 60,
+            "y": 32,
+            "w": 1160,
+            "h": 60,
+            "z": 3,
+            "data": {
+              "text": "Exercice 2 - Ce qu'il faut savoir"
+            },
+            "style": {
+              "fontSize": 34,
+              "fontWeight": 800,
+              "color": "var(--sl-heading)",
+              "fontFamily": "var(--sl-font-heading)"
+            }
+          },
+          {
+            "id": "el_5srgkwt",
+            "type": "shape",
+            "x": 60,
+            "y": 110,
+            "w": 190,
+            "h": 4,
+            "z": 3,
+            "data": {
+              "shape": "rect",
+              "text": ""
+            },
+            "style": {
+              "fill": "var(--sl-primary)",
+              "opacity": 1,
+              "stroke": "none"
+            }
+          },
+          {
+            "id": "el_t010xxx",
+            "type": "text",
+            "x": 60,
+            "y": 132,
+            "w": 580,
+            "h": 470,
+            "z": 2,
+            "data": {
+              "html": "<p>Deux objets du BOM à ne pas confondre :</p><ul><li><code>screen</code> - le <b>moniteur</b> physique (fixe pendant la session)</li><li><code>window</code> - la <b>fenêtre</b> du navigateur (change si on la redimensionne)</li></ul><p style=\"margin-top:10px\">Aucun des deux n'existe en dehors d'une page web (pas de <code>screen</code> ni <code>window</code> dans ce bac à sable de correction - voir slide suivant).</p>"
+            },
+            "style": {
+              "fontSize": 18,
+              "color": "var(--sl-text)",
+              "fontFamily": "var(--sl-font-body)",
+              "lineHeight": 1.5
+            }
+          },
+          {
+            "id": "el_h9x8uc6",
+            "type": "table",
+            "x": 660,
+            "y": 144,
+            "w": 560,
+            "h": 260,
+            "z": 2,
+            "data": {
+              "rows": [
+                [
+                  "Propriété",
+                  "Signification"
+                ],
+                [
+                  "screen.width / height",
+                  "Résolution totale de l'écran"
+                ],
+                [
+                  "screen.availWidth / Height",
+                  "Écran sans barre des tâches"
+                ],
+                [
+                  "window.innerWidth / Height",
+                  "Taille de la fenêtre (viewport)"
+                ]
+              ]
+            },
+            "style": {
+              "color": "var(--sl-text)",
+              "headerBg": "var(--sl-primary)",
+              "headerColor": "#ffffff",
+              "borderColor": "var(--sl-border)"
+            }
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_h014xxx",
+            "type": "heading",
+            "x": 60,
+            "y": 32,
+            "w": 1160,
+            "h": 60,
+            "z": 3,
+            "data": {
+              "text": "Exercice 2 - Correction (simulation)"
+            },
+            "style": {
+              "fontSize": 34,
+              "fontWeight": 800,
+              "color": "var(--sl-heading)",
+              "fontFamily": "var(--sl-font-heading)"
+            }
+          },
+          {
+            "id": "el_72km6cd",
+            "type": "shape",
+            "x": 60,
+            "y": 110,
+            "w": 190,
+            "h": 4,
+            "z": 3,
+            "data": {
+              "shape": "rect",
+              "text": ""
+            },
+            "style": {
+              "fill": "var(--sl-primary)",
+              "opacity": 1,
+              "stroke": "none"
+            }
+          },
+          {
+            "id": "el_gdpm3xp",
+            "type": "code-live",
+            "x": 60,
+            "y": 132,
+            "w": 790,
+            "h": 470,
+            "z": 2,
+            "data": {
+              "language": "javascript",
+              "code": "// screen.width/height n'existe pas ici (pas de fenêtre de navigateur dans ce bac à sable) :\n// on simule avec des valeurs d'exemple pour tester la syntaxe.\nconst largeurEcran = 1920, hauteurEcran = 1080;\nconsole.log(\"Ecran = \" + largeurEcran + \"x\" + hauteurEcran);\n\nconst largeurFenetre = 1200, hauteurFenetre = 800;\nconsole.log(\"Fenetre = \" + largeurFenetre + \"x\" + hauteurFenetre);\n",
+              "autoRun": false
+            },
+            "style": {}
+          },
+          {
+            "id": "el_t017xxx",
+            "type": "text",
+            "x": 882,
+            "y": 134,
+            "w": 340,
+            "h": 468,
+            "z": 2,
+            "data": {
+              "html": "<div style=\"padding-left:2px\"><p style=\"font-weight:700;color:var(--sl-heading);font-size:17px;margin:0 0 8px\">Dans une vraie page</p><p>Remplacer les constantes par <code>screen.width</code>, <code>screen.height</code>, <code>window.innerWidth</code>, <code>window.innerHeight</code>.</p><p style=\"color:var(--sl-muted);font-size:13px;margin:12px 0 0\">▶ Exécuter ici pour la syntaxe, puis ouvrir le fichier .html pour les vraies valeurs.</p></div>"
+            },
+            "style": {
+              "fontSize": 15,
+              "color": "var(--sl-text)",
+              "fontFamily": "var(--sl-font-body)",
+              "lineHeight": 1.5
+            }
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "split",
+        "title": "Exercice 2 - Les deux corrigés officiels",
+        "left": {
+          "label": "TD2Ex2.html - écran",
+          "type": "code",
+          "language": "javascript",
+          "code": "document.write(\"Ecran = \");\ndocument.write(screen.width + \"x\" + screen.height);\ndocument.write(\"<br />\");"
+        },
+        "right": {
+          "label": "TD2Ex2bis.html - fenêtre + zone disponible",
+          "type": "code",
+          "language": "javascript",
+          "code": "document.write(\"Fenetre = \");\ndocument.write(\n  window.innerWidth + \"x\" + window.innerHeight\n);\ndocument.write(\"<br />\");\ndocument.write(\n  \"Zone disponible (ecran sans barre) = \"\n);\ndocument.write(\n  screen.availWidth + \"x\" + screen.availHeight\n);\ndocument.write(\"<br />\");"
+        }
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_zo4o7wr",
+            "type": "quiz-live",
+            "x": 150,
+            "y": 55,
+            "w": 980,
+            "h": 610,
+            "z": 1,
+            "data": {
+              "question": "Quelle propriété donne la taille de l'écran <b>sans</b> la barre des tâches ?",
+              "options": [
+                "screen.width",
+                "screen.availWidth",
+                "window.innerWidth",
+                "window.outerWidth"
+              ],
+              "answer": 1,
+              "duration": 30,
+              "explanation": "<code>screen.availWidth</code> (et <code>availHeight</code>) exclut les barres système (barre des tâches...). <code>screen.width</code> donne la résolution totale, <code>window.innerWidth</code> la taille de la fenêtre du navigateur."
+            },
+            "style": {}
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "chapter",
+        "title": "Exercice 3",
+        "subtitle": "Rediriger selon la taille de l'écran"
+      },
+      {
+        "type": "bullets",
+        "title": "Exercice 3 - Énoncé",
+        "items": [
+          "Créez rapidement 2 fichiers html : <code>page1.html</code> et <code>page2.html</code>",
+          "Si la hauteur de votre écran est supérieure à 768, chargez page1, sinon page2"
+        ],
+        "note": "Indication : <code>window.location.href = \"nomFichier.html\"</code>"
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_h020xxx",
+            "type": "heading",
+            "x": 60,
+            "y": 32,
+            "w": 1160,
+            "h": 60,
+            "z": 3,
+            "data": {
+              "text": "Exercice 3 - Ce qu'il faut savoir"
+            },
+            "style": {
+              "fontSize": 34,
+              "fontWeight": 800,
+              "color": "var(--sl-heading)",
+              "fontFamily": "var(--sl-font-heading)"
+            }
+          },
+          {
+            "id": "el_yvycs4a",
+            "type": "shape",
+            "x": 60,
+            "y": 110,
+            "w": 190,
+            "h": 4,
+            "z": 3,
+            "data": {
+              "shape": "rect",
+              "text": ""
+            },
+            "style": {
+              "fill": "var(--sl-primary)",
+              "opacity": 1,
+              "stroke": "none"
+            }
+          },
+          {
+            "id": "el_t019xxx",
+            "type": "text",
+            "x": 60,
+            "y": 132,
+            "w": 1080,
+            "h": 470,
+            "z": 2,
+            "data": {
+              "html": "<p><code>window.location.href = \"page.html\"</code> navigue immédiatement vers une autre page - l'équivalent en JavaScript de cliquer sur un lien.</p><ul><li>Placé dans le <code>&lt;head&gt;</code>, le script s'exécute <b>avant</b> l'affichage du <code>&lt;body&gt;</code> : la redirection est quasi instantanée.</li><li>Le corrigé officiel encadre le script par <code>&lt;!-- //--&gt;</code> : une technique historique (années 1990) pour cacher le JavaScript aux très vieux navigateurs qui ne le comprenaient pas. Complètement inutile aujourd'hui, mais vous la croiserez dans du vieux code.</li></ul>"
+            },
+            "style": {
+              "fontSize": 18,
+              "color": "var(--sl-text)",
+              "fontFamily": "var(--sl-font-body)",
+              "lineHeight": 1.5
+            }
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_h022xxx",
+            "type": "heading",
+            "x": 60,
+            "y": 32,
+            "w": 1160,
+            "h": 60,
+            "z": 3,
+            "data": {
+              "text": "Exercice 3 - Correction"
+            },
+            "style": {
+              "fontSize": 34,
+              "fontWeight": 800,
+              "color": "var(--sl-heading)",
+              "fontFamily": "var(--sl-font-heading)"
+            }
+          },
+          {
+            "id": "el_4czzyh2",
+            "type": "shape",
+            "x": 60,
+            "y": 110,
+            "w": 190,
+            "h": 4,
+            "z": 3,
+            "data": {
+              "shape": "rect",
+              "text": ""
+            },
+            "style": {
+              "fill": "var(--sl-primary)",
+              "opacity": 1,
+              "stroke": "none"
+            }
+          },
+          {
+            "id": "el_km4kanx",
+            "type": "highlight",
+            "x": 60,
+            "y": 132,
+            "w": 700,
+            "h": 470,
+            "z": 2,
+            "data": {
+              "language": "javascript",
+              "code": "if (screen.height >= 768) {\n  window.location.href = \"page1.html\";\n} else {\n  window.location.href = \"page2.html\";\n}\n",
+              "label": "Non exécutable ici (changerait de page)"
+            },
+            "style": {}
+          },
+          {
+            "id": "el_t025xxx",
+            "type": "text",
+            "x": 792,
+            "y": 134,
+            "w": 430,
+            "h": 468,
+            "z": 2,
+            "data": {
+              "html": "<p style=\"font-weight:700;color:var(--sl-heading);font-size:17px;margin:0 0 8px\">Pourquoi non exécutable ici ?</p><p><code>window</code> n'existe pas dans ce bac à sable (pas de fenêtre de navigateur), et une vraie redirection changerait de page.</p><p style=\"margin-top:10px\">À tester en ouvrant le <code>.html</code> réel, avec <code>page1.html</code>/<code>page2.html</code> créées à côté.</p>"
+            },
+            "style": {
+              "fontSize": 15,
+              "color": "var(--sl-text)",
+              "fontFamily": "var(--sl-font-body)",
+              "lineHeight": 1.5
+            }
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "code",
+        "title": "Exercice 3 - Corrigé",
+        "language": "html",
+        "code": "<!DOCTYPE html>\n<html lang=\"fr\">\n\t<head>\n\t\t<meta charset=\"utf-8\" />\n\t\t<title>Test</title>\n\t\t<script>\n\t\t\t<!--\n\t\t\tif(screen.height >= 768)\n\t\t\t\twindow.location.href = \"fichier1.htm\"\n\t\t\telse\n\t\t\t\twindow.location.href = \"fichier2.htm\"\n\t\t\t//-->\n\t\t</script>\n\t</head>\n\t<body>\n\t</body>\n</html>",
+        "explanation": "<p>Version fournie (noms <code>fichier1.htm</code>/<code>fichier2.htm</code>) : script placé dans le <code>&lt;head&gt;</code>, exécuté avant l'affichage du corps de page.</p>"
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_q1o9o1w",
+            "type": "quiz-live",
+            "x": 150,
+            "y": 55,
+            "w": 980,
+            "h": 610,
+            "z": 1,
+            "data": {
+              "question": "Quelle instruction redirige le navigateur vers une autre page en JavaScript ?",
+              "options": [
+                "window.open(\"page.html\")",
+                "window.location.href = \"page.html\"",
+                "document.redirect(\"page.html\")",
+                "window.navigate(\"page.html\")"
+              ],
+              "answer": 1,
+              "duration": 30,
+              "explanation": "<code>window.location.href = \"page.html\"</code> change la page affichée. <code>window.open</code> ouvre une <b>nouvelle</b> fenêtre/onglet - ce n'est pas la même chose."
+            },
+            "style": {}
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "chapter",
+        "title": "Exercice 4",
+        "subtitle": "Valider un champ email (présence du @)"
+      },
+      {
+        "type": "bullets",
+        "title": "Exercice 4 - Énoncé",
+        "items": [
+          "Écrivez une fonction <code>verifier_email()</code> appelée au changement (<code>onchange</code>) d'un champ texte",
+          "Vérifiez que le texte contient le symbole <code>@</code>",
+          "Affichez un message (<code>alert</code>) qui dit si l'adresse est bonne ou non"
+        ],
+        "note": "Champ : <code>&lt;input id=\"email\" onchange=\"verifier_email()\"&gt;</code> - valeur : <code>document.formulaire.email.value</code>"
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_h028xxx",
+            "type": "heading",
+            "x": 60,
+            "y": 32,
+            "w": 1160,
+            "h": 60,
+            "z": 3,
+            "data": {
+              "text": "Exercice 4 - Ce qu'il faut savoir"
+            },
+            "style": {
+              "fontSize": 34,
+              "fontWeight": 800,
+              "color": "var(--sl-heading)",
+              "fontFamily": "var(--sl-font-heading)"
+            }
+          },
+          {
+            "id": "el_lfbbmjk",
+            "type": "shape",
+            "x": 60,
+            "y": 110,
+            "w": 190,
+            "h": 4,
+            "z": 3,
+            "data": {
+              "shape": "rect",
+              "text": ""
+            },
+            "style": {
+              "fill": "var(--sl-primary)",
+              "opacity": 1,
+              "stroke": "none"
+            }
+          },
+          {
+            "id": "el_t027xxx",
+            "type": "text",
+            "x": 60,
+            "y": 132,
+            "w": 1080,
+            "h": 470,
+            "z": 2,
+            "data": {
+              "html": "<p>Deux façons de chercher un caractère dans une chaîne :</p><ul><li><b>Boucle manuelle</b> : parcourir <code>chaine.charAt(i)</code> pour <code>i</code> de 0 à <code>chaine.length - 1</code>, comparer chaque caractère</li><li><b>Méthode native</b> : <code>chaine.indexOf(\"@\") !== -1</code>, ou <code>chaine.includes(\"@\")</code>, ou <code>chaine.search(\"@\") !== -1</code></li></ul><p style=\"margin-top:10px\">Les deux donnent le même résultat - le corrigé officiel montre les deux versions (boucle et <code>search()</code>).</p>"
+            },
+            "style": {
+              "fontSize": 18,
+              "color": "var(--sl-text)",
+              "fontFamily": "var(--sl-font-body)",
+              "lineHeight": 1.5
+            }
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_h030xxx",
+            "type": "heading",
+            "x": 60,
+            "y": 32,
+            "w": 1160,
+            "h": 60,
+            "z": 3,
+            "data": {
+              "text": "Exercice 4 - Correction"
+            },
+            "style": {
+              "fontSize": 34,
+              "fontWeight": 800,
+              "color": "var(--sl-heading)",
+              "fontFamily": "var(--sl-font-heading)"
+            }
+          },
+          {
+            "id": "el_lfxi960",
+            "type": "shape",
+            "x": 60,
+            "y": 110,
+            "w": 190,
+            "h": 4,
+            "z": 3,
+            "data": {
+              "shape": "rect",
+              "text": ""
+            },
+            "style": {
+              "fill": "var(--sl-primary)",
+              "opacity": 1,
+              "stroke": "none"
+            }
+          },
+          {
+            "id": "el_djp05nq",
+            "type": "code-live",
+            "x": 60,
+            "y": 132,
+            "w": 790,
+            "h": 470,
+            "z": 2,
+            "data": {
+              "language": "javascript",
+              "code": "// Adapté en paramètre (pas de formulaire dans ce bac à sable) : même logique.\nfunction verifierEmail(chaine) {\n  for (let i = 0; i < chaine.length; i++) {\n    if (chaine.charAt(i) === \"@\") return true;\n  }\n  return false;\n}\n\nconsole.log(verifierEmail(\"robert.martin@univ-lyon2.fr\")); // true\nconsole.log(verifierEmail(\"sans-arobase.fr\"));            // false\n",
+              "autoRun": false
+            },
+            "style": {}
+          },
+          {
+            "id": "el_t033xxx",
+            "type": "text",
+            "x": 882,
+            "y": 134,
+            "w": 340,
+            "h": 468,
+            "z": 2,
+            "data": {
+              "html": "<div style=\"padding-left:2px\"><p style=\"font-weight:700;color:var(--sl-heading);font-size:17px;margin:0 0 8px\">Résultat</p><pre style=\"font-family:var(--sl-font-mono,monospace);font-size:13px;background:var(--sl-tag);border:1px solid var(--sl-border);border-radius:8px;padding:8px 10px;margin:6px 0\">true\nfalse</pre><p style=\"color:var(--sl-muted);font-size:13px;margin:12px 0 0\">Dans la vraie page : <code>onchange</code> appelle la fonction avec <code>document.formulaire.email.value</code>, et affiche le résultat via <code>alert()</code>.</p></div>"
+            },
+            "style": {
+              "fontSize": 15,
+              "color": "var(--sl-text)",
+              "fontFamily": "var(--sl-font-body)",
+              "lineHeight": 1.5
+            }
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "split",
+        "title": "Exercice 4 - Les deux corrigés officiels",
+        "left": {
+          "label": "TD2Ex4.html - boucle charAt",
+          "type": "code",
+          "language": "javascript",
+          "code": "function verif_email() {\n  var chaine = document.formulaire.email.value;\n  var adr = 0;\n  for (i = 0; i < chaine.length; i++)\n    if (chaine.charAt(i) == \"@\") {\n      alert(\"L'addresse est bonne\");\n      adr = 1;\n    }\n  if (adr == 0) alert(\"Adresse email invalide !\");\n}"
+        },
+        "right": {
+          "label": "TD2Ex4RegEx.html - search()",
+          "type": "code",
+          "language": "javascript",
+          "code": "function verif_email() {\n  var status = false;\n  var emailRegEx = \"@\";\n  if (document.formulaire.email.value.search(emailRegEx) == -1) {\n    alert(\"Adresse email invalide.\");\n  } else {\n    alert(\"L'addresse est bonne\");\n    status = true;\n  }\n  return status;\n}"
+        }
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_993kko1",
+            "type": "quiz-live",
+            "x": 150,
+            "y": 55,
+            "w": 980,
+            "h": 610,
+            "z": 1,
+            "data": {
+              "question": "Que renvoie <code>\"contact@univ.fr\".indexOf(\"@\")</code> ?",
+              "options": [
+                "true",
+                "-1",
+                "7 (la position du @)",
+                "undefined"
+              ],
+              "answer": 2,
+              "duration": 30,
+              "explanation": "<code>indexOf</code> renvoie l'<b>index</b> (position, en commençant à 0) de la première occurrence, ou <code>-1</code> si absent - jamais un booléen. Ici, le @ est au 8e caractère, donc à l'index 7."
+            },
+            "style": {}
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "chapter",
+        "title": "Exercice 5",
+        "subtitle": "Compter les occurrences du @"
+      },
+      {
+        "type": "bullets",
+        "title": "Exercice 5 - Énoncé",
+        "items": [
+          "Reprenez l'exercice 4 en vérifiant que le symbole <code>@</code> apparaît <b>exactement une fois</b>",
+          "Sinon, affichez le nombre d'apparitions"
+        ],
+        "note": "Même boucle que l'exercice 4, mais sans <code>break</code> : on continue à compter au lieu de retourner dès le premier trouvé."
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_h035xxx",
+            "type": "heading",
+            "x": 60,
+            "y": 32,
+            "w": 1160,
+            "h": 60,
+            "z": 3,
+            "data": {
+              "text": "Exercice 5 - Correction"
+            },
+            "style": {
+              "fontSize": 34,
+              "fontWeight": 800,
+              "color": "var(--sl-heading)",
+              "fontFamily": "var(--sl-font-heading)"
+            }
+          },
+          {
+            "id": "el_h1hjpwu",
+            "type": "shape",
+            "x": 60,
+            "y": 110,
+            "w": 190,
+            "h": 4,
+            "z": 3,
+            "data": {
+              "shape": "rect",
+              "text": ""
+            },
+            "style": {
+              "fill": "var(--sl-primary)",
+              "opacity": 1,
+              "stroke": "none"
+            }
+          },
+          {
+            "id": "el_u3p8mn5",
+            "type": "code-live",
+            "x": 60,
+            "y": 132,
+            "w": 790,
+            "h": 470,
+            "z": 2,
+            "data": {
+              "language": "javascript",
+              "code": "function compterArobases(chaine) {\n  let compteur = 0;\n  for (let i = 0; i < chaine.length; i++) {\n    if (chaine.charAt(i) === \"@\") compteur++;\n  }\n  return compteur;\n}\n\nconsole.log(compterArobases(\"contact@univ.fr\"));     // 1\nconsole.log(compterArobases(\"sans-arobase.fr\"));     // 0\nconsole.log(compterArobases(\"a@b@c.fr\"));            // 2\n",
+              "autoRun": false
+            },
+            "style": {}
+          },
+          {
+            "id": "el_t038xxx",
+            "type": "text",
+            "x": 882,
+            "y": 134,
+            "w": 340,
+            "h": 468,
+            "z": 2,
+            "data": {
+              "html": "<div style=\"padding-left:2px\"><p style=\"font-weight:700;color:var(--sl-heading);font-size:17px;margin:0 0 8px\">Résultat</p><pre style=\"font-family:var(--sl-font-mono,monospace);font-size:13px;background:var(--sl-tag);border:1px solid var(--sl-border);border-radius:8px;padding:8px 10px;margin:6px 0\">1\n0\n2</pre><p style=\"color:var(--sl-muted);font-size:13px;margin:12px 0 0\">▶ Exécuter, puis essayer d'autres chaînes.</p></div>"
+            },
+            "style": {
+              "fontSize": 15,
+              "color": "var(--sl-text)",
+              "fontFamily": "var(--sl-font-body)",
+              "lineHeight": 1.5
+            }
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "code",
+        "title": "Exercice 5 - Corrigé",
+        "language": "javascript",
+        "code": "function verif_email() {\n  var chaine = document.formulaire.email.value;\n  var adr = 0;\n  for (i = 0; i < chaine.length; i++)\n    if (chaine.charAt(i) == \"@\") {\n      adr++;\n    }\n  if (adr == 1) {\n    alert(\"L'adresse est bonne\");\n  } else {\n    alert(\"@ apparait \" + adr + \" fois!\");\n  }\n}"
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_73zenoo",
+            "type": "quiz-live",
+            "x": 150,
+            "y": 55,
+            "w": 980,
+            "h": 610,
+            "z": 1,
+            "data": {
+              "question": "Dans la boucle de comptage, pourquoi ne peut-on pas s'arrêter dès qu'on trouve un premier @ ?",
+              "options": [
+                "Parce que charAt() ne fonctionne qu'une fois",
+                "Parce qu'il faut compter TOUTES les occurrences, pas juste détecter la première",
+                "Parce que la boucle for l'empêche",
+                "Ce nest pas vrai, on peut sarrêter dès le premier"
+              ],
+              "answer": 1,
+              "duration": 20,
+              "explanation": "L'objectif ici est de compter - s'arrêter au premier @ trouvé (comme à l'exercice 4) donnerait toujours 1, même s'il y en a 3."
+            },
+            "style": {}
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "chapter",
+        "title": "Exercice 6",
+        "subtitle": "Valider l'adresse email complète"
+      },
+      {
+        "type": "bullets",
+        "title": "Exercice 6 - Énoncé",
+        "items": [
+          "Ajoutez deux champs de texte <b>Nom</b> et <b>Prénom</b>",
+          "Vérifiez que l'adresse e-mail saisie est exactement <code>prenom.nom@univ-lyon2.fr</code>"
+        ],
+        "note": "On compare la chaîne saisie, caractère par caractère, à la chaîne \"attendue\" reconstruite à partir de Nom/Prénom."
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_h041xxx",
+            "type": "heading",
+            "x": 60,
+            "y": 32,
+            "w": 1160,
+            "h": 60,
+            "z": 3,
+            "data": {
+              "text": "Exercice 6 - Ce qu'il faut savoir"
+            },
+            "style": {
+              "fontSize": 34,
+              "fontWeight": 800,
+              "color": "var(--sl-heading)",
+              "fontFamily": "var(--sl-font-heading)"
+            }
+          },
+          {
+            "id": "el_47irjig",
+            "type": "shape",
+            "x": 60,
+            "y": 110,
+            "w": 190,
+            "h": 4,
+            "z": 3,
+            "data": {
+              "shape": "rect",
+              "text": ""
+            },
+            "style": {
+              "fill": "var(--sl-primary)",
+              "opacity": 1,
+              "stroke": "none"
+            }
+          },
+          {
+            "id": "el_t040xxx",
+            "type": "text",
+            "x": 60,
+            "y": 132,
+            "w": 1080,
+            "h": 470,
+            "z": 2,
+            "data": {
+              "html": "<p>Le corrigé compare <code>chaineMail</code> (saisie) et <code>goodEMail</code> (reconstruite à partir de prénom + nom) caractère par caractère avec <code>charAt(i)</code>.</p><p style=\"margin-top:8px\"><b>Raccourci équivalent :</b> en JavaScript, comparer deux chaînes avec <code>===</code> compare déjà tout le contenu, caractère par caractère, automatiquement :</p><p style=\"margin-top:4px\"><code>chaineMail === goodEMail</code> → même résultat, en une seule ligne.</p>"
+            },
+            "style": {
+              "fontSize": 18,
+              "color": "var(--sl-text)",
+              "fontFamily": "var(--sl-font-body)",
+              "lineHeight": 1.5
+            }
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_h043xxx",
+            "type": "heading",
+            "x": 60,
+            "y": 32,
+            "w": 1160,
+            "h": 60,
+            "z": 3,
+            "data": {
+              "text": "Exercice 6 - Correction"
+            },
+            "style": {
+              "fontSize": 34,
+              "fontWeight": 800,
+              "color": "var(--sl-heading)",
+              "fontFamily": "var(--sl-font-heading)"
+            }
+          },
+          {
+            "id": "el_98vuher",
+            "type": "shape",
+            "x": 60,
+            "y": 110,
+            "w": 190,
+            "h": 4,
+            "z": 3,
+            "data": {
+              "shape": "rect",
+              "text": ""
+            },
+            "style": {
+              "fill": "var(--sl-primary)",
+              "opacity": 1,
+              "stroke": "none"
+            }
+          },
+          {
+            "id": "el_b0j58ti",
+            "type": "code-live",
+            "x": 60,
+            "y": 132,
+            "w": 790,
+            "h": 470,
+            "z": 2,
+            "data": {
+              "language": "javascript",
+              "code": "function verifierAdresse(prenom, nom, emailSaisi) {\n  const bonneAdresse = prenom + \".\" + nom + \"@univ-lyon2.fr\";\n  let ok = emailSaisi.length === bonneAdresse.length;\n  if (ok) {\n    for (let i = 0; i < bonneAdresse.length; i++) {\n      if (emailSaisi.charAt(i) !== bonneAdresse.charAt(i)) ok = false;\n    }\n  }\n  return ok;\n}\n\nconsole.log(verifierAdresse(\"robert\", \"martin\", \"robert.martin@univ-lyon2.fr\")); // true\nconsole.log(verifierAdresse(\"robert\", \"martin\", \"robert.martin@gmail.com\"));     // false\n",
+              "autoRun": false
+            },
+            "style": {}
+          },
+          {
+            "id": "el_t046xxx",
+            "type": "text",
+            "x": 882,
+            "y": 134,
+            "w": 340,
+            "h": 468,
+            "z": 2,
+            "data": {
+              "html": "<div style=\"padding-left:2px\"><p style=\"font-weight:700;color:var(--sl-heading);font-size:17px;margin:0 0 8px\">Résultat</p><pre style=\"font-family:var(--sl-font-mono,monospace);font-size:13px;background:var(--sl-tag);border:1px solid var(--sl-border);border-radius:8px;padding:8px 10px;margin:6px 0\">true\nfalse</pre></div>"
+            },
+            "style": {
+              "fontSize": 15,
+              "color": "var(--sl-text)",
+              "fontFamily": "var(--sl-font-body)",
+              "lineHeight": 1.5
+            }
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "code",
+        "title": "Exercice 6 - Corrigé",
+        "language": "javascript",
+        "code": "function verif_email() {\n  var chaineMail = document.formulaire.email.value;\n  var goodEMail = document.formulaire.prenom.value + \".\" + document.formulaire.nom.value + \"@univ-lyon2.fr\";\n  var adr = 1;\n  var nTaille = chaineMail.length;\n  if (nTaille == goodEMail.length) {\n    for (i = 0; i < nTaille; i++)\n      if (chaineMail.charAt(i) != goodEMail.charAt(i)) {\n        adr = 0;\n      }\n  } else {\n    adr = 0;\n  }\n  if (adr == 1) {\n    alert(\"L'adresse est bonne ! \" + chaineMail);\n  } else {\n    alert(\"Adresse e-mail invalide !\");\n  }\n}"
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_jzh9036",
+            "type": "quiz-live",
+            "x": 150,
+            "y": 55,
+            "w": 980,
+            "h": 610,
+            "z": 1,
+            "data": {
+              "question": "Quelle expression est équivalente à la boucle de comparaison caractère par caractère du corrigé ?",
+              "options": [
+                "chaineMail == goodEMail",
+                "chaineMail.equals(goodEMail)",
+                "chaineMail.compare(goodEMail)",
+                "chaineMail.charAt() == goodEMail.charAt()"
+              ],
+              "answer": 0,
+              "duration": 20,
+              "explanation": "<code>==</code> (ou <code>===</code>, à préférer) entre deux chaînes compare tout le contenu automatiquement - la boucle du corrigé fait exactement la même chose à la main."
+            },
+            "style": {}
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "chapter",
+        "title": "Exercice 7",
+        "subtitle": "Manipuler une chaîne de caractères"
+      },
+      {
+        "type": "bullets",
+        "title": "Exercice 7 - Énoncé",
+        "items": [
+          "Pour <code>strEmail = \"Robert.Martin@france.fr\"</code>, écrivez :",
+          {
+            "text": "Tâches à réaliser :",
+            "sub": [
+              "Afficher la position du caractère @",
+              "Remplacer « france » par « yahoo »",
+              "Afficher en minuscules",
+              "Afficher en majuscules",
+              "Afficher la fin de la chaîne à partir du @",
+              "Afficher la dernière position de la lettre 'o'"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_h049xxx",
+            "type": "heading",
+            "x": 60,
+            "y": 32,
+            "w": 1160,
+            "h": 60,
+            "z": 3,
+            "data": {
+              "text": "Exercice 7 - Ce qu'il faut savoir"
+            },
+            "style": {
+              "fontSize": 34,
+              "fontWeight": 800,
+              "color": "var(--sl-heading)",
+              "fontFamily": "var(--sl-font-heading)"
+            }
+          },
+          {
+            "id": "el_d7fg6f2",
+            "type": "shape",
+            "x": 60,
+            "y": 110,
+            "w": 190,
+            "h": 4,
+            "z": 3,
+            "data": {
+              "shape": "rect",
+              "text": ""
+            },
+            "style": {
+              "fill": "var(--sl-primary)",
+              "opacity": 1,
+              "stroke": "none"
+            }
+          },
+          {
+            "id": "el_g9ct2zh",
+            "type": "table",
+            "x": 60,
+            "y": 132,
+            "w": 1080,
+            "h": 430,
+            "z": 2,
+            "data": {
+              "rows": [
+                [
+                  "Méthode",
+                  "Rôle"
+                ],
+                [
+                  "indexOf(\"@\")",
+                  "Position de la 1ère occurrence (0 = début)"
+                ],
+                [
+                  "lastIndexOf(\"o\")",
+                  "Position de la DERNIÈRE occurrence"
+                ],
+                [
+                  "replace(\"a\", \"b\")",
+                  "Remplace la 1ère occurrence de a par b"
+                ],
+                [
+                  "toLowerCase() / toUpperCase()",
+                  "Copie en minuscules / majuscules"
+                ],
+                [
+                  "substring(debut, fin)",
+                  "Extrait une sous-chaîne"
+                ]
+              ]
+            },
+            "style": {
+              "fontSize": 17,
+              "color": "var(--sl-text)",
+              "headerBg": "var(--sl-primary)",
+              "headerColor": "#ffffff",
+              "borderColor": "var(--sl-border)"
+            }
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_h051xxx",
+            "type": "heading",
+            "x": 60,
+            "y": 32,
+            "w": 1160,
+            "h": 60,
+            "z": 3,
+            "data": {
+              "text": "Exercice 7 - Correction"
+            },
+            "style": {
+              "fontSize": 34,
+              "fontWeight": 800,
+              "color": "var(--sl-heading)",
+              "fontFamily": "var(--sl-font-heading)"
+            }
+          },
+          {
+            "id": "el_8ob8rpi",
+            "type": "shape",
+            "x": 60,
+            "y": 110,
+            "w": 190,
+            "h": 4,
+            "z": 3,
+            "data": {
+              "shape": "rect",
+              "text": ""
+            },
+            "style": {
+              "fill": "var(--sl-primary)",
+              "opacity": 1,
+              "stroke": "none"
+            }
+          },
+          {
+            "id": "el_131uzhs",
+            "type": "code-live",
+            "x": 60,
+            "y": 132,
+            "w": 790,
+            "h": 470,
+            "z": 2,
+            "data": {
+              "language": "javascript",
+              "code": "var strEmail = \"Robert.Martin@france.fr\";\nvar nPos = strEmail.indexOf(\"@\");\nconsole.log(\"Position @ : \" + (nPos + 1)); // +1 car l'index commence à 0\n\nstrEmail = strEmail.replace(\"france\", \"yahoo\");\nconsole.log(\"Après remplacement : \" + strEmail);\n\nconsole.log(\"Minuscules : \" + strEmail.toLowerCase());\nconsole.log(\"Majuscules : \" + strEmail.toUpperCase());\nconsole.log(\"Fin depuis @ : \" + strEmail.substring(nPos));\nconsole.log(\"Dernière position de 'o' : \" + (strEmail.lastIndexOf(\"o\") + 1));\n",
+              "autoRun": false
+            },
+            "style": {}
+          },
+          {
+            "id": "el_t054xxx",
+            "type": "text",
+            "x": 882,
+            "y": 134,
+            "w": 340,
+            "h": 468,
+            "z": 2,
+            "data": {
+              "html": "<div style=\"padding-left:2px\"><p style=\"font-weight:700;color:var(--sl-heading);font-size:17px;margin:0 0 8px\">À retenir</p><p><code>indexOf</code>/<code>lastIndexOf</code> renvoient une <b>position</b> (0 = premier caractère), pas un booléen.</p><p style=\"color:var(--sl-muted);font-size:13px;margin:12px 0 0\">▶ Exécuter, puis essayer avec votre propre adresse.</p></div>"
+            },
+            "style": {
+              "fontSize": 15,
+              "color": "var(--sl-text)",
+              "fontFamily": "var(--sl-font-body)",
+              "lineHeight": 1.5
+            }
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "code",
+        "title": "Exercice 7 - Corrigé",
+        "language": "javascript",
+        "code": "var strEmail = \"Robert.Martin@france.fr\";\nvar nPos = strEmail.indexOf(\"@\");\nvar strTxt = \"Position @ : \" + (nPos + 1) + \"<br />\";\nstrEmail = strEmail.replace(\"france\", \"yahoo\");\nstrTxt = strTxt + \"Remplacement 'france' par 'yahoo' : \" + strEmail + \"<br />\";\nstrTxt = strTxt + \"Tout en minuscules : \" + strEmail.toLowerCase() + \"<br />\";\nstrTxt = strTxt + \"Tout en majuscules : \" + strEmail.toUpperCase() + \"<br />\";\nstrTxt = strTxt + \"Fin de la chaine après @ : \" + strEmail.substring(nPos) + \"<br />\";\nstrTxt = strTxt + \"dernière position de la lettre 'o' : \" + (strEmail.lastIndexOf(\"o\") + 1) + \"<br />\";\ndocument.write(strTxt);",
+        "explanation": "<p>Version fournie : accumulation du résultat dans une seule chaîne <code>strTxt</code>, affichée en une fois.</p>"
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_12yw3o9",
+            "type": "quiz-live",
+            "x": 150,
+            "y": 55,
+            "w": 980,
+            "h": 610,
+            "z": 1,
+            "data": {
+              "question": "Que fait <code>\"2024\".replace(\"0\", \"9\")</code> ?",
+              "options": [
+                "Renvoie \"2924\"",
+                "Renvoie \"2994\"",
+                "Remplace tous les 0 par 9",
+                "Provoque une erreur"
+              ],
+              "answer": 0,
+              "duration": 20,
+              "explanation": "<code>replace()</code> sans <code>/g</code> ne remplace que la <b>première</b> occurrence trouvée - ici le premier \"0\", donnant \"2924\"."
+            },
+            "style": {}
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "chapter",
+        "title": "Exercice 8",
+        "subtitle": "Chaînes de caractères et balises HTML"
+      },
+      {
+        "type": "bullets",
+        "title": "Exercice 8 - Énoncé",
+        "items": [
+          "Affectez à une variable la chaîne : <code>&lt;p&gt;Quelques exemples de &lt;em&gt;fonctions&lt;/em&gt; de manipulation de &lt;em&gt;chaines de caractères&lt;/em&gt;.&lt;/p&gt;</code>",
+          "Affichez la sous-chaîne commençant au 6ème caractère, sur 6 caractères",
+          "Remplacez la balise <code>em</code> par <code>strong</code> partout, et affichez le nombre de remplacements"
+        ],
+        "note": "<code>chaine.replace(valeurRecherchee, nouvelleValeur)</code> - ne remplace <b>qu'une seule fois</b> !"
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_h057xxx",
+            "type": "heading",
+            "x": 60,
+            "y": 32,
+            "w": 1160,
+            "h": 60,
+            "z": 3,
+            "data": {
+              "text": "Exercice 8 - Ce qu'il faut savoir"
+            },
+            "style": {
+              "fontSize": 34,
+              "fontWeight": 800,
+              "color": "var(--sl-heading)",
+              "fontFamily": "var(--sl-font-heading)"
+            }
+          },
+          {
+            "id": "el_hpw3qx9",
+            "type": "shape",
+            "x": 60,
+            "y": 110,
+            "w": 190,
+            "h": 4,
+            "z": 3,
+            "data": {
+              "shape": "rect",
+              "text": ""
+            },
+            "style": {
+              "fill": "var(--sl-primary)",
+              "opacity": 1,
+              "stroke": "none"
+            }
+          },
+          {
+            "id": "el_t056xxx",
+            "type": "text",
+            "x": 60,
+            "y": 132,
+            "w": 1080,
+            "h": 470,
+            "z": 2,
+            "data": {
+              "html": "<p><b>Le piège :</b> <code>chaine.replace(\"em&gt;\", \"strong&gt;\")</code> ne remplace que la <b>première</b> occurrence. Il y a 4 balises <code>em&gt;</code> dans le texte (2 ouvrantes <code>&lt;em&gt;</code> + 2 fermantes <code>&lt;/em&gt;</code>) : il en faut donc 4.</p><p style=\"margin-top:8px\"><b>Solution du corrigé :</b> une boucle <code>while</code> qui répète <code>replace</code> tant que le résultat change encore - dès que <code>replace</code> ne trouve plus rien, la chaîne cesse de changer et la boucle s'arrête.</p><p style=\"margin-top:8px\"><b>Alternative moderne :</b> <code>strExemple.replace(/em&gt;/g, \"strong&gt;\")</code> - le <code>g</code> (global) d'une expression régulière remplace tout en une seule fois.</p>"
+            },
+            "style": {
+              "fontSize": 18,
+              "color": "var(--sl-text)",
+              "fontFamily": "var(--sl-font-body)",
+              "lineHeight": 1.5
+            }
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_h059xxx",
+            "type": "heading",
+            "x": 60,
+            "y": 32,
+            "w": 1160,
+            "h": 60,
+            "z": 3,
+            "data": {
+              "text": "Exercice 8 - Correction"
+            },
+            "style": {
+              "fontSize": 34,
+              "fontWeight": 800,
+              "color": "var(--sl-heading)",
+              "fontFamily": "var(--sl-font-heading)"
+            }
+          },
+          {
+            "id": "el_rtxk2mq",
+            "type": "shape",
+            "x": 60,
+            "y": 110,
+            "w": 190,
+            "h": 4,
+            "z": 3,
+            "data": {
+              "shape": "rect",
+              "text": ""
+            },
+            "style": {
+              "fill": "var(--sl-primary)",
+              "opacity": 1,
+              "stroke": "none"
+            }
+          },
+          {
+            "id": "el_n2k80uq",
+            "type": "code-live",
+            "x": 60,
+            "y": 132,
+            "w": 790,
+            "h": 470,
+            "z": 2,
+            "data": {
+              "language": "javascript",
+              "code": "var strExemple = \"<p>Quelques exemples de <em>fonctions</em> de manipulation de <em>chaines de caracteres</em>.</p>\";\n\nvar strExtraction = strExemple.substring(5, 5 + 6); // 6e position = index 5\nconsole.log(\"Extraction : \" + strExtraction);\n\nvar strRemplace = strExemple;\nvar strChaine = \"\";\nvar nbRemplacements = 0;\nwhile (strRemplace != strChaine) {\n  strChaine = strRemplace;\n  strRemplace = strChaine.replace(\"em>\", \"strong>\");\n  nbRemplacements++;\n}\nnbRemplacements--; // le 1er tour ne compte pas un vrai remplacement\nconsole.log(\"Remplacements : \" + nbRemplacements);\nconsole.log(strRemplace);\n",
+              "autoRun": false
+            },
+            "style": {}
+          },
+          {
+            "id": "el_t062xxx",
+            "type": "text",
+            "x": 882,
+            "y": 134,
+            "w": 340,
+            "h": 468,
+            "z": 2,
+            "data": {
+              "html": "<div style=\"padding-left:2px\"><p style=\"font-weight:700;color:var(--sl-heading);font-size:17px;margin:0 0 8px\">À retenir</p><p><code>replace()</code> seul = 1 seule occurrence. Pour tout remplacer : boucle, ou <code>replace(/motif/g, ...)</code>.</p><p style=\"color:var(--sl-muted);font-size:13px;margin:12px 0 0\">▶ Exécuter pour voir les 4 remplacements.</p></div>"
+            },
+            "style": {
+              "fontSize": 15,
+              "color": "var(--sl-text)",
+              "fontFamily": "var(--sl-font-body)",
+              "lineHeight": 1.5
+            }
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "code",
+        "title": "Exercice 8 - Corrigé",
+        "language": "javascript",
+        "code": "var strExemple = \"<p>Quelques exemples de <em>fonctions</em> de manipulation de <em>chaines de caracteres</em>.</p>\";\nvar strTxt = \"Chaine initiale :\" + strExemple + \"<br />\";\nvar strExtraction = strExemple.substring(5, 5 + 6);\nstrTxt = strTxt + \"Extraction chaine : a partir de la 6-eme position, 6 caracteres :\" + strExtraction + \"<br />\";\nvar strRemplace = strExemple;\nstrChaine = \"\";\nnbRemplacements = 0;\nwhile (strRemplace != strChaine) {\n  strChaine = strRemplace;\n  strRemplace = strChaine.replace(\"em>\", \"strong>\");\n  nbRemplacements++;\n}\nnbRemplacements--;\n// en une ligne avec une expression reguliere :\n// var strRemplace = strExemple.replace(/em>/g, \"strong>\");\nstrTxt = strTxt + \"Remplacement chaine : \" + strRemplace + \" nombre de remplacements = \" + nbRemplacements + \"<br />\";\ndocument.write(strTxt);"
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_hd9jpll",
+            "type": "quiz-live",
+            "x": 150,
+            "y": 55,
+            "w": 980,
+            "h": 610,
+            "z": 1,
+            "data": {
+              "question": "Combien de fois faut-il appeler <code>replace(\"em>\", \"strong>\")</code> pour remplacer les balises dans <code>\"&lt;em&gt;a&lt;/em&gt; et &lt;em&gt;b&lt;/em&gt;\"</code> ?",
+              "options": [
+                "1 fois",
+                "2 fois",
+                "4 fois",
+                "Une infinité"
+              ],
+              "answer": 2,
+              "duration": 30,
+              "explanation": "4 occurrences de <code>em&gt;</code> : 2 balises ouvrantes <code>&lt;em&gt;</code> + 2 fermantes <code>&lt;/em&gt;</code>. replace() ne traite qu'une occurrence par appel, donc 4 appels (ou 4 tours de boucle)."
+            },
+            "style": {}
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "chapter",
+        "title": "Exercice 9",
+        "subtitle": "Construire un planning"
+      },
+      {
+        "type": "bullets",
+        "title": "Exercice 9 - Énoncé",
+        "items": [
+          "Créez, en JavaScript, une page HTML contenant un planning vide pour une semaine",
+          "Du lundi au dimanche, de 8h à 20h"
+        ],
+        "note": "Générer un <code>&lt;table&gt;</code> HTML via des boucles imbriquées, comme au TD1 (Exercice 4 bis)."
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_h065xxx",
+            "type": "heading",
+            "x": 60,
+            "y": 32,
+            "w": 1160,
+            "h": 60,
+            "z": 3,
+            "data": {
+              "text": "Exercice 9 - Ce qu'il faut savoir"
+            },
+            "style": {
+              "fontSize": 34,
+              "fontWeight": 800,
+              "color": "var(--sl-heading)",
+              "fontFamily": "var(--sl-font-heading)"
+            }
+          },
+          {
+            "id": "el_06bo4cq",
+            "type": "shape",
+            "x": 60,
+            "y": 110,
+            "w": 190,
+            "h": 4,
+            "z": 3,
+            "data": {
+              "shape": "rect",
+              "text": ""
+            },
+            "style": {
+              "fill": "var(--sl-primary)",
+              "opacity": 1,
+              "stroke": "none"
+            }
+          },
+          {
+            "id": "el_t064xxx",
+            "type": "text",
+            "x": 60,
+            "y": 132,
+            "w": 1080,
+            "h": 470,
+            "z": 2,
+            "data": {
+              "html": "<p>Le planning demande <b>deux blocs de boucles</b> :</p><ul><li><b>En-tête</b> : une boucle simple (7 tours) qui écrit une <code>&lt;th&gt;</code> par jour de la semaine</li><li><b>Corps du tableau</b> : deux boucles <b>imbriquées</b> - la boucle <b>externe</b> (12 tours, 8h à 19h) parcourt les <b>lignes</b> <code>&lt;tr&gt;</code> (une par heure), et pour chaque ligne, la boucle <b>interne</b> (7 tours) écrit une cellule <code>&lt;td&gt;</code> vide par jour</li></ul><p style=\"margin-top:8px\">Les jours sont stockés dans un <b>tableau</b> (<code>tabJours[0]</code> = \"Lundi\"...) plutôt que 7 variables séparées - plus facile à parcourir avec une boucle.</p>"
+            },
+            "style": {
+              "fontSize": 18,
+              "color": "var(--sl-text)",
+              "fontFamily": "var(--sl-font-body)",
+              "lineHeight": 1.5
+            }
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_h067xxx",
+            "type": "heading",
+            "x": 60,
+            "y": 32,
+            "w": 1160,
+            "h": 60,
+            "z": 3,
+            "data": {
+              "text": "Exercice 9 - Correction"
+            },
+            "style": {
+              "fontSize": 34,
+              "fontWeight": 800,
+              "color": "var(--sl-heading)",
+              "fontFamily": "var(--sl-font-heading)"
+            }
+          },
+          {
+            "id": "el_shtixw8",
+            "type": "shape",
+            "x": 60,
+            "y": 110,
+            "w": 190,
+            "h": 4,
+            "z": 3,
+            "data": {
+              "shape": "rect",
+              "text": ""
+            },
+            "style": {
+              "fill": "var(--sl-primary)",
+              "opacity": 1,
+              "stroke": "none"
+            }
+          },
+          {
+            "id": "el_b28kzid",
+            "type": "code-live",
+            "x": 60,
+            "y": 132,
+            "w": 790,
+            "h": 470,
+            "z": 2,
+            "data": {
+              "language": "javascript",
+              "code": "var tabJours = [\"Lundi\", \"Mardi\", \"Mercredi\", \"Jeudi\", \"Vendredi\", \"Samedi\", \"Dimanche\"];\nvar strTxt = \"<table border='1'>\\n<tr><th>Planning</th>\";\n\nfor (let j = 0; j < 7; j++) {\n  strTxt += \"<th>\" + tabJours[j] + \"</th>\";\n}\nstrTxt += \"</tr>\\n\";\n\nfor (let h = 0; h < 12; h++) {\n  strTxt += \"<tr><th>\" + (h + 8) + \"h-\" + (h + 9) + \"h</th>\";\n  for (let j = 0; j < 7; j++) {\n    strTxt += \"<td>&nbsp;</td>\";\n  }\n  strTxt += \"</tr>\\n\";\n}\nstrTxt += \"</table>\";\n\nconsole.log(strTxt);\n",
+              "autoRun": false
+            },
+            "style": {}
+          },
+          {
+            "id": "el_t070xxx",
+            "type": "text",
+            "x": 882,
+            "y": 134,
+            "w": 340,
+            "h": 468,
+            "z": 2,
+            "data": {
+              "html": "<div style=\"padding-left:2px\"><p style=\"font-weight:700;color:var(--sl-heading);font-size:17px;margin:0 0 8px\">À retenir</p><p>Même schéma que le triangle du TD1 : boucle externe = lignes, boucle interne = colonnes.</p><p style=\"color:var(--sl-muted);font-size:13px;margin:12px 0 0\">▶ Exécuter, puis coller le résultat dans un fichier .html pour voir le vrai tableau.</p></div>"
+            },
+            "style": {
+              "fontSize": 15,
+              "color": "var(--sl-text)",
+              "fontFamily": "var(--sl-font-body)",
+              "lineHeight": 1.5
+            }
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "code",
+        "title": "Exercice 9 - Corrigé",
+        "language": "javascript",
+        "code": "var strTxt = \"<h1>Planning de la semaine</h1> \\n\";\ntabJours = new Array(\"Lundi\", \"Mardi\", \"Mercredi\", \"Jeudi\", \"Vendredi\", \"Samedi\", \"Dimanche\");\nstrTxt = strTxt + \"<table border='1'> \\n\";\nstrTxt = strTxt + \"<tr> \\n\";\nstrTxt = strTxt + \"<th> Planning </th>\\n\";\nfor (nPosx = 0; nPosx < 7; nPosx++) {\n  strTxt = strTxt + \"<th scope=\\\"col\\\">\" + tabJours[nPosx] + \"</th> \\n\";\n}\nstrTxt = strTxt + \"</tr> \\n\";\n\nfor (nPosy = 0; nPosy < 12; nPosy++) {\n  strTxt = strTxt + \"<tr> \\n\";\n  strTxt = strTxt + \"<th scope=\\\"row\\\"> \" + (nPosy + 8) + \"h-\" + (nPosy + 9) + \"h </th> \\n\";\n  for (nPosx = 0; nPosx < 7; nPosx++) {\n    strTxt = strTxt + \"<td>&nbsp;</td>\" + \"\\n\";\n  }\n  strTxt = strTxt + \"</tr> \\n\";\n}\nstrTxt = strTxt + \"</table> \\n\";\ndocument.write(strTxt);"
+      },
+      {
+        "type": "canvas",
+        "elements": [
+          {
+            "id": "el_wq9v8vv",
+            "type": "quiz-live",
+            "x": 150,
+            "y": 55,
+            "w": 980,
+            "h": 610,
+            "z": 1,
+            "data": {
+              "question": "Dans une boucle imbriquée qui construit un tableau HTML (lignes = heures, colonnes = jours), la boucle EXTERNE correspond à :",
+              "options": [
+                "Les colonnes (jours)",
+                "Les lignes (heures)",
+                "Ça n'a pas d'importance",
+                "Les cellules individuelles"
+              ],
+              "answer": 1,
+              "duration": 20,
+              "explanation": "La boucle externe parcourt les <code>&lt;tr&gt;</code> (une par heure) ; pour CHAQUE ligne, la boucle interne parcourt les <code>&lt;td&gt;</code> (une par jour)."
+            },
+            "style": {}
+          }
+        ],
+        "connectors": []
+      },
+      {
+        "type": "bullets",
+        "title": "Ce qu'il faut retenir",
+        "items": [
+          "<code>navigator.appName</code> vaut toujours \"Netscape\" - utiliser <code>userAgent</code> pour identifier le navigateur",
+          "<code>screen</code> = moniteur (fixe) ; <code>window</code> = fenêtre (variable)",
+          "<code>window.location.href = \"page.html\"</code> pour rediriger",
+          "<code>indexOf</code> / <code>lastIndexOf</code> renvoient une <b>position</b>, pas un booléen",
+          "<code>replace()</code> ne remplace qu'<b>une seule fois</b> - boucler ou utiliser <code>/g</code>",
+          "Boucles imbriquées : externe = lignes, interne = colonnes"
+        ],
+        "note": "document.NOM_FORM.NOM_CHAMP.value pour lire un champ de formulaire."
+      },
+      {
+        "type": "title",
+        "eyebrow": "Fin du TD 2",
+        "title": "Des questions ?",
+        "subtitle": "Pensez au dépôt Moodle - TD2_Nom_Prenom.zip"
+      }
+    ],
+    "reviewComments": [],
+    "typography": {
+      "heading": 52,
+      "text": 22
+    }
+  },
+  "bookmarks": [],
+  "notes": {},
+  "revision": {}
+}
