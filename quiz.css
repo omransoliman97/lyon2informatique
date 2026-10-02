@@ -182,11 +182,17 @@
 }
 
 /* Small, quiet icon button for the "restart" action, kept out of the
-   Précédent/Suivant stepper. Mirrors the navbar theme-toggle button. */
+   Précédent/Suivant stepper. Mirrors the navbar theme-toggle button.
+   Fixed, equal width/height (not padding-derived) guarantees a true
+   circle regardless of box-sizing or flex-context quirks. */
 .quiz-container .quiz-restart-btn {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    box-sizing: border-box;
     background: transparent;
     border: none;
-    padding: 6px;
+    padding: 0;
     border-radius: 50%;
     font-weight: 400;
     text-transform: none;
@@ -198,6 +204,13 @@
     align-items: center;
     justify-content: center;
     transition: background 0.2s ease, color 0.2s ease;
+}
+
+.quiz-container .quiz-restart-btn svg {
+    display: block;
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
 }
 
 .quiz-container .quiz-restart-btn:hover,

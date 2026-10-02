@@ -7,7 +7,6 @@
     
     <link rel="icon" href="images/logo.png" type="image/png">
     <link rel="stylesheet" href="style.css?v=2">
-    <link rel="stylesheet" href="quiz.css?v=4">
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-27SCS6BBW2"></script>
@@ -64,8 +63,41 @@
 
     <section class="learning-section fade-in" id="cm-section">
         <h1>CM - Cours Magistraux</h1>
-        <div class="quiz-container glass-card" id="quiz-app">
-            <!-- Quiz will be rendered here -->
+        <!-- COPY A qcm-group BLOCK TO ADD A NEW CM, COPY A qcm-game-card TO ADD A NEW PARTIE -->
+        <div class="qcm-group">
+            <h3 class="qcm-group-title">QCM CM1</h3>
+            <div class="qcm-games-row">
+                <div class="qcm-game-card glass-card">
+                    <span class="qcm-game-label">Partie 1</span>
+                    <button onclick="window.location.href='qcm_algo_cm1_p1.html'">Ouvrir</button>
+                </div>
+                <div class="qcm-game-card glass-card">
+                    <span class="qcm-game-label">Partie 2</span>
+                    <button onclick="window.location.href='qcm_algo_cm1_p2.html'">Ouvrir</button>
+                </div>
+            </div>
+        </div>
+        <div class="qcm-group">
+            <h3 class="qcm-group-title">QCM CM2</h3>
+            <div class="qcm-games-row">
+                <div class="qcm-game-card glass-card">
+                    <span class="qcm-game-label">Partie 1</span>
+                    <button onclick="window.location.href='qcm_algo_cm2_p1.html'">Ouvrir</button>
+                </div>
+                <div class="qcm-game-card glass-card">
+                    <span class="qcm-game-label">Partie 2</span>
+                    <button onclick="window.location.href='qcm_algo_cm2_p2.html'">Ouvrir</button>
+                </div>
+            </div>
+        </div>
+        <div class="qcm-group">
+            <h3 class="qcm-group-title">QCM CM3</h3>
+            <div class="qcm-games-row">
+                <div class="qcm-game-card glass-card">
+                    <span class="qcm-game-label">QCM CM3</span>
+                    <button onclick="window.location.href='qcm_algo_cm3_p1.html'">Ouvrir</button>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -109,14 +141,6 @@
                 localStorage.setItem('theme', 'light');
                 themeToggle.innerHTML = moonIcon;
             }
-        });
-    </script>
-    <script src="quiz_algo.js?v=2"></script>
-    <script src="quiz.js?v=3"></script>
-    <script>
-        let quizInstance;
-        window.addEventListener('DOMContentLoaded', () => {
-            quizInstance = new Quiz('quiz-app', algoQuestions, 'quizProgress_algo');
         });
     </script>
 </body>
