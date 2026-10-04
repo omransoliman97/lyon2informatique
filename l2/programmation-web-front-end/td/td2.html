@@ -5,6 +5,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>TD 2 — Le navigateur et les chaînes de caractères</title>
 
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-27SCS6BBW2"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-27SCS6BBW2');
+</script>
+
+<!-- App: "Add to Home Screen" support (see assets/js/pwa.js) -->
+<link rel="manifest" href="../../../manifest.webmanifest">
+<meta name="theme-color" content="#0f111a">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Info Lyon 2">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="apple-touch-icon" href="../../../assets/images/app/apple-touch-icon.png">
+
 <script>
   (function () {
     var t = localStorage.getItem('theme') || 'dark';
@@ -1331,5 +1349,6 @@
     mq.addEventListener ? mq.addEventListener('change', onChange) : mq.addListener(onChange);
   })();
 </script>
+<script src="../../../assets/js/pwa.js?v=1"></script>
 </body>
 </html>

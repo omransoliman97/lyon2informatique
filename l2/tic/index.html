@@ -6,7 +6,16 @@
     <title>TIC - Traitement de données - Lyon 2</title>
     
     <link rel="icon" href="../../assets/images/logo.png" type="image/png">
-    <link rel="stylesheet" href="../../assets/css/style.css?v=2">
+    <link rel="stylesheet" href="../../assets/css/style.css?v=3">
+
+    <!-- App: "Add to Home Screen" support (see assets/js/pwa.js) -->
+    <link rel="manifest" href="../../manifest.webmanifest">
+    <meta name="theme-color" content="#0f111a">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Info Lyon 2">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon" href="../../assets/images/app/apple-touch-icon.png">
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-27SCS6BBW2"></script>
@@ -29,7 +38,10 @@
                 <img src="../../assets/images/logo.png" alt="Logo">
                 <span>Informatique Lyon 2</span>
             </a>
-            <ul class="nav-menu">
+            <button class="nav-toggle" id="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-menu">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-menu" id="nav-menu">
                 <li><a href="../../index.html#links-section" class="nav-link">Liens</a></li>
                 <li class="dropdown">
                     <a href="../../l1/index.html" class="dropbtn">L1 <span class="arrow">&#9662;</span></a>
@@ -62,12 +74,23 @@
     </section>
 
 
-    <section class="learning-section fade-in">
-        <h1>Ressources</h1>
+    <section class="learning-section fade-in" id="cm-section">
+        <h1>CM - Cours Magistraux</h1>
         <div class="learning-section-items" style="justify-content: center;">
             <div class="learning-card glass-card">
                 <h2>En préparation</h2>
-                <p>Les ressources seront ajoutées prochainement.</p>
+                <p>Les ressources pour les CM seront ajoutées prochainement.</p>
+                <p style="text-align: right; color: #888;">Bientôt</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="learning-section fade-in" id="td-section">
+        <h1>TD - Travaux Dirigés</h1>
+        <div class="learning-section-items" style="justify-content: center;">
+            <div class="learning-card glass-card">
+                <h2>En préparation</h2>
+                <p>Les ressources pour les TD seront ajoutées prochainement.</p>
                 <p style="text-align: right; color: #888;">Bientôt</p>
             </div>
         </div>
@@ -104,5 +127,7 @@
             }
         });
     </script>
+    <script src="../../assets/js/nav.js?v=1"></script>
+    <script src="../../assets/js/pwa.js?v=1"></script>
 </body>
 </html>
