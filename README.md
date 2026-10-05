@@ -8,6 +8,8 @@ Le site est adapté aux téléphones et peut être ajouté à l'écran d'accueil
 ```text
 .
 ├── index.html                          # Accueil (L2) — doit rester à la racine
+├── 404.html                            # Page affichée pour toute adresse inconnue
+├── vercel.json                         # Redirections des anciennes adresses (voir « Hébergement »)
 ├── manifest.webmanifest                # Manifeste de l'application (nom, icônes, couleurs)
 ├── sw.js                               # Service worker minimal : rend le site installable, ne met rien en cache
 ├── l1/
@@ -51,7 +53,7 @@ Le site est adapté aux téléphones et peut être ajouté à l'écran d'accueil
 
 - Les liens vers une page de dossier pointent explicitement vers son `index.html`.
 - **Ne jamais renommer les clés `localStorage` des QCM** (`quizProgress_...`) : cela réinitialiserait la progression des étudiants.
-- **Cache** : quand `style.css`, `quiz.css`, `quiz.js`, `nav.js` ou `pwa.js` est modifié, augmenter son numéro `?v=` dans toutes les pages qui le chargent. Sinon les visiteurs gardent l'ancienne version en cache avec le nouveau HTML (menu cassé, styles manquants...). Exemple (macOS) :
+- **Cache** : quand `style.css`, `quiz.css`, `quiz.js`, `nav.js` ou `pwa.js` est modifié, augmenter son numéro `?v=` dans toutes les pages qui le chargent. Sinon certains visiteurs peuvent garder l'ancienne version en cache avec le nouveau HTML (menu cassé, styles manquants...). Exemple (macOS) :
 
   ```bash
   grep -rl 'style.css?v=3' --include='*.html' . | xargs sed -i '' 's/style.css?v=3/style.css?v=4/'
@@ -63,7 +65,7 @@ Le site est adapté aux téléphones et peut être ajouté à l'écran d'accueil
 node scripts/check-site.mjs
 ```
 
-Vérifie que **chaque page** contient le tag Google Analytics, le manifeste + `pwa.js` et le menu mobile, et que tous les liens locaux (pages, images, scripts, CSS) pointent vers un fichier existant (majuscules/minuscules comprises, car GitHub Pages y est sensible). À lancer avant chaque push.
+Vérifie que **chaque page** contient le tag Google Analytics, le manifeste + `pwa.js` et le menu mobile (sauf `404.html`, qui peut s'afficher à n'importe quelle adresse), que tous les liens locaux (pages, images, scripts, CSS) pointent vers un fichier existant (majuscules/minuscules comprises, car Vercel y est sensible), et que chaque redirection de `vercel.json` mène à un fichier existant sans masquer une vraie page. À lancer avant chaque push.
 Les pages TD sont générées par PresentaForge : après un nouvel export, relancer la vérification (le tag Google Analytics, le menu et `pwa.js` doivent y être ajoutés de nouveau).
 
 ## Menu mobile
@@ -81,7 +83,14 @@ Sous 820 px de large (ou sur un téléphone tenu en paysage), la barre de naviga
 - Les actions sont envoyées à Google Analytics (événements `a2hs_shown`, `a2hs_accepted`, `a2hs_dismissed`...). Un lancement depuis l'écran d'accueil apparaît avec la source `homescreen`.
 
 Prévisualiser sur ordinateur : ajouter `?a2hs=1` (ou `?a2hs=ios` / `?a2hs=android`) à l'adresse d'une page. Pour la revoir après l'avoir masquée : `localStorage.removeItem('a2hs')` dans la console du navigateur.
-L'installation demande du HTTPS (GitHub Pages ✓). Les icônes sont dans `assets/images/app/` et le nom/couleurs dans `manifest.webmanifest`.
+L'installation demande du HTTPS (Vercel ✓). Les icônes sont dans `assets/images/app/` et le nom/couleurs dans `manifest.webmanifest`.
+
+## Hébergement et anciennes adresses
+
+Le site est hébergé sur **Vercel** (`lyon2informatique.vercel.app`) et se met à jour automatiquement à chaque `git push` sur la branche `main` du dépôt GitHub.
+
+- **`vercel.json`** : redirections permanentes (308) des anciennes adresses d'avant la réorganisation (`l1.html`, `outils_recherche.html`, `qcm_algo_cm1_p1.html`, `l2s1_td_prog_web/...`, les PDF de `files/`...) vers les nouvelles, pour que les liens déjà partagés ou mis en favoris continuent de fonctionner. Pour en ajouter une : ajouter une entrée dans `redirects` (`source` = ancienne adresse, `destination` = nouvelle) puis lancer `node scripts/check-site.mjs`. Dans les sources des PDF, `:rest` remplace la fin du nom du dossier, pour tolérer les espaces et les accents.
+- **`404.html`** : page affichée par Vercel pour toute adresse inconnue, avec un bouton « Retour à l'accueil ». Elle est autonome (styles dans le fichier, chemins absolus `/...`) car elle peut s'afficher à n'importe quelle adresse.
 
 ## Ajouter un jeu QCM
 

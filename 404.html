@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <meta name="theme-color" content="#0f111a">
+    <title>Page introuvable - Informatique Lyon 2</title>
+    <!-- This page is served by Vercel for ANY missing address, at any depth.
+         So it is self-contained (inline styles) and only uses absolute paths (/...). -->
+    <link rel="icon" href="/assets/images/logo.png" type="image/png">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-27SCS6BBW2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-27SCS6BBW2');
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        // Same light/dark choice as the rest of the site
+        try { if (localStorage.getItem('theme') === 'light') document.documentElement.setAttribute('data-theme', 'light'); } catch (e) {}
+    </script>
+
+    <style>
+        :root {
+            --bg: #0f111a;
+            --fg: #e2e8f0;
+            --muted: #94a3b8;
+            --card: rgba(255, 255, 255, 0.04);
+            --border: rgba(255, 255, 255, 0.1);
+            --primary: #EF4E6E;
+            --violet: #8B45D4;
+        }
+        :root[data-theme="light"] {
+            --bg: #f8fafc;
+            --fg: #1e293b;
+            --muted: #64748b;
+            --card: rgba(0, 0, 0, 0.03);
+            --border: rgba(0, 0, 0, 0.1);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+
+        body {
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            background: var(--bg);
+            color: var(--fg);
+            font-family: 'Outfit', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Same soft pink / violet glows as the rest of the site */
+        body::before, body::after {
+            content: '';
+            position: fixed;
+            width: 60vmax;
+            height: 60vmax;
+            border-radius: 50%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        body::before { top: -30vmax; left: -20vmax; background: radial-gradient(circle, rgba(239, 78, 110, 0.18), transparent 60%); }
+        body::after { bottom: -30vmax; right: -20vmax; background: radial-gradient(circle, rgba(139, 69, 212, 0.18), transparent 60%); }
+
+        .card {
+            width: 100%;
+            max-width: 480px;
+            padding: 40px 28px;
+            text-align: center;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+        }
+
+        .logo img { display: block; width: 130px; height: auto; margin: 0 auto; }
+
+        .code {
+            margin: 18px 0 2px;
+            font-size: clamp(4.5rem, 24vw, 7rem);
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: -2px;
+            background: linear-gradient(90deg, var(--primary), var(--violet));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+        }
+
+        h1 { margin: 6px 0 12px; font-size: 1.7rem; }
+        .msg { color: var(--muted); line-height: 1.6; }
+
+        .actions { margin-top: 28px; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+        .btn {
+            display: inline-block;
+            padding: 14px 28px;
+            border-radius: 12px;
+            background: linear-gradient(90deg, var(--primary), var(--violet));
+            color: #fff;
+            font-weight: 700;
+            text-decoration: none;
+        }
+        .link { padding: 10px; color: var(--muted); text-decoration: none; }
+        .btn:hover, .link:hover { opacity: 0.85; }
+    </style>
+</head>
+<body>
+    <main class="card">
+        <a class="logo" href="/"><img src="/assets/images/logo.png" alt="Université Lumière Lyon 2" width="130"></a>
+        <p class="code">404</p>
+        <h1>Page introuvable</h1>
+        <p class="msg">Cette page n'existe pas ou a changé d'adresse. Le site a été réorganisé : retrouvez vos cours et vos QCM depuis l'accueil.</p>
+        <div class="actions">
+            <a class="btn" href="/">Retour à l'accueil</a>
+            <a class="link" href="/l1/index.html">Aller à la page L1</a>
+        </div>
+    </main>
+</body>
+</html>

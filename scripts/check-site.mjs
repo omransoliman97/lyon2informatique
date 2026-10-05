@@ -7,8 +7,10 @@
 //   - the Google Analytics tag (same measurement ID everywhere)
 //   - the app manifest link and assets/js/pwa.js ("Add to Home Screen")
 //   - the mobile nav markup (#nav-toggle + #nav-menu) and its script
+//   (404.html is the exception for the last two: Vercel serves it at ANY address, so it can't use relative links)
 // and every local link / image / script / stylesheet must point to a file that exists
-// (exact upper/lower case, because GitHub Pages is case-sensitive even if macOS is not).
+// (exact upper/lower case, because Vercel/GitHub are case-sensitive even if macOS is not).
+// vercel.json: every redirect must lead to an existing file and must not hide a real one.
 // Exits with code 1 if anything is wrong, so it can also be used before a push.
 import fs from 'node:fs';
 import path from 'node:path';
@@ -30,6 +32,7 @@ function findPages(dir, out = []) {
 function existsExactCase(abs) {
   const rel = path.relative(root, abs);
   if (rel.startsWith('..')) return false;
+  if (!rel) return true;   // the site root itself
   let current = root;
   for (const part of rel.split(path.sep)) {
     if (!fs.readdirSync(current).includes(part)) return false;
@@ -54,8 +57,10 @@ for (const file of pages) {
   if (!html.includes(`googletagmanager.com/gtag/js?id=${GA_ID}`) || !html.includes(`gtag('config', '${GA_ID}')`)) {
     problems.push(`${rel}: Google Analytics tag (${GA_ID}) is missing`);
   }
-  if (!/<link[^>]+rel="manifest"/.test(html)) problems.push(`${rel}: <link rel="manifest"> is missing`);
-  if (!/<script[^>]+src="[^"]*assets\/js\/pwa\.js/.test(html)) problems.push(`${rel}: assets/js/pwa.js is not loaded`);
+  if (rel !== '404.html') {
+    if (!/<link[^>]+rel="manifest"/.test(html)) problems.push(`${rel}: <link rel="manifest"> is missing`);
+    if (!/<script[^>]+src="[^"]*assets\/js\/pwa\.js/.test(html)) problems.push(`${rel}: assets/js/pwa.js is not loaded`);
+  }
   if (/class="navbar"/.test(html)) {
     if (!html.includes('id="nav-toggle"') || !html.includes('id="nav-menu"')) {
       problems.push(`${rel}: mobile nav markup (#nav-toggle / #nav-menu) is missing`);
@@ -75,9 +80,31 @@ for (const file of pages) {
   }
 }
 
+// vercel.json redirects (old addresses -> new ones)
+let redirectCount = 0;
+const vercelFile = path.join(root, 'vercel.json');
+if (fs.existsSync(vercelFile)) {
+  let config = {};
+  try {
+    config = JSON.parse(fs.readFileSync(vercelFile, 'utf8'));
+  } catch (e) {
+    problems.push(`vercel.json: invalid JSON (${e.message})`);
+  }
+  for (const r of config.redirects ?? []) {
+    redirectCount++;
+    const dest = decodeURIComponent(String(r.destination ?? '').split('#')[0].split('?')[0]);
+    if (!dest.startsWith('/') || (!/[:*]/.test(dest) && !existsExactCase(path.join(root, dest)))) {
+      problems.push(`vercel.json: ${r.source} -> ${r.destination}: the destination does not exist`);
+    }
+    if (!/[:*()?+{}]/.test(r.source) && existsExactCase(path.join(root, decodeURIComponent(r.source)))) {
+      problems.push(`vercel.json: ${r.source} is a real file, so this redirect would hide it`);
+    }
+  }
+}
+
 if (problems.length) {
   console.error(`\n${problems.length} problem(s) found:\n`);
   for (const p of problems) console.error('  ✗ ' + p);
   process.exit(1);
 }
-console.log(`✓ ${pages.length} pages OK: Google Analytics, manifest + pwa.js, mobile nav, and ${refCount} local links all good.`);
+console.log(`✓ ${pages.length} pages OK: Google Analytics, manifest + pwa.js, mobile nav, ${refCount} local links, and ${redirectCount} redirects in vercel.json all good.`);

@@ -1,0 +1,30 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    {"source": "/l1.html", "destination": "/l1/index.html", "permanent": true},
+    {"source": "/outils_recherche.html", "destination": "/l2/outils-recherche/index.html", "permanent": true},
+    {"source": "/algorithmique.html", "destination": "/l2/algorithmique/index.html", "permanent": true},
+    {"source": "/prog_web.html", "destination": "/l2/programmation-web-front-end/index.html", "permanent": true},
+    {"source": "/creation_num.html", "destination": "/l2/creation-numerique/index.html", "permanent": true},
+    {"source": "/tic.html", "destination": "/l2/tic/index.html", "permanent": true},
+    {"source": "/qcm_outils_cm1_p1.html", "destination": "/l2/outils-recherche/qcm/cm1-p1.html", "permanent": true},
+    {"source": "/qcm_outils_cm1_p2.html", "destination": "/l2/outils-recherche/qcm/cm1-p2.html", "permanent": true},
+    {"source": "/qcm_outils_cm1_p3.html", "destination": "/l2/outils-recherche/qcm/cm1-p3.html", "permanent": true},
+    {"source": "/qcm_outils_cm1_p4.html", "destination": "/l2/outils-recherche/qcm/cm1-p4.html", "permanent": true},
+    {"source": "/qcm_outils_cm1_p5.html", "destination": "/l2/outils-recherche/qcm/cm1-p5.html", "permanent": true},
+    {"source": "/qcm_algo_cm1_p1.html", "destination": "/l2/algorithmique/qcm/cm1-p1.html", "permanent": true},
+    {"source": "/qcm_algo_cm1_p2.html", "destination": "/l2/algorithmique/qcm/cm1-p2.html", "permanent": true},
+    {"source": "/qcm_algo_cm2_p1.html", "destination": "/l2/algorithmique/qcm/cm2-p1.html", "permanent": true},
+    {"source": "/qcm_algo_cm2_p2.html", "destination": "/l2/algorithmique/qcm/cm2-p2.html", "permanent": true},
+    {"source": "/qcm_algo_cm3_p1.html", "destination": "/l2/algorithmique/qcm/cm3-p1.html", "permanent": true},
+    {"source": "/l2s1_td_prog_web/revision-td-1-programmation-web-front-end-javascript.html", "destination": "/l2/programmation-web-front-end/td/td1.html", "permanent": true},
+    {"source": "/l2s1_td_prog_web/revision-td-2-programmation-web-front-end-javascript.html", "destination": "/l2/programmation-web-front-end/td/td2.html", "permanent": true},
+    {"source": "/l2s1_td_prog_web/revision-td-3-programmation-web-front-end-javascript.html", "destination": "/l2/programmation-web-front-end/td/td3.html", "permanent": true},
+    {"source": "/files/Algorithmique:rest/CM/CM1.pdf", "destination": "/documents/algorithmique/cm/cm1.pdf", "permanent": true},
+    {"source": "/files/Algorithmique:rest/CM/CM2.pdf", "destination": "/documents/algorithmique/cm/cm2.pdf", "permanent": true},
+    {"source": "/files/Algorithmique:rest/CM/CM3.pdf", "destination": "/documents/algorithmique/cm/cm3.pdf", "permanent": true},
+    {"source": "/files/Outils:rest/CM/CM1.pdf", "destination": "/documents/outils-recherche/cm/cm1.pdf", "permanent": true},
+    {"source": "/files/Programmation:rest/CM/CM1.pdf", "destination": "/documents/programmation-web-front-end/cm/cm1.pdf", "permanent": true},
+    {"source": "/files/Programmation:rest/CM/CM2.pdf", "destination": "/documents/programmation-web-front-end/cm/cm2.pdf", "permanent": true}
+  ]
+}
