@@ -1,0 +1,328 @@
+/* Shared site navigation, used by EVERY page (main pages and TD pages): navbar, dropdown menus, theme button,
+   hamburger button and the sliding mobile panel. Behaviour lives in assets/js/nav.js.
+
+   Colors: the navbar reads the site's design tokens (--foreground, --glass-*, --primary ... defined in
+   assets/css/style.css) when the page has them. Pages without those tokens (the TD pages) get the fallbacks
+   below, so the nav looks identical everywhere. The only nav-specific colors (--nav-bg, --nav-panel) live here.
+   Works whether data-theme="light" is set on <html> or on <body>. */
+
+.navbar {
+  --nav-bg: rgba(15, 17, 26, 0.7);
+  --nav-panel: rgba(20, 24, 36, 0.95);
+  --nav-fg: var(--foreground, #e2e8f0);
+  --nav-muted: var(--text-muted, #94a3b8);
+  --nav-solid: var(--background, #0f111a);
+  --nav-border: var(--glass-border, rgba(255, 255, 255, 0.08));
+  --nav-hover: var(--glass-hover, rgba(255, 255, 255, 0.08));
+  --nav-glass: var(--glass-bg, rgba(255, 255, 255, 0.03));
+  --nav-accent: var(--primary, #EF4E6E);
+  --nav-accent-2: var(--ai-section-color, #8B45D4);
+}
+
+[data-theme="light"] .navbar {
+  --nav-bg: rgba(248, 250, 252, 0.8);
+  --nav-panel: rgba(255, 255, 255, 0.95);
+  --nav-fg: var(--foreground, #1e293b);
+  --nav-muted: var(--text-muted, #64748b);
+  --nav-solid: var(--background, #f8fafc);
+  --nav-border: var(--glass-border, rgba(0, 0, 0, 0.08));
+  --nav-hover: var(--glass-hover, rgba(0, 0, 0, 0.06));
+  --nav-glass: var(--glass-bg, rgba(0, 0, 0, 0.03));
+}
+
+/* Self-contained: don't depend on the page's own reset, font or line height */
+:where(.navbar, .navbar *) {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar {
+  color: var(--nav-fg);
+  font-family: 'Outfit', sans-serif;
+  line-height: normal;
+  -webkit-font-smoothing: auto;
+  -moz-osx-font-smoothing: auto;
+}
+
+/* Navbar */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: var(--nav-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--nav-border);
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+}
+
+.nav-logo:hover {
+  opacity: 0.85;
+}
+
+.nav-logo img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.nav-logo span {
+  font-size: 1.5rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, var(--nav-accent), var(--nav-accent-2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.nav-menu {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+  align-items: center;
+}
+
+.nav-link, .dropbtn {
+  color: var(--nav-fg);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  padding: 10px 15px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.nav-link:hover, .dropbtn:hover {
+  background: var(--nav-hover);
+  color: var(--nav-accent);
+}
+
+.dropdown {
+  position: relative;
+}
+
+.arrow {
+  font-size: 0.8rem;
+  transition: transform 0.3s ease;
+}
+
+.dropdown:hover .arrow {
+  transform: rotate(180deg);
+}
+
+.dropdown-content {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background: var(--nav-panel);
+  backdrop-filter: blur(16px);
+  min-width: 250px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--nav-border);
+  padding: 10px;
+  transition: all 0.3s ease;
+  z-index: 1001;
+}
+
+.dropdown:hover .dropdown-content {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.dropdown-content a {
+  color: var(--nav-muted);
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.dropdown-content a:hover {
+  background-color: var(--nav-hover);
+  color: var(--nav-fg);
+  padding-left: 20px;
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+  background: transparent;
+  border: none;
+  color: var(--nav-fg);
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+.theme-toggle:hover {
+  background: var(--nav-hover);
+}
+
+/* Hamburger button (mobile only, shown by the 820px breakpoint below; behaviour in assets/js/nav.js) */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  flex: 0 0 auto;
+  width: 44px;
+  height: 44px;
+  margin-left: auto;
+  padding: 0 10px;
+  background: none;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.nav-toggle:hover {
+  background: var(--nav-hover);
+}
+
+.nav-toggle span {
+  display: block;
+  width: 24px;
+  height: 3px;
+  background: var(--nav-fg);
+  border-radius: 2px;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+/* Mobile navigation: compact bar + hamburger + sliding panel (behaviour in assets/js/nav.js).
+   Same pattern as the TD pages. Submenus expand when tapped because touch screens have no hover.
+   Also used for touch phones held in landscape (short screens), keep in sync with nav.js. */
+@media (max-width: 820px), (pointer: coarse) and (max-height: 500px) {
+  .nav-container {
+    padding: 8px 15px;
+    gap: 10px;
+  }
+  .nav-logo {
+    gap: 10px;
+    min-width: 0;
+  }
+  .nav-logo img {
+    width: 34px;
+    height: 34px;
+  }
+  .nav-logo span {
+    font-size: 1.2rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .nav-toggle {
+    display: flex;
+  }
+
+  .nav-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+    padding: 0 12px;
+    /* solid panel: the theme tint layered over the page background (no see-through hero behind the menu) */
+    background-color: var(--nav-solid);
+    background-image: linear-gradient(var(--nav-panel), var(--nav-panel));
+    border-bottom: 1px solid var(--nav-border);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.3);
+    max-height: 0;
+    overflow: hidden;
+    visibility: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease, visibility 0s linear 0.3s;
+  }
+  .nav-menu.open {
+    max-height: 80vh;
+    padding: 12px;
+    overflow-y: auto;
+    visibility: visible;
+    transition-delay: 0s;
+  }
+  .nav-link, .dropbtn {
+    width: 100%;
+    justify-content: space-between;
+    font-size: 1.05rem;
+    padding: 13px 14px;
+  }
+
+  .dropdown:hover .arrow {
+    transform: none;
+  }
+  .dropdown.open .arrow {
+    transform: rotate(180deg);
+  }
+  .dropdown-content,
+  .dropdown:hover .dropdown-content {
+    position: static;
+    display: none;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    min-width: 0;
+    margin: 4px 0 6px;
+    padding: 4px;
+    background: var(--nav-glass);
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+  .dropdown.open .dropdown-content {
+    display: block;
+  }
+  .dropdown-content a {
+    padding: 12px 14px;
+  }
+  .dropdown-content a:hover {
+    padding-left: 14px;
+  }
+
+  .theme-toggle {
+    width: 44px;
+    height: 44px;
+    margin: 4px 0 0 6px;
+  }
+}
+
+/* Very small phones: slightly smaller brand name */
+@media (max-width: 380px) {
+  .nav-logo span {
+    font-size: 1.1rem;
+  }
+}

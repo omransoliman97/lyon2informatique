@@ -29,7 +29,7 @@ Le site est adapté aux téléphones et peut être ajouté à l'écran d'accueil
 │   └── tic/
 │       └── index.html
 ├── assets/                             # Ressources partagées par toutes les pages
-│   ├── css/                            # style.css (site) · quiz.css (QCM)
+│   ├── css/                            # style.css (site) · nav.css (menu) · quiz.css (QCM)
 │   ├── js/                             # quiz.js (moteur de QCM) · nav.js (menu mobile) · pwa.js (écran d'accueil)
 │   └── images/                         # logo.png, background.jpg, icons/ (logos des liens), app/ (icônes de l'application)
 ├── data/
@@ -53,7 +53,7 @@ Le site est adapté aux téléphones et peut être ajouté à l'écran d'accueil
 
 - Les liens vers une page de dossier pointent explicitement vers son `index.html`.
 - **Ne jamais renommer les clés `localStorage` des QCM** (`quizProgress_...`) : cela réinitialiserait la progression des étudiants.
-- **Cache** : quand `style.css`, `quiz.css`, `quiz.js`, `nav.js` ou `pwa.js` est modifié, augmenter son numéro `?v=` dans toutes les pages qui le chargent. Sinon certains visiteurs peuvent garder l'ancienne version en cache avec le nouveau HTML (menu cassé, styles manquants...). Exemple (macOS) :
+- **Cache** : quand `style.css`, `nav.css`, `quiz.css`, `quiz.js`, `nav.js` ou `pwa.js` est modifié, augmenter son numéro `?v=` dans toutes les pages qui le chargent. Sinon certains visiteurs peuvent garder l'ancienne version en cache avec le nouveau HTML (menu cassé, styles manquants...). Exemple (macOS) :
 
   ```bash
   grep -rl 'style.css?v=3' --include='*.html' . | xargs sed -i '' 's/style.css?v=3/style.css?v=4/'
@@ -65,12 +65,19 @@ Le site est adapté aux téléphones et peut être ajouté à l'écran d'accueil
 node scripts/check-site.mjs
 ```
 
-Vérifie que **chaque page** contient le tag Google Analytics, le manifeste + `pwa.js` et le menu mobile (sauf `404.html`, qui peut s'afficher à n'importe quelle adresse), que tous les liens locaux (pages, images, scripts, CSS) pointent vers un fichier existant (majuscules/minuscules comprises, car Vercel y est sensible), et que chaque redirection de `vercel.json` mène à un fichier existant sans masquer une vraie page. À lancer avant chaque push.
-Les pages TD sont générées par PresentaForge : après un nouvel export, relancer la vérification (le tag Google Analytics, le menu et `pwa.js` doivent y être ajoutés de nouveau).
+Vérifie que **chaque page** contient le tag Google Analytics, le manifeste + `pwa.js` et le **même menu** (même HTML, `nav.css` + `nav.js`, sans styles de menu privés ; sauf `404.html`, qui peut s'afficher à n'importe quelle adresse), que tous les liens locaux (pages, images, scripts, CSS) pointent vers un fichier existant (majuscules/minuscules comprises, car Vercel y est sensible), et que chaque redirection de `vercel.json` mène à un fichier existant sans masquer une vraie page. À lancer avant chaque push.
+Les pages TD sont générées par PresentaForge : après un nouvel export, relancer la vérification, qui indique ce qu'il faut y remettre (tag Google Analytics, menu partagé, `pwa.js`).
 
-## Menu mobile
+## Menu de navigation
 
-Sous 820 px de large (ou sur un téléphone tenu en paysage), la barre de navigation devient un bouton ☰ qui ouvre un panneau ; toucher « L1 » ou « L2 » déplie son sous-menu au lieu de changer de page. Styles : `assets/css/style.css` (section « Mobile navigation »). Comportement : `assets/js/nav.js`. Les pages TD ont leur propre copie du menu dans leur code.
+Le menu (logo, Liens, L1, L2, thème clair/sombre) est **le même sur toutes les pages**, pages TD comprises :
+
+- **Styles** : `assets/css/nav.css`, une seule feuille utilisée par toutes les pages. Elle est autonome : elle reprend les couleurs du site quand la page les définit, et a ses propres valeurs sinon (pages TD).
+- **Comportement** : `assets/js/nav.js`.
+- **HTML** : le bloc `<nav class="navbar">…</nav>` doit être identique d'une page à l'autre (copier celui d'une page existante ; seuls les chemins relatifs changent).
+- **Téléphone** : sous 820 px de large (ou sur un téléphone tenu en paysage), la barre devient un bouton ☰ qui ouvre un panneau ; toucher « L1 » ou « L2 » déplie son sous-menu au lieu de changer de page.
+- Ne pas redéfinir le menu dans une page (pas de `.nav-menu {…}` dans un `<style>`) : modifier `nav.css` pour que tout le site suive. `node scripts/check-site.mjs` le vérifie.
+- **Pages TD** (générées par PresentaForge) : après un nouvel export, remplacer le `<nav>` par celui d'une autre page (en adaptant les chemins), ajouter les liens `nav.css` / `nav.js` comme dans `td1.html`, et supprimer les styles de menu du `<style>` exporté. Seule la règle `.navbar{flex:0 0 auto;z-index:30}` doit rester : elle garde le menu sous le panneau « Sommaire ».
 
 ## Ajouter à l'écran d'accueil
 
